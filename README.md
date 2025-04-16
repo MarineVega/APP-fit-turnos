@@ -3,3 +3,6 @@ APP desarrollada como trabajo final para FIP. 3º Cuatrimestre de Carrera Desarr
 
 Carpeta donde se encuentra la documentación:
 https://drive.google.com/drive/folders/1hGj3prqmhDEROV6sUC-oZ969cJhtDBgq
+
+Trello:
+https://trello.com/b/GbD623W4/fit-turnos
