@@ -1,13 +1,14 @@
 # APP-fit-turnos
 Aplicación móvil/web que permite a los usuarios reservar turnos en gimnasios, gestionar sus horarios y acceder a disponibilidad en tiempo real.
 
-* El objetivo es:
+El objetivo es:
 - Facilitar la reserva de turnos
 - Evitar aglomeraciones y esperas
 - Mejorar la gestión de horarios
 - Digitalizar reservas o cancelaciones
 
 * Funcionalidades según los distintos usuarios:
+
 ADMINISTRADORES:
 - Gestionan disciplinas, servicios, horarios, pagos, profesores, entrenadores, preparadores físicos, socios. 
 - Gestionan disponibilidad y controlan el aforo.
