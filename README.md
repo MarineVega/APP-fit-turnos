@@ -7,7 +7,9 @@ El objetivo es:
 - Mejorar la gestión de horarios
 - Digitalizar reservas o cancelaciones
 
-* Funcionalidades según los distintos usuarios:
+
+
+Funcionalidades según los distintos usuarios:
 
 ADMINISTRADORES:
 - Gestionan disciplinas, servicios, horarios, pagos, profesores, entrenadores, preparadores físicos, socios. 
@@ -15,10 +17,12 @@ ADMINISTRADORES:
 - Publican noticias, eventos deportivos, eventos sociales.
 - Espacio Publicitario (patrocinadores). 
 
+
 PROFESORES: 
 - Consultan padrones de alumnos.
 - Modifican horarios de sus clases notificando a los alumnos registrados en su clase y al administrador.
 - Brindan información respecto de eventos en los que participan sus alumnos, fotos, resultados, etc.
+
 
 CLIENTES: 
 - Reservan, cancelan y modifican turnos.
