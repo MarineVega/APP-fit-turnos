@@ -41,3 +41,7 @@ https://drive.google.com/drive/folders/1hGj3prqmhDEROV6sUC-oZ969cJhtDBgq
 Trello:
 https://trello.com/b/GbD623W4/fit-turnos
 
+Figma:
+https://www.figma.com/design/63XgAFmGgcaJJdWkxzzirR/FIT-Turnos?node-id=0-1&p=f&t=tK4Y446Lr0pKXb2O-0
+
+
