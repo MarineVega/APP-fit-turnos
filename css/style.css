@@ -1,0 +1,35 @@
+/* configuro la fuente, nombre y ubicación -> alternativa'Roboto'*/
+/*
+@font-face {
+    font-family: 'Poppins';
+    src: url(../assets/fonts/Montserrat-VariableFont_wght.ttf); 
+}
+*/
+
+/*  * -> selector universal // configuro la fuente para todo el sitio */
+* {
+    font-family: "Poppins";
+}
+
+/* configuración de variables*/
+:root{
+    --color-fondo: #bababa;
+    --color-primario: #007A5E;
+    --color-secundario: #6EDC8C;
+    --color-terciario: #033649;
+    --color-cuarto:#45C4ED;
+    --color-contraste-claro: #F5F5F5;
+    --color-contraste-oscuro: #222222;
+}
+
+/*estilos del body*/
+body{
+    background-color: var(--color-fondo);
+    color: var(--color-terciario);
+}
+
+.main_principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
