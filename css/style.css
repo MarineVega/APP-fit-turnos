@@ -57,12 +57,6 @@ body {
   color: var(--color-terciario);
 }
 
-.main_principal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 header {
   nav {
     top: 0;
@@ -106,3 +100,88 @@ header {
  @media (max-width: 1280px) {
 }
  */
+
+ /* Estilos de index.html */
+.mainPrincipal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  .logoFit {
+    width: 50%;
+    height: 50%;
+  }
+
+  .contenedorIconos_1, .contenedorIconos_2 {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;  /* permitir múltiples filas */
+    justify-content: space-between;    
+   
+    img {
+      width: 70px;
+      height: 70px;
+      margin: 10px;
+    }    
+  }
+
+  .contenedorIconos_2 {
+    justify-content: space-evenly;
+  }
+
+  .slogan {
+    width: 80%;     
+    text-align: center; 
+    color: #222222; 
+    font-size: 1.8rem; 
+    font-weight: 500; 
+    line-height: 40px;     
+    word-wrap: break-word;
+  }
+
+  .registrarse {
+    color: #222222;
+    font-size: 1.4rem;
+    line-height: 40px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+  }
+
+  .logoMedusa {
+    width: 70%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+}
+
+
+button {
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: var(--color-secundario);
+  border: 1.5px solid var(--color-secundario);
+  color: var(--color-contraste-oscuro);
+  font-size: 1.2rem;
+  
+  height: 50px;
+  width: 200px;       
+  margin: 10px;  
+}
+  
+.btnAceptar:hover {
+  background-color: var(--color-primario);  
+  color: var(--color-contraste-claro);
+}
+/*
+.btnAceptar {
+  background-color: var(--color-secundario);
+  
+  color: var(--color-contraste-oscuro);
+  
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  
+  }
+  */
