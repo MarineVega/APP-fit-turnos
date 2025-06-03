@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- configuración de estilos -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- ícono de la página web -->
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    
+    <!-- íconos de google -->
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+
+    <title>FIT Turnos - Actividad</title>
+
+</head>
+<body>
+    <header class="header">
+        <nav>
+            <a href="../index.html" class="logo">
+                <img src="../assets/img/Logo_Fit_Home.png" alt="Icono FIT Turnos" loading="lazy">                
+            </a>    
+        </nav>
+    </header>
+
+    <main class="mainActividad">
+
+        <div class="tituloConFlecha">
+            <a href="../pages/administrar.html">
+                <img class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Ir hacia atrás">
+            </a>
+            <p>Agregar Actividad</p>
+             
+            <a href="../pages/administrar.html">
+                <!-- sin flecha -->
+                <img class="flechaInvisible" src="" alt="">
+            </a> 
+            <!--                         
+            <a href="../pages/administrar.html">
+                <img class="flecha" src="../assets/img/icono_flecha_adelante.png" alt="Ir hacia adelante">
+            </a>  -->
+        </div>
+        
+        <section class="seccionActividad">
+            <form class="formActividad">
+                <div>
+                    <label for="nombre">Nombre *</label>                
+                    <input type="text" id="nombre" class="inputActividad" placeholder="Nombre">
+                    <div id="nombreError" class="mensaje-error"></div>
+                </div>
+
+                <div>
+                    <label for="descripcion">Descripción *</label>                
+                    <input type="text" id="descripcion" class="inputActividad" placeholder="Descripción">
+                    <div id="descripcionError" class="mensaje-error"></div>
+                </div>
+
+                <div>
+                    <label for="cupoMaximo">Cupo Máximo *</label>
+                    <input type="number" id="Cupo Máximo" class="inputActividad" placeholder="10">
+                    <div id="cupoMaximoError" class="mensaje-error"></div>    
+                </div>
+
+                <label class="adventencia">* Campos obligatorios</label>
+            </form>
+            
+            <button class="btnAceptar" onclick="window.location.href='../pages/cuenta.html'">AGREGAR</button>
+        </section>
+
+        
+        <!-- <h1>Página en construcción...</h1>
+        <img width="50%" height="50%" src="../assets/img/pagina_en_construccion.png" alt=""> -->
+    </main>
+    
+
+</body>
+</html>
