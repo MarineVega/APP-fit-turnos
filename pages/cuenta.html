@@ -1,56 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- configuración de estilos -->
-    <link rel="stylesheet" href="../css/style.css">
-    
-    <!-- ícono de la página web -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    
-    <title>Crear Cuenta</title>
-    
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <title>Crear Cuenta</title>
 </head>
 <body>
-    <header class="header">
-        <nav>
+  <header class="header">
+    <nav>
+      <a href="../index.html" class="logo">
+        <img src="../assets/img/Logo_Fit_Home.png" alt="Logo FIT Turnos" loading="lazy" />
+        <span>Fit Turnos</span>
+      </a>
+    </nav>
+  </header>
 
-            <a href="../index.html" class="logo">
-                <img src="../assets/img/Logo_Fit_Home.png" alt="Logo FIT Turnos" loading="lazy">                
-            </a>
-            
-    <!-- 
-        <div style="width: 360px; height: 63px; position: relative; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-        <div style="width: 360px; height: 63px; padding: 16px; background: #007A5E; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); justify-content: flex-start; align-items: center; gap: 33px; display: inline-flex">
-        <div style="width: 24px; height: 24px; position: relative"></div>
-        <div style="flex: 1 1 0"></div>
-        <div style="justify-content: flex-start; align-items: flex-start; gap: 24px; display: flex">
-        <div style="width: 24.12px; height: 24px; position: relative"></div>
-        <div style="width: 23.25px; height: 24px; position: relative"></div>
-        </div>
-        </div>
-        <img style="width: 38.79px; height: 39px; left: 87.79px; top: 50px; position: absolute; transform: rotate(180deg); transform-origin: top left" src="https://placehold.co/39x39" />
-        </div>
-        -->
+  <main class="mainActividad">
+    <section class="seccionActividad">
+      <div class="tituloConFlecha">
+        <img class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Ir hacia atrás">
+        <span>Crear Cuenta</span>
+        <span class="flechaInvisible">&#x2192;</span>
+      </div>
 
-        <!-- 
-        <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="./pages/productos.html">Productos</a></li>
-            <li><a href="./pages/promociones.html">Promociones</a></li>
-            <li><a href="./pages/contacto.html">Contacto</a></li>
-        </ul>
-    -->
-        </nav>
-    </header>
-    
-    <main class="mainPrincipal">
-        <h1>Página en construcción...</h1>
-        <img width="50%" height="50%" src="../assets/img/pagina_en_construccion.png" alt="">
+      <form class="formActividad">
+        <div>
+          <input type="text" class="inputActividad" placeholder="Nombre" />
+        </div>
+        <div>
+          <input type="email" class="inputActividad" placeholder="Email" />
+        </div>
+        <div>
+          <input type="password" class="inputActividad" id="password" placeholder="Contraseña" />
+        </div>
+        <div>
+          <input type="password" class="inputActividad" id="confirmar" placeholder="Confirmar Contraseña" />
+        </div>
+        <button type="submit" class="btnAceptar">CONFIRMAR</button>
+      </form>
+    </section>
+  </main>
 
-    </main>
-    
+  <script>
+  
+  </script>
 </body>
 </html>
