@@ -228,17 +228,33 @@ button {
           justify-content: flex-start;
           
           /* display: inline-flex; */
-        }        
+        }
+        
+        .inputActividad::placeholder {
+          color: var(--color-fondo);
+        }
+
+        /* para que desaparezca el placeholder al hacer clic en el input */
+        .inputActividad:focus::placeholder {
+          color: transparent;
+        }
+
+
+      }
+
+      .mensaje-error {
+      color: red;
+      font-size: 1.1rem;
       }
       
-      .adventencia {        
+      .advertencia {        
         padding-left: 4%;        
         font-size: 0.9rem;
       }
     }
 
     .btnAceptar {
-      margin-top: 10%;
+      margin-top: 5%;
     }
   }
 }

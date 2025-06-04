@@ -59,21 +59,34 @@
 
                 <div>
                     <label for="cupoMaximo">Cupo Máximo *</label>
-                    <input type="number" id="Cupo Máximo" class="inputActividad" placeholder="10">
+                    <input type="number" id="cupoMaximo" class="inputActividad" placeholder="10">
                     <div id="cupoMaximoError" class="mensaje-error"></div>    
                 </div>
 
-                <label class="adventencia">* Campos obligatorios</label>
+                <label class="advertencia">* Campos obligatorios</label>
             </form>
             
-            <button class="btnAceptar" onclick="window.location.href='../pages/cuenta.html'">AGREGAR</button>
+            <button id="agregar" class="btnAceptar" >AGREGAR</button>
+        </section>
+        
+        <!-- <section id="listadoActividades" style="display: none;">
+            <h2>Actividades creadas</h2>
+            <ul id="actividadesLista"></ul>
+        </section> -->
+
+        <section id="listadoActividades">
+            <h2>Actividades</h2>
+            <ul id="actividadesLista"></ul>
         </section>
 
-        
+
+
+
         <!-- <h1>Página en construcción...</h1>
         <img width="50%" height="50%" src="../assets/img/pagina_en_construccion.png" alt=""> -->
     </main>
     
+    <script src="../js/actividad.js"></script>
 
 </body>
 </html>
