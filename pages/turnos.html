@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- configuración de estilos -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- ícono de la página web -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <title>FIT Turnos</title>
+
+</head>
+
+<body>
+
+    <header class="header">
+        <nav>
+            <div class="nav-item">
+                <a href="#" class="icon" id="btnMenu">
+                    <img src="../assets/img/menu.png" alt="Menú" loading="lazy">
+                </a>
+                <a href="#" class="logo">
+                    <img src="../assets/img/Logo_Fit_Home.png" alt="Logo" loading="lazy">
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="icon">
+                    <img src="../assets/img/buscar.png" alt="Buscar" loading="lazy">
+                </a>
+                <a href="#" class="icon">
+                    <img src="../assets/img/notif.png" alt="Notificaciones" loading="lazy">
+                </a>
+            </div>
+        </nav>
+
+        <div class="menu-desplegable oculto" id="menuDesplegable">
+            <a href="#">Home</a>
+            <a href="#">Iniciar Sesión</a>
+            <a href="#">Crear Cuenta</a>
+            <a href="#">Perfil</a>
+            <a href="#">Mensajes</a>
+            <a href="#">Turnos</a>
+            <a href="#">Administrar <span>(admin)</span></a>
+            <a href="#">Cerrar Sesión</a>
+        </div>
+    </header>
+
+    <main class="mainPrincipal">
+
+        <div class="tituloConFlecha">
+            <a href="../index.html">
+                <img class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Ir hacia atrás">
+            </a>
+            <h2>Turnos</h2>
+            <a href="../pages/administrar.html">
+                <img class="flechaInvisible" src="" alt="">
+            </a>
+        </div>
+
+        <h2>Actividad</h2>
+
+
+        <!-- carrousel -->
+
+        <div class="contenedor-actividades">
+            <div class="tituloConFlecha">
+                <a href="#">
+                    <img class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Anterior actividad">
+                </a>
+            </div>
+
+            <div class="carrusel-actividades">
+                <div class="actividad-card">
+                    <img src="../assets/img/icono_yoga.png" alt="Yoga" />
+                    <p>Yoga</p>
+                </div>
+                <div class="actividad-card seleccionada">
+                    <img src="../assets/img/icono_pesas.png" alt="Musculación" />
+                    <p>Musculación</p>
+                </div>
+                <div class="actividad-card">
+                    <img src="../assets/img/icono_natacion.png" alt="Natación" />
+                    <p>Natación</p>
+                </div>
+            </div>
+
+            <div class="tituloConFlecha">
+                <a href="../pages/administrar.html">
+                    <img class="flecha" src="../assets/img/icono_flecha_adelante.png" alt="Siguiente actividad">
+                </a>
+            </div>
+        </div>
+
+        <!-- selector de profesor -->
+        <div class="selector-profesor">
+            <label for="profesor">Profesores</label>
+            <select id="profesor" name="profesor">
+                <option value="todos">Todos</option>
+                <option value="juan">Juan</option>
+                <option value="maria">María</option>
+            </select>
+        </div>
+
+    </main>
+
+
+    <!--
+    
+    <main class="mainPrincipal">
+        
+        <div class="tituloConFlecha">
+            <a href="../index.html">
+                <img class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Ir hacia atrás">
+            </a>
+            <h2>Turnos</h2>
+
+            <a href="../pages/administrar.html">
+                
+                <img class="flechaInvisible" src="" alt="">
+            </a> 
+        </div>
+
+        <h2>Actividad</h2>
+
+        <div class="tituloConFlecha">
+            <a href="#">
+                <img class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Ir hacia atrás">
+            </a>
+            
+                                     
+            <a href="../pages/administrar.html">
+                <img class="flecha" src="../assets/img/icono_flecha_adelante.png" alt="Ir hacia adelante">
+            </a>  
+        </div>
+
+    </main> -->
+
+    <script src="../js/index.js"></script>
+    <script src="../js/turnos.js"></script>
+
+
+
+</body>
+
+</html>
