@@ -1,0 +1,160 @@
+/* Fuente personalizada: Poppins y Roboto */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/Roboto/Roboto-Italic-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Estilos globales */
+* {
+  font-family: "Poppins", "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Variables */
+:root {
+  --color-fondo: #bababa;
+  --color-primario: #007a5e;
+  --color-secundario: #6edc8c;
+  --color-terciario: #033649;
+  --color-cuarto: #45c4ed;
+  --color-contraste-claro: #f5f5f5;
+  --color-contraste-oscuro: #222222;
+}
+
+/* Estilo general del body */
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-terciario);
+}
+
+/* Header / navegación */
+header nav {
+  top: 0;
+  width: 100%;
+  padding: 16px;
+  background: var(--color-primario);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 33px;
+}
+
+header nav a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: var(--color-cuarto);
+  font-weight: bold;
+}
+
+header nav .logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+header nav .logo img {
+  width: 50px;
+}
+
+header nav .logo span {
+  font-size: 0.7rem;
+  padding-top: 10px;
+}
+
+/* Título con flechas */
+.tituloConFlecha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+  /*background-color: #eaeaea;*/
+}
+
+.tituloConFlecha p {
+  font-size: 1.5em;
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.flecha,
+.flechaInvisible {
+  width: 24px;
+  height: 24px;
+}
+
+/* Estilo de las tarjetas*/
+.card {
+  background: linear-gradient(to right, #a9cdbb, #c1d8e4);
+  border-radius: 15px;
+  padding: 1em;
+  margin: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  position: relative;
+  color: var(--color-contraste-oscuro);
+}
+
+.card h2 {
+  width: 100%;
+  margin-bottom: 0.5em;
+  font-size: 1em;
+  color: rgb(66, 65, 65);
+}
+
+.card p,
+.card ul {
+  width: 60%;
+  margin-bottom: 1em;
+  color: rgb(255, 255, 255);
+}
+
+.card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.card li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.3em 0;
+  font-size: 1.1em;
+}
+
+.icon {
+  font-size: 1.2em;
+  
+}
+
+.card img {
+  width: 10%;
+  max-width: 25%;
+  align-self: center;
+  margin-top: -30px; /*Se debe buscar una mejor manera de alinear en el centro la imagen*/ 
+}
