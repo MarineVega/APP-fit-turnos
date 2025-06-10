@@ -7,6 +7,7 @@
   <title>Cuenta</title>
 </head>
 <body>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
   <header class="header">
     <nav>
       <a href="../index.html" class="logo">
@@ -65,7 +66,9 @@
         <div><input type="text" class="inputActividad" id="codigoSeguridad" placeholder="Ingresá el código de seguridad aquí" /></div>
         <p id="recuperarError2" class="adventencia" style="color: red;"></p>
         <button type="submit" class="btnAceptar">CONFIRMAR</button>
+       <div style="text-align: center;">
         <p><a href="#" id="reenviarCodigo">Volver a enviar el código de seguridad</a></p>
+       </div>
       </form>
 
       <!-- Recuperar paso 3 -->
@@ -84,6 +87,7 @@
   <script src="../assets/js/crearcuenta.js"></script>
   <script src="../assets/js/cuenta.js"></script>
   <script src="../assets/js/recuperar.js"></script>
+ 
  
 </body>
 </html>

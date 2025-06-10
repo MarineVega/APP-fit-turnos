@@ -25,7 +25,27 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    alert("Cuenta creada exitosamente");
-    form.reset();
+    // reemplazo alert
+    // SweetAlert2 configuracion
+    Swal.fire({
+      title: '¡Operación Exitosa!',
+      text: 'Bienvenid@, ya está todo listo, alcanza tus objetivos con nosotros.',
+      imageUrl: '../assets/img/exito.png', 
+      imageHeight: 100,
+      imageAlt: 'Éxito',
+      icon: 'success',
+      confirmButtonText: 'Inicio',
+      customClass: {
+        confirmButton: 'btnAceptar' 
+      },
+      buttonsStyling: false 
+    }).then((result) => {
+      if (result.isConfirmed) {
+       
+        window.location.href = '../index.html'; // 
+      }
+    });
+
+    form.reset(); // 
   });
 });

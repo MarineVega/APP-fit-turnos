@@ -15,7 +15,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Simulación de login
     if (email.value === "usuario@fit.com" && password.value === "123456") {
-      alert("Inicio de sesión exitoso");
+       Swal.fire({
+       title: '¡Operación exitosa!',
+       imageUrl: '../assets/img/exito.png', // imagen
+       imageWidth: 100,
+       imageHeight: 100,
+       imageAlt: 'Checkmark',
+       icon: 'success', //icono exito 
+       confirmButtonText: 'Cerrar'
+       });
       form.reset();
     } else {
       error.textContent = "Email o contraseña incorrectos.";

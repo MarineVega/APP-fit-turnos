@@ -48,7 +48,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (codigoSeguridad.value === "123456") { // Example code
       mostrar("formRecuperar3");
     } else {
-      recuperarError2.textContent = "Código incorrecto. Intentá de nuevo.";
+       Swal.fire({
+       title: '¡upps!, ocurrió un error',
+       text:'Algo salio mal, por favor intentalo nuevamente',
+       imageUrl: '../assets/img/error.png', // imagen
+       imageWidth: 100,
+       imageHeight: 100,
+       imageAlt: 'Checkmark',
+       icon: 'error', // <--- This sets the error icon
+       confirmButtonText: 'Cerrar',
+       customClass: {
+       confirmButton: 'btnAceptar'
+  },
+  buttonsStyling: false
+       });
     }
   });
 
