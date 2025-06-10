@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // reemplazo alert
-    // SweetAlert2 configuracion
+    // SweetAlert2 
     Swal.fire({
       title: '¡Operación Exitosa!',
       text: 'Bienvenid@, ya está todo listo, alcanza tus objetivos con nosotros.',
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }).then((result) => {
       if (result.isConfirmed) {
        
-        window.location.href = '../index.html'; // 
+        window.location.href = '../index.html'; // mando a la home
       }
     });
 

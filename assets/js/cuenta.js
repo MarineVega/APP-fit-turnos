@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
       error.textContent = "Completá todos los campos.";
       return;
     }
-
+    // hay que ver que pedimos como minimo
     if (pass.value.length < 6) {
       error.textContent = "La contraseña debe tener al menos 6 caracteres.";
       return;

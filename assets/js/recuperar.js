@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(formId).style.display = "flex";
   };
 
-  // Logic for "Recuperar paso 1"
+  //  "Recuperar paso 1"
   formRecuperar1.addEventListener("submit", (e) => {
     e.preventDefault();
     recuperarError1.textContent = "";
@@ -29,12 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Simulate sending an email with a security code
+    // simula el envio de codigo
     alert("Se ha enviado un código de seguridad a tu email.");
     mostrar("formRecuperar2");
   });
 
-  // Logic for "Recuperar paso 2"
+  //  "Recuperar paso 2"
   formRecuperar2.addEventListener("submit", (e) => {
     e.preventDefault();
     recuperarError2.textContent = "";
@@ -44,8 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Simulate code validation
-    if (codigoSeguridad.value === "123456") { // Example code
+    // Simula una validación
+    if (codigoSeguridad.value === "123456") { // 
       mostrar("formRecuperar3");
     } else {
        Swal.fire({
@@ -55,13 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
        imageWidth: 100,
        imageHeight: 100,
        imageAlt: 'Checkmark',
-       icon: 'error', // <--- This sets the error icon
+       icon: 'error', //
        confirmButtonText: 'Cerrar',
        customClass: {
        confirmButton: 'btnAceptar'
-  },
-  buttonsStyling: false
-       });
+      },
+      buttonsStyling: false
+      });
     }
   });
 
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
     alert("Se ha reenviado un nuevo código de seguridad a tu email.");
   });
 
-  // Logic for "Recuperar paso 3"
+  //"Recuperar paso 3"
   formRecuperar3.addEventListener("submit", (e) => {
     e.preventDefault();
     recuperarError3.textContent = "";
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     alert("Contraseña actualizada exitosamente.");
-    mostrar("formLogin"); // Redirect to login after successful password reset
+    mostrar("formLogin"); 
     document.getElementById("modoTitulo").textContent = "Iniciar Sesión";
     formRecuperar1.reset();
     formRecuperar2.reset();
