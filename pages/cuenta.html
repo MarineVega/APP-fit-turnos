@@ -4,8 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../css/style.css" />
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-  <title>Crear Cuenta</title>
+  <title>Cuenta</title>
 </head>
 <body>
   <header class="header">
@@ -20,32 +19,70 @@
   <main class="mainActividad">
     <section class="seccionActividad">
       <div class="tituloConFlecha">
-        <img class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Ir hacia atrás">
-        <span>Crear Cuenta</span>
+        <img id="flechaVolver" class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Volver" style="cursor: pointer;">
+        <span id="modoTitulo">Iniciar Sesión</span>
         <span class="flechaInvisible">&#x2192;</span>
       </div>
 
-      <form class="formActividad">
-        <div>
-          <input type="text" class="inputActividad" placeholder="Nombre" />
-        </div>
-        <div>
-          <input type="email" class="inputActividad" placeholder="Email" />
-        </div>
-        <div>
-          <input type="password" class="inputActividad" id="password" placeholder="Contraseña" />
-        </div>
-        <div>
-          <input type="password" class="inputActividad" id="confirmar" placeholder="Confirmar Contraseña" />
-        </div>
-       
+      <!-- Login -->
+      <form class="formActividad" id="formLogin">
+        <div><input type="email" class="inputActividad" id="loginEmail" placeholder="Email" /></div>
+        <div><input type="password" class="inputActividad" id="loginPassword" placeholder="Contraseña" /></div>
+        <label style="padding-left: 5%; font-size: 0.9rem;"><input type="checkbox" id="recordarme" /> Recordarme</label>
+        <p id="loginError" class="adventencia" style="color: red;"></p>
+        <button type="submit" class="btnAceptar">CONFIRMAR</button>
+        <div style="text-align: center;">
+          <p><a href="#" id="linkRecuperar">Olvidé mi contraseña</a></p>
+          <p><a href="#" id="linkRegistrarse">No tenés cuenta? Registrarse</a></p>
+        </div>   
+       </form>
+
+      <!-- Crear cuenta -->
+      <form class="formActividad" id="formCrear" style="display:none;">
+        <div><input type="text" class="inputActividad" id="nombre" placeholder="Nombre" /></div>
+        <div><input type="email" class="inputActividad" id="crearEmail" placeholder="Email" /></div>
+        <div><input type="password" class="inputActividad" id="crearPassword" placeholder="Contraseña" /></div>
+        <div><input type="password" class="inputActividad" id="confirmarPassword" placeholder="Confirmar Contraseña" /></div>
+        <p id="crearError" class="adventencia" style="color: red;"></p>
+        <button type="submit" class="btnAceptar">REGISTRARSE</button>
+        <div style="text-align: center;">
+         <p><a href="#" id="linkVolverLogin1">Ya tenés cuenta? Iniciar sesión</a></p>
+        </div> 
       </form>
-          <button type="submit" class="btnAceptar">CONFIRMAR</button>
+
+      <!-- Recuperar paso 1 -->
+      <form class="formActividad" id="formRecuperar1" style="display:none;">
+        <div><input type="email" class="inputActividad" id="recuperarEmail" placeholder="Email" /></div>
+        <p id="recuperarError1" class="adventencia" style="color: red;"></p>
+        <button type="submit" class="btnAceptar">RECUPERAR CONTRASEÑA</button>
+        <div style="text-align: center;">
+         <p><a href="#" id="linkVolverLogin2">Volver a iniciar sesión</a></p>
+        </div> 
+      </form>
+
+      <!-- Recuperar paso 2 -->
+      <form class="formActividad" id="formRecuperar2" style="display:none;">
+        <div><input type="text" class="inputActividad" id="codigoSeguridad" placeholder="Ingresá el código de seguridad aquí" /></div>
+        <p id="recuperarError2" class="adventencia" style="color: red;"></p>
+        <button type="submit" class="btnAceptar">CONFIRMAR</button>
+        <p><a href="#" id="reenviarCodigo">Volver a enviar el código de seguridad</a></p>
+      </form>
+
+      <!-- Recuperar paso 3 -->
+      <form class="formActividad" id="formRecuperar3" style="display:none;">
+        <div><input type="password" class="inputActividad" id="nuevaPassword" placeholder="Contraseña" /></div>
+        <div><input type="password" class="inputActividad" id="confirmarNuevaPassword" placeholder="Confirmar Contraseña" /></div>
+        <p id="recuperarError3" class="adventencia" style="color: red;"></p>
+        <button type="submit" class="btnAceptar">CONFIRMAR</button>
+      </form>
+
     </section>
   </main>
 
-  <script>
-  
-  </script>
+  <script src="../js/navegacion.js"></script>
+  <script src="../js/login.js"></script>
+  <script src="../js/crearCuenta.js"></script>
+  <script src="../js/recuperar.js"></script>
+ 
 </body>
 </html>

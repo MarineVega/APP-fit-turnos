@@ -239,6 +239,8 @@ button {
 
     .btnAceptar {
       margin-top: 10%;
+      display: block; /*agregue que lo centre*/
+      margin: 0 auto;
     }
   }
 }
