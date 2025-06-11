@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const pass = document.getElementById("crearPassword");
   const confirmar = document.getElementById("confirmarPassword");
   const error = document.getElementById("crearError");
+  
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();

@@ -90,7 +90,16 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    alert("Contraseña actualizada exitosamente.");
+     Swal.fire({
+       title: '¡Operación exitosa!',
+       text:'Se ha actualizado la contraseña',
+       imageUrl: '../assets/img/exito.png', // imagen
+       imageWidth: 100,
+       imageHeight: 100,
+       imageAlt: 'Checkmark',
+       icon: 'success', //icono exito 
+       confirmButtonText: 'Cerrar'
+       });
     mostrar("formLogin"); 
     document.getElementById("modoTitulo").textContent = "Iniciar Sesión";
     formRecuperar1.reset();
