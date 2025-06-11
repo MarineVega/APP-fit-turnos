@@ -84,14 +84,17 @@ header nav .logo span {
   padding-top: 10px;
 }
 
-/* Título con flechas */
-.tituloConFlecha {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1em;
-  /*background-color: #eaeaea;*/
-}
+.tituloConFlecha {    
+    width: 100%;
+    padding: 5% 3%;        
+    display: flex;
+    color: var(--color-contraste-oscuro);
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    align-items: center;
+    justify-content:space-between;    
+    font-size: 1.3rem;
+  }
 
 .tituloConFlecha p {
   font-size: 1.5em;
@@ -100,10 +103,10 @@ header nav .logo span {
   text-align: center;
 }
 
-.flecha,
 .flechaInvisible {
   width: 24px;
   height: 24px;
+  visibility: hidden;
 }
 
 /* Estilo de las tarjetas*/
@@ -147,13 +150,18 @@ header nav .logo span {
   font-size: 1em;
 }
 
+.card a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
 .icon {
   font-size: 1.2em;  
 }
 
 .card img {
-  width: 10%;
+  width: 20%;
   max-width: 25%;
   align-self: center;
-  margin-top: -30px; /*Se debe buscar una mejor manera de alinear en el centro la imagen*/ 
+  margin-top: -30px; 
 }
