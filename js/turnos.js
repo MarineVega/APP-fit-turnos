@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const tarjetas = document.querySelectorAll(".actividad-card");
 
   tarjetas.forEach((tarjeta) => {
