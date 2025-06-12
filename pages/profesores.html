@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- configuración de estilos -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- ícono de la página web -->
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    
+    <!-- íconos de google -->
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+
+    <title> FIT Turnos - Profesores </title>
+
+</head>
+<body>
+    <!-- agregue sweetalert para usar imagenes e iconos-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+
+    <header class="header">
+        <nav>
+            <a href="../index.html" class="logo">
+                <img src="../assets/img/Logo_Fit_Home.png" alt="Icono FIT Turnos" loading="lazy">                
+            </a>    
+        </nav>
+    </header>
+
+    <main class="mainProfesores">
+
+        <div class="tituloConFlecha">
+            <a href="../pages/administrar.html">
+                <img class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Ir hacia atrás">
+            </a>
+            <p id="titulo">Agregar Profesores</p>
+             
+            <a href="../pages/administrar.html">
+                <!-- sin flecha -->
+                <img class="flechaInvisible" src="" alt="">
+            </a> 
+            <!--                         
+            <a href="../pages/administrar.html">
+                <img class="flecha" src="../assets/img/icono_flecha_adelante.png" alt="Ir hacia adelante">
+            </a>  -->
+        </div>
+        
+        <section class="seccionProfesores" id="formularioProfesores">
+            <form class="formProfesores">
+                <div>
+                    <label for="nombre"> Nombre *</label>                
+                    <input type="text" id="nombre" class="inputProfesores" placeholder="Nombre">
+                    <div id="nombreError" class="mensaje-error"></div>
+                </div>
+
+                <div>
+                    <label for="apellido"> Apellido *</label>                
+                    <input type="text" id="apellido" class="inputProfesores" placeholder="Apellido">
+                    <div id="apellidoError" class="mensaje-error"></div>
+                </div>
+
+                <div>
+                    <label for="documento"> Documento *</label>
+                    <input type="number" id="documento" class="inputProfesores" placeholder="10">
+                    <div id="documentoError" class="mensaje-error"></div>    
+                </div>
+
+                <div>
+                    <label for="titulo"> Título *</label>                
+                    <input type="text" id="titulo" class="inputProfesores" placeholder="Titulo">
+                    <div id="tituloError" class="mensaje-error"></div>
+                </div>
+
+                 <div>
+                    <label for="cuil"> CUIT/CUIL *</label>
+                    <input type="number" id="cuil" class="inputProfesores" placeholder="10">
+                    <div id="cuilError" class="mensaje-error"></div>    
+                </div>
+
+                <div>
+                    <label for="imagen">URL de Imagen</label>
+                    <input type="file" id="imagen" class="inputProfesores" accept="image/*">
+                    <img id="vistaPrevia" style="width: 100px; display: none; margin-top: 10px;">
+                    <label class="advertencia">Coloque la imagen en la carpeta <b>assets/img</b> antes de seleccionarla.</label>
+                </div>
+
+                <label class="advertencia">* Campos obligatorios</label>
+            </form>
+            
+            <button id="agregar" class="btnAceptar">AGREGAR</button>
+        </section>
+        
+        <section id="listadoProfesores">            
+            <table id="tablaProfesores">
+                <thead id="encabezadoProfesores">
+                    <!-- encabezado generado desde JS -->
+                </thead>
+                <tbody id="profesoresLista">
+                    <!-- Filas generadas dinámicamente -->
+                </tbody>
+            </table>            
+        </section>
+      
+    </main>
+    
+    <script src="../js/profesores.js"></script>
+
+</body>
+</html>

@@ -102,7 +102,7 @@ header {
  */
 
  /* Estilos de index.html, actividad.html */
-.mainPrincipal, .mainActividad {
+.mainPrincipal, .mainProfesores {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -139,6 +139,7 @@ header {
     font-weight: 500; 
     line-height: 40px;     
     word-wrap: break-word;
+    padding: 5% 0%;
   }
 
   .registrarse {
@@ -147,12 +148,13 @@ header {
     line-height: 40px;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     letter-spacing: 0.1rem;
+    padding: 2% 0%;
   }
 
   .logoMedusa {
-    width: 70%;
-    border-radius: 10px;
-    margin-bottom: 20px;
+    width: 70%;    
+    border-radius: 10px;    
+    margin: 20px 0px;
   }
 
   .tituloConFlecha {    
@@ -170,8 +172,6 @@ header {
   .flechaInvisible {
     visibility: hidden;
   }
-
-
 }
 
 button {
@@ -194,30 +194,31 @@ button {
 }
 
 
-/* Estilos de la página de Actividad */
-.mainActividad {
-  .seccionActividad {
+/* Estilos de la página de Profesores */
+.mainProfesores {
+  .seccionProfesores {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center;    
+    justify-items: center;
 
-    .formActividad {
+    .formProfesores {
       width: 100%;
       color: var(--color-contraste-oscuro);
       display: flex;
       flex-direction: column;
-      align-items:start;
+      align-items: start;
       font-size: 1.3rem;
       padding: 0% 5%;;      
-
+      
       div {
         width: 100%;
         display: flex;
         flex-direction: column;        
         padding: 2%;
         
-        .inputActividad {
+        .inputProfesores {
           background: var(--color-contraste-claro);
           width: 100%;
           padding: 4%;
@@ -230,16 +231,14 @@ button {
           /* display: inline-flex; */
         }
         
-        .inputActividad::placeholder {
+        .inputProfesores::placeholder {
           color: var(--color-fondo);
         }
 
         /* para que desaparezca el placeholder al hacer clic en el input */
-        .inputActividad:focus::placeholder {
+        .inputProfesores:focus::placeholder {
           color: transparent;
         }
-
-
       }
 
       .mensaje-error {
@@ -252,11 +251,61 @@ button {
         font-size: 0.9rem;
       }
     }
-
+    
     .btnAceptar {
-      margin-top: 5%;
-    }
+      margin-top: 15%;
+    }  
   }
+
+  .btnTabla {
+    background-color: transparent;
+    width: 70%;
+  }
+
+  .btnTabla:hover {
+    background-color: var(--color-primario);
+  }
+
+  .iconoTabla {
+    width: 90%;
+  }
+
+  /* ver esta parte!!!! */
+  #tablaProfesores {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    
+  }
+
+  #tablaProfesores th,
+  #tablaProfesores td {
+    border: 1px solid var(--color-fondo);
+    padding: 12px;
+    
+    word-wrap: break-word;
+    word-break: break-word;   /* Fuerza corte incluso sin espacios */
+    white-space: normal;      /* Permite que baje de línea */
+    max-width: 200px;         /* Límite de ancho de la celda para que corte */
+
+  }
+
+  #tablaProfesores #documento,
+  #tablaProfesores #imagen {
+    text-align: center;  
+  }
+
+
+  #tablaProfesores th {
+    background-color: var(--color-primario);
+    color: var(--color-contraste-claro);
+    text-align: center;
+  }
+
+  #tablaProfesores tr:nth-child(even) {
+    background-color: var(--color-secundario);
+  }
+
 }
 
 
