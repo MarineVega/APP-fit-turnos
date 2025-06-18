@@ -96,13 +96,8 @@ header {
   }
 }
 
-/*
- @media (max-width: 1280px) {
-}
- */
-
- /* Estilos de index.html, actividad.html */
-.mainPrincipal, .mainActividad {
+/* Estilos de index.html, actividad.html, horario.html */
+.mainPrincipal, .mainActividad, .mainHorario {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -118,8 +113,7 @@ header {
     width: 100%;
     display: flex;
     flex-wrap: wrap;  /* permitir múltiples filas */
-    justify-content: space-between;    
-   
+    justify-content: space-between;   
     img {
       width: 70px;
       height: 70px;
@@ -157,23 +151,35 @@ header {
     margin: 20px 0px;
   }
 
+  .flechaInvisible {
+    visibility: hidden;
+  }
+
+/*  lo saco de la clase main, para poder usarlo en todas las páginas, sin necesidad de agregar el main de cada página acá
   .tituloConFlecha {    
     width: 100%;
-    padding: 5% 3%;         /* que las flechas no queden en el borde */ /* top-botton 2% right-left 3% */
+    padding: 5% 3%;  
     display: flex;
     color: var(--color-contraste-oscuro);
     font-weight: 600;
     letter-spacing: 0.1rem;
     align-items: center;
-    justify-content:space-between;    /* coloca las flechas en los extremos */
+    justify-content:space-between;   
     font-size: 1.3rem;
   }
+*/ 
+}
 
-  .flechaInvisible {
-    visibility: hidden;
-  }
-
-
+.tituloConFlecha {    
+  width: 100%;
+  padding: 5% 3%;         /* que las flechas no queden en el borde */ /* top-botton 2% right-left 3% */
+  display: flex;
+  color: var(--color-contraste-oscuro);
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  align-items: center;
+  justify-content:space-between;    /* coloca las flechas en los extremos */
+  font-size: 1.3rem;
 }
 
 button {
@@ -205,6 +211,9 @@ button {
   color: var(--color-contraste-claro);
 }
 
+
+
+
 footer {  
   display: flex;
   flex-direction: row;
@@ -225,16 +234,16 @@ footer {
 
 
 
-/* Estilos de la página de Actividad */
-.mainActividad {
-  .seccionActividad {
+/* Estilos de las páginas Actividad y Horario */
+.mainActividad, .mainHorario {
+  .seccionActividad, .seccionHorario {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;    
     justify-items: center;
 
-    .formActividad {
+    .formActividad, .formHorario {
       width: 100%;
       color: var(--color-contraste-oscuro);
       display: flex;
@@ -247,12 +256,12 @@ footer {
         width: 100%;
         display: flex;
         flex-direction: column;        
-        padding: 2%;
+        padding: 1%;
         
-        .inputActividad {
+        .inputActividad, .inputHorario {
           background: var(--color-contraste-claro);
           width: 100%;
-          padding: 4%;
+          padding: 2%;
           margin-top: 10px;
           border-radius: 6px;
           border-style: none;
@@ -260,7 +269,11 @@ footer {
           justify-content: flex-start;
           
           /* display: inline-flex; */
+          
         }
+
+      
+
         
         .inputActividad::placeholder {
           color: var(--color-fondo);
@@ -270,19 +283,93 @@ footer {
         .inputActividad:focus::placeholder {
           color: transparent;
         }
-
-
       }
 
+      
       .mensaje-error {
-      color: red;
-      font-size: 1.1rem;
+        color: red;
+        font-size: 1.1rem;
       }
       
       .advertencia {        
         padding-left: 4%;        
         font-size: 0.9rem;
       }
+
+      /* estilos exclusivos para horario.html */
+      .contenedorDias {
+        max-width: 100%;
+
+        .grillaDias {
+          display: grid;
+          grid-template-columns: 1fr 1fr;   /* 2 columnas */
+          gap: 5px;
+
+          
+          label {
+            position: relative;
+            padding-left: 30px;
+            cursor: pointer;
+            user-select: none;
+
+            /* estilo del contenedor visible del checkbox */
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            margin: 0.2rem;
+          }
+
+          /* ya que el checkbox no permite mucho estilo, debo ocultar el checkbox original y usar un elemento visual para reemplazarlo */
+
+          /* oculto el checkbox original*/
+          input[type="checkbox"] {
+            display: none;
+          }
+          /* estilo personalizado de la "caja" del checkbox */
+          label::before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            border: 2px solid var(--color-terciario);
+            background-color: var(--color-fondo);
+            border-radius: 4px;
+            transition: background-color 0.2s;
+          }
+          /* cuando el checkbox está marcado */
+          input[type="checkbox"]:checked + label::before {
+            background-color: var(--color-secundario);  /* fondo verde */
+            border-color: var(--color-secundario);            
+            background-image: url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.00039 10.8002L3.20039 8.00024L2.26672 8.93358L6.00039 12.6672L14.0004 4.66724L13.0671 3.73358L6.00039 10.8002Z"/></svg>'); /* muestro un tilde blanco con SVG embebido (imagen del check)*/            
+            /* background-repeat: no-repeat; */
+            /* background-position: center; */
+          }
+
+
+        }
+
+        /* aumentar tamaño de los checkboxes */
+        input[type="checkbox"] {
+          width: 20px;                /* width y height -> definen el tamaño del checkbox. */
+          height: 20px;
+          transform: scale(1.4);      /* aumento el tamaño general */
+          margin-right: 15px;         /* espacio entre el checkbox y el texto */
+          cursor: pointer;
+        }
+
+        .etiquetaDias {
+          font-weight: bold;
+          /* margin-bottom: 8px; */
+          display: block;
+        }
+
+      }
+    }
+    
+    .etiquetaHoras {
+      font-weight: bold;      
+      display: block;
     }
     
     .btnAceptar {
@@ -340,6 +427,9 @@ footer {
   }
 }
 
+
+
+
 /* Estilos para SweetAlert */
 .swal2-html-container .swal2-file,
 .swal2-html-container .advertencia {
@@ -349,33 +439,40 @@ footer {
 
 /* Media Queries para pantallas de tablet */
 @media (min-width: 768px) {
-  .mainActividad .seccionActividad {
+  .mainActividad .seccionActividad, 
+  .mainHorario .seccionHorario {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
   }
 
-  .mainActividad .formActividad {
+  .mainActividad .formActividad,
+  .mainHorario .formHorario {
     font-size: 1rem;
     padding: 0 10%;
   }
 
-  .mainActividad .formActividad .inputActividad {
+  .mainActividad .formActividad .inputActividad,
+  .mainHorario .formHorario .inputHorario {
     font-size: 1rem;
     padding: 10px;
   }
 
-  .mainActividad .formActividad .advertencia {
+  .mainActividad .formActividad .advertencia,
+  .mainHorario .formHorario .advertencia {
     font-size: 0.85rem;
   }
 
   .mainActividad .btnAceptar,
-  .mainActividad .btnCancelar {
+  .mainActividad .btnCancelar,
+  .mainHorario .btnAceptar,
+  .mainHorario .btnCancelar {
     width: 150px;
     font-size: 1rem;
   }
 
-  .mainActividad .tituloConFlecha {
+  .mainActividad .tituloConFlecha,
+  .mainHorario .tituloConFlecha {
     font-size: 1.1rem;
     padding: 2% 5%;
   }
@@ -383,11 +480,13 @@ footer {
 
 /* Media Queries para pantallas de escritorio */
 @media (min-width: 1024px) {
-  .mainActividad .seccionActividad {
+  .mainActividad .seccionActividad,
+  .mainHorario .seccionHorario {
     max-width: 700px;
   }
 
-  .mainActividad .formActividad {
+  .mainActividad .formActividad,
+  .mainHorario .formHorario {
     font-size: 0.95rem;
     display: grid;
     /* grid-template-columns: 1fr 1fr; */
@@ -395,44 +494,51 @@ footer {
     padding: 0 5%;
   }
   
-  .mainActividad .formActividad .inputActividad {
+  .mainActividad .formActividad .inputActividad,
+  .mainHorario .formHorario .inputHorario {
     font-size: 0.95rem;    
   }
 
   .mainActividad .btnAceptar,
-  .mainActividad .btnCancelar {
+  .mainActividad .btnCancelar,
+  .mainHorario .btnAceptar,
+  .mainHorario .btnCancelar {
     width: 140px;
     font-size: 0.95rem;
   }
 
-  .mainActividad .tituloConFlecha {
+  .mainActividad .tituloConFlecha,
+  .mainHorario .tituloConFlecha {
     font-size: 1.5rem;
   }
 
-  .mainActividad .formActividad > div {
+  .mainActividad .formActividad > div,
+  .mainHorario .formHorario > div {
     padding: 0; 
   }
 
-  .mainActividad .formActividad .mensaje-error {
+  .mainActividad .formActividad .mensaje-error,
+  .mainHorario .formHorario .mensaje-error {
     font-size: 0.85rem;
   }
 
-  .mainActividad .formActividad label.advertencia {
+  .mainActividad .formActividad label.advertencia,
+  .mainHorario .formHorario label.advertencia  {
     grid-column: span 2;
     font-size: 0.85rem;
   }
 
-  .mainActividad .btnAceptar {
+  .mainActividad .btnAceptar , 
+  .mainHorario .btnAceptar {
     grid-column: 2;
     justify-self: end;
     margin-top: 30px;
   }
 
-  .mainActividad .btnCancelar {
+  .mainActividad .btnCancelar , 
+  .mainHorario .btnCancelar {
     grid-column: 1;
     justify-self: start;
     margin-top: 30px;
   }
 }
-
-

@@ -405,27 +405,3 @@ function importarLocalStorage() {
     });
 }
 
-/*
-function importarLocalStorage(event) {
-    const archivo = event.target.files[0];
-    if (!archivo) return;
-
-    const lector = new FileReader();
-    lector.onload = function (e) {
-        try {
-            const datos = JSON.parse(e.target.result);
-            if (Array.isArray(datos)) {
-                localStorage.setItem("actividades", JSON.stringify(datos));
-                Swal.fire("Importación exitosa", "Las actividades fueron cargadas", "success");
-                location.reload();
-            } else {
-                Swal.fire("Error", "El archivo no tiene el formato esperado", "error");
-            }
-        } catch (error) {
-            Swal.fire("Error", "Archivo inválido", "error");
-        }
-    };
-
-    lector.readAsText(archivo);
-}
-    */
