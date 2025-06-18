@@ -32,6 +32,7 @@
 
         <div class="tituloConFlecha">
             <a href="../pages/administrar.html">
+            <!-- <a href="#" id="volverAtras"> -->
                 <img class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Ir hacia atrás">
             </a>
             <p id="titulo">Agregar Actividad</p>
@@ -67,15 +68,18 @@
                 </div>
 
                 <div>
-                    <label for="imagen">URL de Imagen</label>
-                    <input type="file" id="imagen" class="inputActividad" accept="image/*">
+                   <!-- <div id="urlImagen">         se agregó esta clase, para poder ocultar el input en el modificar, ya que, aun no pude resolver el mostrar ruta de la imagen, para poder modificar-->
+                        <label for="imagen">URL de Imagen</label>
+                        <input type="file" id="imagen" class="inputActividad" accept="image/*">                 
+                        <label class="advertencia">Coloque la imagen en la carpeta <b>assets/img</b> antes de seleccionarla.</label>
+                  <!--  </div>  -->
                     <img id="vistaPrevia" style="width: 100px; display: none; margin-top: 10px;">
-                    <label class="advertencia">Coloque la imagen en la carpeta <b>assets/img</b> antes de seleccionarla.</label>
                 </div>
 
                 <label class="advertencia">* Campos obligatorios</label>
             </form>
             
+            <button id="cancelar" class="btnCancelar">CANCELAR</button>
             <button id="agregar" class="btnAceptar">AGREGAR</button>
         </section>
         
@@ -87,12 +91,19 @@
                 <tbody id="actividadesLista">
                     <!-- Filas generadas dinámicamente -->
                 </tbody>
-            </table>            
+            </table>
         </section>
       
     </main>
     
     <script src="../js/actividad.js"></script>
+    
+    <footer>
+        <button id="exportarLocalStorage" onclick="exportarLocalStorage()">Exportar Actividades</button>
+        <button id="importarLocalStorage" onclick="importarLocalStorage()">Importar Actividades</button>
+
+        <!-- <input type="file" id="importarLocalStorage" accept=".json" onchange="importarLocalStorage(event)"> -->
+    </footer>
 
 </body>
 </html>

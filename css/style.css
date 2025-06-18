@@ -190,10 +190,39 @@ button {
   margin: 10px;  
 }
   
+.btnCancelar {
+  background-color: var(--color-contraste-claro);
+  border: 1.5px solid var(--color-terciario);
+}
+
+.btnCancelar:hover {
+  background-color: var(--color-terciario);  
+  color: var(--color-contraste-claro);
+}
+
 .btnAceptar:hover {
   background-color: var(--color-primario);  
   color: var(--color-contraste-claro);
 }
+
+footer {  
+  display: flex;
+  flex-direction: row;
+  justify-content: center;  
+}
+
+/* Botón para exportar Local Storage a JSON */
+#exportarLocalStorage, #importarLocalStorage{
+  background-color: var(--color-fondo);
+  color: var(--color-terciario);  
+  font-size: 0.9rem;
+}
+
+#exportarLocalStorage:hover, #importarLocalStorage:hover {
+  background-color: var(--color-terciario);
+  color: var(--color-contraste-claro);
+}
+
 
 
 /* Estilos de la página de Actividad */
@@ -286,10 +315,7 @@ button {
   #tablaActividades th,
   #tablaActividades td {
     border: 1px solid var(--color-fondo);
-    padding: 12px;
-    
-
-    
+    padding: 12px;    
     word-wrap: break-word;
     word-break: break-word;   /* Fuerza corte incluso sin espacios */
     white-space: normal;      /* Permite que baje de línea */
@@ -312,22 +338,101 @@ button {
   #tablaActividades tr:nth-child(even) {
     background-color: var(--color-secundario);
   }
+}
 
-
-
-
+/* Estilos para SweetAlert */
+.swal2-html-container .swal2-file,
+.swal2-html-container .advertencia {
+  font-size: 0.9rem;
 }
 
 
-/*
-.btnAceptar {
-  background-color: var(--color-secundario);
-  
-  color: var(--color-contraste-oscuro);
-  
-  border-radius: 8px;
-  padding: 12px 24px;
-  font-size: 1.1rem;
-  
+/* Media Queries para pantallas de tablet */
+@media (min-width: 768px) {
+  .mainActividad .seccionActividad {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
   }
-  */
+
+  .mainActividad .formActividad {
+    font-size: 1rem;
+    padding: 0 10%;
+  }
+
+  .mainActividad .formActividad .inputActividad {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .mainActividad .formActividad .advertencia {
+    font-size: 0.85rem;
+  }
+
+  .mainActividad .btnAceptar,
+  .mainActividad .btnCancelar {
+    width: 150px;
+    font-size: 1rem;
+  }
+
+  .mainActividad .tituloConFlecha {
+    font-size: 1.1rem;
+    padding: 2% 5%;
+  }
+}
+
+/* Media Queries para pantallas de escritorio */
+@media (min-width: 1024px) {
+  .mainActividad .seccionActividad {
+    max-width: 700px;
+  }
+
+  .mainActividad .formActividad {
+    font-size: 0.95rem;
+    display: grid;
+    /* grid-template-columns: 1fr 1fr; */
+    gap: 20px;
+    padding: 0 5%;
+  }
+  
+  .mainActividad .formActividad .inputActividad {
+    font-size: 0.95rem;    
+  }
+
+  .mainActividad .btnAceptar,
+  .mainActividad .btnCancelar {
+    width: 140px;
+    font-size: 0.95rem;
+  }
+
+  .mainActividad .tituloConFlecha {
+    font-size: 1.5rem;
+  }
+
+  .mainActividad .formActividad > div {
+    padding: 0; 
+  }
+
+  .mainActividad .formActividad .mensaje-error {
+    font-size: 0.85rem;
+  }
+
+  .mainActividad .formActividad label.advertencia {
+    grid-column: span 2;
+    font-size: 0.85rem;
+  }
+
+  .mainActividad .btnAceptar {
+    grid-column: 2;
+    justify-self: end;
+    margin-top: 30px;
+  }
+
+  .mainActividad .btnCancelar {
+    grid-column: 1;
+    justify-self: start;
+    margin-top: 30px;
+  }
+}
+
+
