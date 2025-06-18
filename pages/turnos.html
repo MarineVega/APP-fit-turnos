@@ -18,16 +18,38 @@
 <body>
 
     <header class="header">
-        <nav>
-            <div class="nav-item">
+        <nav class="navbar">
+            <!-- Zona izquierda -->
+
+            <div class="nav-left">
+                <!-- icono hamburguesa SOLO en mobile -->
                 <a href="#" class="icon" id="btnMenu">
                     <img src="../assets/img/menu.png" alt="Menú" loading="lazy">
                 </a>
+
+                <!-- Logo -->
                 <a href="#" class="logo">
                     <img src="../assets/img/Logo_Fit_Home.png" alt="Logo" loading="lazy">
                 </a>
+
+                <!-- menu visible solo en escritorio -->
+                <div class="nav-links desktop-only">
+                    <a href="#">Home</a>
+                    <a href="#">Turnos</a>
+                    <a href="#">Perfil</a>
+                </div>
             </div>
-            <div class="nav-item">
+
+            <!-- Zona derecha -->
+
+            <div class="nav-right">
+                <!-- Menú visible solo en escritorio -->
+                <div class="nav-links desktop-only">
+                    <a href="#">Iniciar Sesion</a>
+                    <a href="#">Crear Cuenta</a>
+                </div>
+
+                <!-- Íconos comunes -->
                 <a href="#" class="icon">
                     <img src="../assets/img/buscar.png" alt="Buscar" loading="lazy">
                 </a>
@@ -35,18 +57,20 @@
                     <img src="../assets/img/notif.png" alt="Notificaciones" loading="lazy">
                 </a>
             </div>
-        </nav>
 
-        <div class="menu-desplegable oculto" id="menuDesplegable">
-            <a href="#">Home</a>
-            <a href="#">Iniciar Sesión</a>
-            <a href="#">Crear Cuenta</a>
-            <a href="#">Perfil</a>
-            <a href="#">Mensajes</a>
-            <a href="#">Turnos</a>
-            <a href="#">Administrar <span>(admin)</span></a>
-            <a href="#">Cerrar Sesión</a>
-        </div>
+            <!-- Menú desplegable mobile -->
+            <div class="menu-desplegable oculto" id="menuDesplegable">
+                <a href="#">Home</a>
+                <a href="#">Iniciar Sesión</a>
+                <a href="#">Crear Cuenta</a>
+                <a href="#">Perfil</a>
+                <a href="#">Mensajes</a>
+                <a href="#">Turnos</a>
+                <a href="#">Administrar <span>(admin)</span></a>
+                <a href="#">Cerrar Sesión</a>
+            </div>
+
+        </nav>
     </header>
 
     <main class="mainPrincipal">
