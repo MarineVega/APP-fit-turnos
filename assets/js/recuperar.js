@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const codigo = generarCodigo();
 
     localStorage.setItem("codigoRecuperacion", codigo);
-
+    // coloco el service de emailjs y el template creado
     emailjs.send("service_vq2s3hg", "template_tth5c7f", {
     email: destino,
     codigo: codigo
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (nuevaPassword.value.length < 6) {
-      recuperarError3.textContent = "La contraseña debe tener al menos 6 caracteres.";
+        recuperarError3.textContent = "La contraseña debe tener al menos 6 caracteres.";
       return;
     }
 
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
     formRecuperar3.reset();
     localStorage.removeItem("codigoRecuperacion");
   });
-
+ // genero codigo de recuperacion de cuenta para enviar por mail
   function generarCodigo() {
     return Math.floor(100000 + Math.random() * 900000).toString();
   }
