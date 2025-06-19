@@ -1,4 +1,3 @@
-// lo comenté porque sino no funcionan los íconos modificar/eliminar de la tabla
 document.addEventListener("DOMContentLoaded", () => {
 
     // Obtengo el modo por medio del parámetro que recibe

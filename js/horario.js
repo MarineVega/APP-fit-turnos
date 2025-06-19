@@ -1,15 +1,29 @@
-// Obtengo actividades del localStorage, para mostrar en el combo
-const actividades = JSON.parse(localStorage.getItem("actividades")) || [];
+document.addEventListener("DOMContentLoaded", () => {
 
-const select = document.getElementById("actividades");
+    // Obtengo actividades del localStorage, para mostrar en el combo
+    const actividades = JSON.parse(localStorage.getItem("actividades")) || [];
 
-actividades.forEach(actividad => {
-    const option = document.createElement("option");
-    // option.value = actividad.id;             // identificador único
-    option.textContent = actividad.nombre; 
-    select.appendChild(option);
-});
+    const select = document.getElementById("actividades");
 
+    actividades.forEach(actividad => {
+        const option = document.createElement("option");
+        // option.value = actividad.id;             // identificador único
+        option.textContent = actividad.nombre; 
+        select.appendChild(option);
+    });
+
+    // Obtengo el modo por medio del parámetro que recibe
+    const params = new URLSearchParams(window.location.search);
+    const modo = params.get("modo");
+
+    const formulario = document.getElementById("formularioHorario");
+    const listado = document.getElementById("listadoHorarios");
+    const titulo = document.getElementById("titulo");
+
+    const btnExportar = document.getElementById("exportarLocalStorage");
+    const btnImportar = document.getElementById("importarLocalStorage");
+
+})
 
 /* control para q elija al menos 1 día
 const form = document.getElementById("formulario");

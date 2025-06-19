@@ -120,7 +120,17 @@
                 <button id="cancelar" class="btnCancelar">CANCELAR</button>
                 <button id="agregar" class="btnAceptar">AGREGAR</button>
             </div>
+        </section>
 
+        <section id="listadoActividades">            
+            <table id="tablaActividades">
+                <thead id="encabezadoActividades">
+                    <!-- encabezado generado desde JS -->
+                </thead>
+                <tbody id="actividadesLista">
+                    <!-- Filas generadas dinámicamente -->
+                </tbody>
+            </table>
         </section>
 
 <!-- 
@@ -129,5 +139,10 @@
     </main>
 
     <script src="../js/horario.js"></script>
+    <footer>
+        <button id="exportarLocalStorage" onclick="exportarLocalStorage()">Exportar Actividades</button>
+        <button id="importarLocalStorage" onclick="importarLocalStorage()">Importar Actividades</button>        
+    </footer>
+
 </body>
 </html>
