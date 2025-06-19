@@ -95,8 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const codigo = generarCodigo();
     localStorage.setItem("codigoRecuperacion", codigo);
 
-    emailjs.send("service_vq23shg", "template_codigo", {
-      to_email: destino,
+    emailjs.send("service_vq2s3hg", "template_tth5c7f", {
+      email: destino,
       codigo: codigo
     })
     .then(() => {
