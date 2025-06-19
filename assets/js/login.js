@@ -13,20 +13,31 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Simulación de login
-    if (email.value === "usuario@fit.com" && password.value === "123456") {
-       Swal.fire({
-       title: '¡Operación exitosa!',
-       imageUrl: '../assets/img/exito.png', // imagen
-       imageWidth: 100,
-       imageHeight: 100,
-       imageAlt: 'Checkmark',
-       icon: 'success', //icono exito 
-       confirmButtonText: 'Cerrar'
-       });
+    // Obtener usuario de localStorage
+    const usuarioGuardado = JSON.parse(localStorage.getItem("usuario"));
+
+    if (
+      usuarioGuardado &&
+      email.value === usuarioGuardado.email &&
+      password.value === usuarioGuardado.password
+    ) {
+      const mensaje = usuarioGuardado.esAdmin
+        ? 'Bienvenido administrador'
+        : '¡Bienvenido!';
+
+      Swal.fire({
+        title: mensaje,
+        imageUrl: '../assets/img/exito.png',
+        imageWidth: 100,
+        imageHeight: 100,
+        imageAlt: 'Checkmark',
+        icon: 'success',
+        confirmButtonText: 'Cerrar'
+      });
+
       form.reset();
     } else {
-        error.textContent = "Email o contraseña incorrectos.";
+      error.textContent = "Email o contraseña incorrectos.";
     }
   });
 });

@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const email = document.getElementById("crearEmail");
   const pass = document.getElementById("crearPassword");
   const confirmar = document.getElementById("confirmarPassword");
+  const esAdmin = document.getElementById("esAdmin");
   const error = document.getElementById("crearError");
-  
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -26,8 +26,16 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // reemplazo alert
-    // SweetAlert2 
+    // Simula guardar usuario en localStorage
+    const usuario = {
+      nombre: nombre.value,
+      email: email.value,
+      password: pass.value,
+      esAdmin: esAdmin.checked
+    };
+
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+
     Swal.fire({
       title: '¡Operación Exitosa!',
       text: 'Bienvenid@, ya está todo listo, alcanza tus objetivos con nosotros.',
@@ -42,11 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
       buttonsStyling: false 
     }).then((result) => {
       if (result.isConfirmed) {
-       
-        window.location.href = '../index.html'; // mando a la home
+        window.location.href = '../index.html';
       }
     });
 
-    form.reset(); // 
+    form.reset();
   });
 });
+

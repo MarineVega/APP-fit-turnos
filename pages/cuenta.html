@@ -40,17 +40,24 @@
        </form>
 
       <!-- Crear cuenta -->
-      <form class="formActividad" id="formCrear" style="display:none;">
-        <div><input type="text" class="inputActividad" id="nombre" placeholder="Nombre" /></div>
-        <div><input type="email" class="inputActividad" id="crearEmail" placeholder="Email" /></div>
-        <div><input type="password" class="inputActividad" id="crearPassword" placeholder="Contraseña" /></div>
-        <div><input type="password" class="inputActividad" id="confirmarPassword" placeholder="Confirmar Contraseña" /></div>
-        <p id="crearError" class="adventencia" style="color: red;"></p>
-        <button type="submit" class="btnAceptar">REGISTRARSE</button>
-        <div style="text-align: center;">
+     <form class="formActividad" id="formCrear" style="display:none;">
+       <div><input type="text" class="inputActividad" id="nombre" placeholder="Nombre" /></div>
+       <div><input type="email" class="inputActividad" id="crearEmail" placeholder="Email" /></div>
+       <div><input type="password" class="inputActividad" id="crearPassword" placeholder="Contraseña" /></div>
+       <div><input type="password" class="inputActividad" id="confirmarPassword" placeholder="Confirmar Contraseña" /></div>
+  
+      <!-- NUEVO: checkbox para rol -->
+      <label style="padding-left: 5%; font-size: 0.9rem;">
+        <input type="checkbox" id="esAdmin" /> Crear como administrador
+      </label>
+  
+      <p id="crearError" class="adventencia" style="color: red;"></p>
+      <button type="submit" class="btnAceptar">REGISTRARSE</button>
+      <div style="text-align: center;">
          <p><a href="#" id="linkVolverLogin1">Ya tenés cuenta? Iniciar sesión</a></p>
-        </div> 
-      </form>
+      </div> 
+    </form>
+
 
       <!-- Recuperar paso 1 -->
       <form class="formActividad" id="formRecuperar1" style="display:none;">
@@ -86,7 +93,6 @@
   <script src="../assets/js/navegacion.js"></script>
   <script src="../assets/js/login.js"></script>
   <script src="../assets/js/crearcuenta.js"></script>
-  <script src="../assets/js/cuenta.js"></script>
   <script src="../assets/js/recuperar.js"></script>
  
  
