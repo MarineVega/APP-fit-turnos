@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- configuración de estilos -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- ícono de la página web -->
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    
+    <!-- íconos de google -->
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+
+    <title>FIT Turnos - Actividad</title>
+
+</head>
+<body>
+    <!-- agregue sweetalert para usar imagenes e iconos-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+
+    <header class="header">
+        <nav>
+            <a href="../index.html" class="logo">
+                <img src="../assets/img/Logo_Fit_Home.png" alt="Icono FIT Turnos" loading="lazy">                
+            </a>    
+        </nav>
+    </header>
+
+    <main class="mainActividad">
+
+        <div class="tituloConFlecha">
+            <a href="../pages/administrar.html">
+            <!-- <a href="#" id="volverAtras"> -->
+                <img class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Ir hacia atrás">
+            </a>
+            <p id="titulo">Agregar Actividad</p>
+             
+            <a href="../pages/administrar.html">
+                <!-- sin flecha -->
+                <img class="flechaInvisible" src="" alt="">
+            </a> 
+            <!--                         
+            <a href="../pages/administrar.html">
+                <img class="flecha" src="../assets/img/icono_flecha_adelante.png" alt="Ir hacia adelante">
+            </a>  -->
+        </div>
+        
+        <section class="seccionActividad" id="formularioActividad">
+            <form class="formActividad">
+                <div>
+                    <label for="nombre">Nombre *</label>                
+                    <input type="text" id="nombre" class="inputActividad" placeholder="Nombre">
+                    <div id="nombreError" class="mensaje-error"></div>
+                </div>
+
+                <div>
+                    <label for="descripcion">Descripción *</label>                
+                    <input type="text" id="descripcion" class="inputActividad" placeholder="Descripción">
+                    <div id="descripcionError" class="mensaje-error"></div>
+                </div>
+
+                <div>
+                    <label for="cupoMaximo">Cupo Máximo *</label>
+                    <input type="number" id="cupoMaximo" class="inputActividad" placeholder="10">
+                    <div id="cupoMaximoError" class="mensaje-error"></div>    
+                </div>
+
+                <div>
+                   <!-- <div id="urlImagen">         se agregó esta clase, para poder ocultar el input en el modificar, ya que, aun no pude resolver el mostrar ruta de la imagen, para poder modificar-->
+                        <label for="imagen">URL de Imagen</label>
+                        <input type="file" id="imagen" class="inputActividad" accept="image/*">                 
+                        <label class="advertencia">Coloque la imagen en la carpeta <b>assets/img</b> antes de seleccionarla.</label>
+                  <!--  </div>  -->
+                    <img id="vistaPrevia" style="width: 100px; display: none; margin-top: 10px;">
+                </div>
+
+                <label class="advertencia">* Campos obligatorios</label>
+            </form>
+            
+            <button id="cancelar" class="btnCancelar">CANCELAR</button>
+            <button id="agregar" class="btnAceptar">AGREGAR</button>
+        </section>
+        
+        <section id="listadoActividades">            
+            <table id="tablaActividades">
+                <thead id="encabezadoActividades">
+                    <!-- encabezado generado desde JS -->
+                </thead>
+                <tbody id="actividadesLista">
+                    <!-- Filas generadas dinámicamente -->
+                </tbody>
+            </table>
+        </section>
+      
+    </main>
+    
+    <script src="../js/actividad.js"></script>
+    
+    <footer>
+        <button id="exportarLocalStorage" onclick="exportarLocalStorage()">Exportar Actividades</button>
+        <button id="importarLocalStorage" onclick="importarLocalStorage()">Importar Actividades</button>
+
+        <!-- <input type="file" id="importarLocalStorage" accept=".json" onchange="importarLocalStorage(event)"> -->
+    </footer>
+
+</body>
+</html>
