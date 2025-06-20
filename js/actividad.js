@@ -277,10 +277,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const filaEncabezado = document.createElement("tr");
     filaEncabezado.innerHTML = `
         <th>Nombre</th>
-        <th>Descripción</th>
-        <th>Cupo Máximo</th>
+        <th>Detalle</th>
+        <th>Cupo Max.</th>
         <th>Imagen</th>
-        ${modo !== "consultar" ? "<th>Acción</th>" : ""}
+        ${modo !== "consultar" ? "<th></th>" : ""}
     `;
     encabezado.appendChild(filaEncabezado);
 
@@ -304,7 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 boton.className = "btnTabla";
 
                 if (modo === "editar") {
-                    boton.innerHTML = `<img src="../assets/img/icono_editar.png" alt="Editar" class="iconoTabla">`;
+                    boton.innerHTML = `<img src="../assets/img/icono_editar.png" alt="Editar" class="iconoTabla">`; 
                     boton.addEventListener("click", () => editarActividad(index));
                 } else if (modo === "eliminar") {
                     boton.innerHTML = `<img src="../assets/img/icono_eliminar.png" alt="Eliminar" class="iconoTabla">`;
