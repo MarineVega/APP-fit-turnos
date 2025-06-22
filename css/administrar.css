@@ -170,6 +170,24 @@ header nav .logo span {
   color: #033649;
 }
 
+.card .icon {
+  display: inline-block;
+  /*background-color: var(--color-fondo);*/
+  color: white;
+  padding: 0.3em 0.6em;
+  margin-left: 0.5em;
+  border-radius: 8px;
+  font-size: 1.1em;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.card .icon:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
 .card a {
   text-decoration: none;
   color: white;
@@ -177,9 +195,12 @@ header nav .logo span {
 
 .card > img:last-child {
   width: 20%;
-  /*max-width: 150px;*/
   height: auto;
   align-self: center;
+}
+
+.card p {
+  color: white;
 }
 
 #Empresa {

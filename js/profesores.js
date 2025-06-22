@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", function () {
 // document.addEventListener("DOMContentLoaded", () => {
     // Obtengo el modo por medio del parámetro que recibe
     const params = new URLSearchParams(window.location.search);
@@ -91,11 +92,11 @@
         document.getElementById("formularioProfesores").style.display = "block";
         document.getElementById("listadoProfesores").style.display = "none";
 
-        document.getElementById("nombre").value = profesores.nombre;
-        document.getElementById("apellido").value = profesores.apellido;
-        document.getElementById("documento").value = profesores.documento;
-        document.getElementById("titulo").value = profesores.documento;
-        document.getElementById("cuil").value = profesores.documento;
+        document.getElementById("nombre").value = profesor.nombre;
+        document.getElementById("apellido").value = profesor.apellido;
+        document.getElementById("documento").value = profesor.documento;
+        document.getElementById("titulo").value = profesor.titulo;
+        document.getElementById("cuil").value = profesor.cuil;
 
         // Reemplazo el botón agregar por uno de guardar cambios
         const boton = document.getElementById("agregar");
@@ -222,7 +223,7 @@ btnAceptar.addEventListener("click", (e) => {
             profesores.push(nuevoProfesor);
         }
 
-        localStorage.setItem("profesores", JSON.stringify(actividades));
+        localStorage.setItem("profesores", JSON.stringify(profesores));
   
         Swal.fire({
             title: '¡Operación Exitosa!',
@@ -238,7 +239,7 @@ btnAceptar.addEventListener("click", (e) => {
             buttonsStyling: false 
             }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = './profesor.html?modo=consultar';
+                window.location.href = './profesores.html?modo=consultar';
             }
         });
 
@@ -287,9 +288,9 @@ function mostrarListadoProfesores(modo= "consultar") {
 
             let accion = "";
             if (modo === "editar") {
-                accion = `<button class="btnTabla" onclick="editarActividad(${index})"><img src="../assets/img/icono_editar.png" alt="Editar" class="iconoTabla"></button>`;
+                accion = `<button class="btnTabla" onclick="editarProfesor(${index})"><img src="../assets/img/icono_editar.png" alt="Editar" class="iconoTabla"></button>`;
             } else if (modo === "eliminar") {
-                accion = `<button class="btnTabla" onclick="eliminarActividad(${index})"><img src="../assets/img/icono_eliminar.png" alt="Eliminar" class="iconoTabla"></button>`;
+                accion = `<button class="btnTabla" onclick="eliminarProfesor(${index})"><img src="../assets/img/icono_eliminar.png" alt="Eliminar" class="iconoTabla"></button>`;
             }
 
             fila.innerHTML = `
@@ -321,3 +322,4 @@ function resetMesajesError() {
 }
 
 // No logro que se agregue el profesor al listado de profesores a pesar de haber modificado el archivo js. Probablemente haya vayas errores.
+});
