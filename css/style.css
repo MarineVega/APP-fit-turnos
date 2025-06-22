@@ -541,6 +541,37 @@ footer {
 
 /*__________TERMINA CSS CUENTA___________*/
 
+/*___________TURNO______________________*/
+#listaTurnos {
+  display: none;
+  margin-top: 20px;
+}
+
+.tarjeta-turno {
+  background-color: var(--color-contraste-claro);
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+  color: var(--color-terciario);
+}
+
+.tarjeta-turno button {
+  margin-top: 10px;
+  background-color: var(--color-secundario);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.tarjeta-turno button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+
 
 /* Media Queries para pantallas de tablet */
 @media (min-width: 768px) {
