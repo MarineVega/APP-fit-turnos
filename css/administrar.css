@@ -24,9 +24,6 @@
   font-style: normal;
 }
 
-/* Iconos de Bootstrap */
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
-
 /* Estilos globales */
 * {
   font-family: "Poppins", "Roboto", sans-serif;
@@ -89,7 +86,7 @@ header nav .logo span {
 
 .tituloConFlecha {    
     width: 100%;
-    padding: 5% 3%;        
+    padding: 2% 2%;  /* Corregí acá el padding porque me parecía que quedaba demasiado espacio entre el título y la primera tarjeta */    
     display: flex;
     color: var(--color-contraste-oscuro);
     font-weight: 600;
@@ -112,39 +109,37 @@ header nav .logo span {
   border-radius: 15px;
   padding: 1em;
   margin: 1em;
+  margin-top: 0%;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
   position: relative;
   color: var(--color-contraste-oscuro);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
 }
 
 .card h2 {
   width: 100%;
   margin-bottom: 0.5em;
-  font-size: 1.2em;
-  font-weight: bold;
+  font-size: 1em;
   color: rgb(66, 65, 65);
+}
+
+.card p, .card ul {
+  width: 60%;
+  margin-bottom: 1em;
+  color: rgb(255, 255, 255);
 }
 
 .card ul {
   list-style: none;
   padding-left: 0;
-  margin: 0;
-  flex: 1;
 }
 
-#Horario {
+#Datos {
   font-size: 0.8em;
   color: white;
-}
-
-.card li {
-  display: flex;
-  align-items: center;
-  margin: 0.6em 5em;
+  justify-items: flex-start;
 }
 
 .card li i, .card li img {
@@ -157,6 +152,8 @@ header nav .logo span {
 #Medusa{
   object-fit: contain;
   border-radius: 7%;
+  margin: auto;
+  margin-right: 14px;
 }
 
 .bi {
@@ -167,12 +164,41 @@ header nav .logo span {
 
 .bi:hover {
   transform: scale(1.2);
-  color: #033649;
+  color: #45c4ed;
+}
+
+.card li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.3em 5em;
+  font-size: 1em;
+}
+
+.card a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
+.icon {
+  font-size: 1.2em;  
+}
+
+.card img {
+  width: 20%;
+  max-width: 25%;
+  align-self: center;
+  margin-top: -30px; 
+}
+
+#Empresa {
+ width: 200px;
+ height: 200px;
 }
 
 .card .icon {
   display: inline-block;
-  /*background-color: var(--color-fondo);*/
+  background: linear-gradient(to right, #a9cdbb, #b6cdda);
   color: white;
   padding: 0.3em 0.6em;
   margin-left: 0.5em;
@@ -187,23 +213,3 @@ header nav .logo span {
   transform: scale(1.1);
   cursor: pointer;
 }
-
-.card a {
-  text-decoration: none;
-  color: white;
-}
-
-.card > img:last-child {
-  width: 20%;
-  height: auto;
-  align-self: center;
-}
-
-.card p {
-  color: white;
-}
-
-#Empresa {
- width: 200px;
- height: 200px;
-} /* Se puede mejorar muchisimo */
