@@ -213,3 +213,149 @@ header nav .logo span {
   transform: scale(1.1);
   cursor: pointer;
 }
+
+/* Media Queruy para distintas pantallas 
+    hasta   480 px -> Dispositivos móviles
+    hasta   768px  -> Tabletas
+    más de  1024px -> Pantallas de escritorio
+*/
+
+/* Estilos para SweetAlert */
+.swal2-html-container .swal2-file,
+.swal2-html-container .advertencia {
+  font-size: 0.9rem;
+}
+
+/* Media Queries para pantallas de tablet */
+@media (min-width: 481px) {
+
+  .mainActividad .seccionActividad, 
+  .mainHorario .seccionHorario {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .mainActividad .formActividad,
+  .mainHorario .formHorario {
+    font-size: 1rem;
+    padding: 0 10%;
+  }
+
+  .mainActividad .formActividad .inputActividad,
+  .mainHorario .formHorario .inputHorario {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .mainActividad .formActividad .advertencia,
+  .mainHorario .formHorario .advertencia {
+    font-size: 0.85rem;
+  }
+
+  .mainActividad .btnTabla {
+    width: 80%;
+  }
+
+
+  .mainActividad .btnAceptar,
+  .mainActividad .btnCancelar,
+  .mainHorario .btnAceptar,
+  .mainHorario .btnCancelar {
+    width: 150px;
+    font-size: 1rem;
+  }
+
+  .mainActividad .tituloConFlecha,
+  .mainHorario .tituloConFlecha {
+    font-size: 1.1rem;
+    padding: 2% 5%;
+  }
+}
+
+/* Media Queries para pantallas de escritorio */
+@media (min-width: 1024px) {
+
+  .mainActividad .seccionActividad,
+  .mainHorario .seccionHorario {
+    max-width: 700px;
+  }
+
+  .mainActividad .seccionActividad .contenedorBotones,
+  .mainHorario .seccionHorario .contenedorBotones {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+  }
+
+  .mainActividad .formActividad,
+  .mainHorario .formHorario {
+    font-size: 0.95rem;
+    display: grid;
+    /* grid-template-columns: 1fr 1fr; */
+    gap: 20px;
+    padding: 0 5%;
+  }
+  
+  .mainActividad .formActividad .inputActividad,
+  .mainHorario .formHorario .inputHorario {
+    font-size: 0.95rem;
+  }
+
+  .mainActividad .seccionActividad .btnAceptar,
+  .mainActividad .seccionActividad .btnCancelar,
+  .mainHorario .btnAceptar,
+  .mainHorario .btnCancelar {
+    font-size: 1rem;
+    height: 50px;    
+    width: 200px;
+    }
+  
+
+  .mainActividad .tituloConFlecha,
+  .mainHorario .tituloConFlecha {
+    font-size: 1.5rem;
+  }
+
+  .mainActividad .formActividad > div,
+  .mainHorario .formHorario > div {
+    padding: 0; 
+  }
+
+  .mainActividad .formActividad .mensaje-error,
+  .mainHorario .formHorario .mensaje-error {
+    font-size: 0.85rem;
+  }
+
+  .mainActividad .formActividad label.advertencia,
+  .mainHorario .formHorario label.advertencia  {
+    grid-column: span 2;
+    font-size: 0.85rem;
+  }
+
+  .mainActividad .btnTabla {
+    width: 70%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 1);    /* sombra */
+  }
+
+  .mainActividad .btnAceptar, 
+  .mainHorario .btnAceptar {
+    grid-column: 2;
+    justify-self: end;
+    margin-top: 30px;
+  }
+
+  .mainActividad .btnCancelar, 
+  .mainHorario .btnCancelar {
+    grid-column: 1;
+    justify-self: start;
+    margin-top: 30px;
+  }
+
+  .mainActividad #tablaActividades th,
+  .mainActividad #tablaActividades td {
+    font-size: 1.1rem;    
+  }
+
+}

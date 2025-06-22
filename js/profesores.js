@@ -47,8 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     
-
-
     function eliminarProfesor(index) {
         Swal.fire({
             title: '¿Estás seguro?',
@@ -80,8 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
-
-
 
     // Editar profesor
     function editarProfesor(index) {
