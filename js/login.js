@@ -13,28 +13,35 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Obtener usuario de localStorage
-    const usuarioGuardado = JSON.parse(localStorage.getItem("usuario"));
+    // Obtener lista de usuarios guardados
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-    if (
-      usuarioGuardado &&
-      email.value === usuarioGuardado.email &&
-      password.value === usuarioGuardado.password
-    ) {
-      const mensaje = usuarioGuardado.esAdmin
-        ? 'Bienvenido administrador'
-        : '¡Bienvenido!';
+    // Buscar usuario con email y password coincidente
+    const usuario = usuarios.find(
+      (u) => u.email === email.value && u.password === password.value
+    );
 
-      Swal.fire({
-        title: mensaje,
-        imageUrl: '../assets/img/exito.png',
-        imageWidth: 100,
-        imageHeight: 100,
-        imageAlt: 'Checkmark',
-        icon: 'success',
-        confirmButtonText: 'Cerrar'
-      });
+    if (usuario) {
+      // Guardar usuario logueado en sesión/ esto para que se pueda usar en el index
+      localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
 
+      const mensaje = usuario.esAdmin
+        ? "Bienvenido administrador"
+        : "¡Bienvenido!";
+
+     Swal.fire({
+      title: mensaje,
+      imageUrl: "../assets/img/exito.png",
+      imageWidth: 100,
+      imageHeight: 100,
+      imageAlt: "Checkmark",
+      icon: "success",
+      confirmButtonText: "Cerrar"
+     }).then((result) => {
+       if (result.isConfirmed) {
+          window.location.href = "../index.html";
+       }
+    });
       form.reset();
     } else {
       error.textContent = "Email o contraseña incorrectos.";
