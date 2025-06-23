@@ -1,3 +1,56 @@
+// FUNCIONES MOVIDAS FUERA PARA USO GLOBAL
+
+function eliminarProfesor(index) {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Esta acción eliminará el profesor/a permanentemente.",
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: '#6edc8c',
+        customClass: {
+            cancelButton: 'btnAceptar'
+        },
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const profesores = JSON.parse(localStorage.getItem("profesores")) || [];
+            profesores.splice(index, 1);
+            localStorage.setItem("profesores", JSON.stringify(profesores));
+
+            const tabla = document.getElementById("profesoresLista");
+            tabla.deleteRow(index);
+
+            Swal.fire({
+                title: 'Eliminado',
+                text: 'El profesor ha sido eliminado.',
+                icon: 'success',
+                confirmButtonColor: '#6edc8c',
+                confirmButtonText: 'Cerrar'
+            });
+        }
+    });
+}
+
+function editarProfesor(index) {
+    const profesores = JSON.parse(localStorage.getItem("profesores")) || [];
+    const profesor = profesores[index];
+
+    document.getElementById("formularioProfesores").style.display = "block";
+    document.getElementById("listadoProfesores").style.display = "none";
+
+    document.getElementById("nombre").value = profesor.nombre;
+    document.getElementById("apellido").value = profesor.apellido;
+    document.getElementById("documento").value = profesor.documento;
+    document.getElementById("titulo").value = profesor.titulo;
+    document.getElementById("cuil").value = profesor.cuil;
+
+    const boton = document.getElementById("agregar");
+    boton.textContent = "GUARDAR";
+    boton.dataset.editIndex = index;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 // document.addEventListener("DOMContentLoaded", () => {
     // Obtengo el modo por medio del parámetro que recibe
@@ -46,7 +99,6 @@ document.addEventListener("DOMContentLoaded", function () {
             break    
     }
 
-    
     function eliminarProfesor(index) {
         Swal.fire({
             title: '¿Estás seguro?',
@@ -63,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 const actividades = JSON.parse(localStorage.getItem("profesores")) || [];
-                actividades.splice(index, 1);   // elimina 1 elemento
+                actividades.splice(index, 1);  
                 localStorage.setItem("profesores", JSON.stringify(profesores));
                 mostrarListadoProfesores("eliminar");
 
@@ -114,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             boton.textContent = "AGREGAR";
 
-            boton.onclick = agregarProfesor;   // Restauro acción original
+            boton.onclick = agregarProfesor;  
         };
     }
 
@@ -125,10 +177,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("documento").value = "";
         document.getElementById("titulo").value = "";
         document.getElementById("cuil").value = "";
-        // imagen.value = "";
-        // vistaPrevia.src = "";
-       // vistaPrevia.style.display = "none";
-
 
         document.getElementById("nombreError").textContent = "";
         document.getElementById("apellidoError").textContent = "";
@@ -139,18 +187,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // });
 
-
-/* OJO!!!!!! CONTROLAR*/
-
 // ELEMENTOS
 let nombre = document.getElementById("nombre");
 let apellido = document.getElementById("apellido");
 let documento = document.getElementById("documento");
-//let titulo = document.getElementById("titulo"); // Indica un error que no encuentro dónde está
+// let titulo = document.getElementById("titulo"); // Indica un error que no encuentro dónde está. Si descomento esta parte va directamente a la pagina agregar profesores
 let cuil = document.getElementById("cuil");
 let imagen = document.getElementById("imagen");
 
-/* INICIO 11-06-25 */
 const vistaPrevia = document.getElementById("vistaPrevia");
 
 imagen.addEventListener("change", () => {
@@ -163,7 +207,7 @@ imagen.addEventListener("change", () => {
         vistaPrevia.style.display = "none";
     }
 });
-/* FIN 11-06-25 */
+
 
 let btnAceptar = document.getElementById("agregar");
 
@@ -193,19 +237,16 @@ btnAceptar.addEventListener("click", (e) => {
     if (esValido) {
         let profesores = JSON.parse(localStorage.getItem("profesores")) || [];
         
-        /* INICIO 11-06-25 */
         const archivoImagen = imagen.files[0];
         const nombreImagen = archivoImagen ? archivoImagen.name : null;
         const rutaImagen = nombreImagen ? `../assets/img/${nombreImagen}` : null;
-        /* FIN 11-06-25 */
-        
+
         const nuevoProfesor = {
             nombre: nombre.value,
             apellido: apellido.value,
             documento: documento.value,
             titulo: titulo.value,
             cuil: cuil.value,
-            // imagen: imagen.value,
             imagen: rutaImagen,
         };
 
@@ -277,7 +318,7 @@ function mostrarListadoProfesores(modo= "consultar") {
 
     // Obtengo datos
     const profesores = JSON.parse(localStorage.getItem("profesores")) || [];
-    
+
     if (profesores.length > 0) {
         profesores.forEach((profesor, index) => {
             const fila = document.createElement("tr");
@@ -290,14 +331,14 @@ function mostrarListadoProfesores(modo= "consultar") {
             }
 
             fila.innerHTML = `
-                <td>${profesor.nombre}</td>
-                <td>${profesor.apellido}</td>
-                <td id="cupo">${profesor.documento}</td>
-                <td id="cupo">${profesor.titulo}</td>
-                <td id="cupo">${profesor.cuil}</td>
-                <td id="imagen"><img src=${profesor.imagen|| '../assets/img/icono_pesas.png'} style="width: 80px; height: auto;"></td>
-                    ${modo !== "consultar" ? `<td>${accion}</td>` : ""}                   
-            `;
+    <td>${profesor.nombre}</td>
+    <td>${profesor.apellido}</td>
+    <td>${profesor.documento}</td>
+    <td>${profesor.titulo}</td>
+    <td>${profesor.cuil}</td>
+    <td><img src="${profesor.imagen || '../assets/img/icono_pesas.png'}" style="width: 80px; height: auto;"></td>
+    ${modo !== "consultar" ? `<td>${accion}</td>` : ""}
+`;
             tabla.appendChild(fila);
         });
     } else {
@@ -317,5 +358,4 @@ function resetMesajesError() {
     });
 }
 
-// No logro que se agregue el profesor al listado de profesores a pesar de haber modificado el archivo js. Probablemente haya vayas errores.
 });
