@@ -76,11 +76,11 @@ document.addEventListener("DOMContentLoaded", () => {
         // Creo el encabezado dinámicamente
         const filaEncabezado = document.createElement("tr");
         filaEncabezado.innerHTML = `
-            <th>Actividad</th>
-            <th>Profesor</th>
+            <th>Activ.</th>
+            <th>Prof.</th>
             <th>Cupo Max.</th>
             <th>Días</th>
-            <th>Horario</th>
+            <th>Hora</th>
             ${modo !== "consultar" ? "<th></th>" : ""}
         `;
         

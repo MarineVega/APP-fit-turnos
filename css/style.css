@@ -444,7 +444,7 @@ footer {
   #tablaHorarios th,
   #tablaHorarios td {
     border: 1px solid var(--color-fondo);
-    padding: 12px;    
+    padding: 5px;    
     word-wrap: break-word;
     word-break: break-word;   /* Fuerza corte incluso sin espacios */
     white-space: normal;      /* Permite que baje de línea */

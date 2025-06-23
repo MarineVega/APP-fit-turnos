@@ -163,6 +163,23 @@ document.addEventListener("DOMContentLoaded", () => {
             esValido = false;
         }
 
+        // Valido que no se ingrese un nombre de actividad existente
+        const nombreIngresado = nombre.value.trim().toLowerCase();      // normalizo el texto ingresado (quito espacios y lo paso a minúscula)
+        const editIndex = btnAceptar.dataset.editIndex;
+        const actividades = JSON.parse(localStorage.getItem("actividades")) || [];
+
+        const nombreDuplicado = actividades.some((act, i) =>            // recorro todas las actividades y busco si hay otra con el mismo nombre
+            act.nombre.trim().toLowerCase() === nombreIngresado &&
+            i != editIndex          // permito el mismo nombre si estoy editando ese mismo elemento (misma posicion en el array)
+        );
+
+        if (nombreDuplicado) {
+            mostrarMensajeError("nombreError", "Ya existe una actividad con ese nombre.");
+            return;         // cancela el guardado
+        }
+        
+
+
         if (esValido) {
             let actividades = JSON.parse(localStorage.getItem("actividades")) || [];
                         
@@ -200,8 +217,8 @@ document.addEventListener("DOMContentLoaded", () => {
             // Armo texto para usar en swal fire, identificando el agregar del modificar
             const esEdicion = editIndex !== undefined && editIndex !== "";  // si estoy en el alta, el atributo data-edit-index está vacío o undefined; cuando edito, se le asigna un número
             const textoSwal = esEdicion
-                ? 'El horario ha sido actualizado.'
-                : 'El horario ha sido creado.';
+                ? 'La actividad ha sido actualizada.'
+                : 'La actividad ha sido creada.';
 
             Swal.fire({
                 title: '¡Operación Exitosa!',
