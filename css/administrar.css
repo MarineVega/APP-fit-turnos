@@ -214,6 +214,35 @@ header nav .logo span {
   cursor: pointer;
 }
 
+/* footer */ 
+
+.footer {
+  background-color: var(--color-primario);
+  color: var(--color-cuarto);
+  padding: 20px 10px;
+  width: 100%;
+  /*position: fixed;*/
+  text-align: center;
+  font-size: 0.9rem;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; 
+
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-logo img {
+  height: 45px;
+}
+
 /* Media Queruy para distintas pantallas 
     hasta   480 px -> Dispositivos móviles
     hasta   768px  -> Tabletas

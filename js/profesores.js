@@ -51,9 +51,17 @@ function editarProfesor(index) {
     boton.dataset.editIndex = index;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-// document.addEventListener("DOMContentLoaded", () => {
-    // Obtengo el modo por medio del parámetro que recibe
+    document.addEventListener("DOMContentLoaded", function () {
+    // 🧹 Limpiar localStorage si hay profesores sin campo 'titulo'
+    const profesoresGuardados = JSON.parse(localStorage.getItem("profesores")) || [];
+    const hayErrores = profesoresGuardados.some(prof => !prof.titulo || prof.titulo === "undefined");
+
+    if (hayErrores) {
+        console.warn("Se detectaron profesores sin campo 'titulo'. Se limpiará el localStorage.");
+        localStorage.removeItem("profesores");
+    }
+
+    // Obtengo el modo desde la URL
     const params = new URLSearchParams(window.location.search);
     const modo = params.get("modo");
 
@@ -66,68 +74,36 @@ document.addEventListener("DOMContentLoaded", function () {
         case "consultar":
             formulario.style.display = "none";
             listado.style.display = "block";
-            titulo.textContent = "Listado de Profesores";
+            document.getElementById("tituloPagina").textContent = "Listado de Profesores";
             mostrarListadoProfesores();
-            break
-        
+            break;
+
         case "agregar":
             formulario.style.display = "block";
             listado.style.display = "none";
-            titulo.textContent = "Agregar Profesor";
+            document.getElementById("tituloPagina").textContent = "Agregar Profesor";
             limpiarFormulario();
-            break
-        
-         case "editar":
+            break;
+
+        case "editar":
             formulario.style.display = "none";
             listado.style.display = "block";
-            titulo.textContent = "Modificar Profesor";
+            document.getElementById("tituloPagina").textContent = "Modificar Profesor";
             mostrarListadoProfesores("editar");
-            break
-        
-         case "eliminar":
+            break;
+
+        case "eliminar":
             formulario.style.display = "none";
             listado.style.display = "block";
-            titulo.textContent = "Eliminar Profesor";
+            document.getElementById("tituloPagina").textContent = "Eliminar Profesor";
             mostrarListadoProfesores("eliminar");
-            break
-        
+            break;
+
         default:
             formulario.style.display = "none";
             listado.style.display = "block";
             mostrarListadoProfesores();
-            break    
-    }
-
-    function eliminarProfesor(index) {
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: "Esta acción eliminará el profesor/a permanentemente.",
-            icon: 'warning',
-            showCancelButton: true,
-            cancelButtonColor: '#6edc8c',                        
-            customClass: {
-                cancelButton: 'btnAceptar'
-            },
-            confirmButtonColor: '#d33',
-            confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const actividades = JSON.parse(localStorage.getItem("profesores")) || [];
-                actividades.splice(index, 1);  
-                localStorage.setItem("profesores", JSON.stringify(profesores));
-                mostrarListadoProfesores("eliminar");
-
-                Swal.fire({
-                    title: 'Eliminada',
-                    text: 'El profesor ha sido eliminado.',
-                    icon:'success',
-                    confirmButtonColor: '#6edc8c',
-                    confirmButtonText: 'Cerrar'
-                });
-               
-            }
-        });
+            break;
     }
 
     // Editar profesor
@@ -190,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
 let nombre = document.getElementById("nombre");
 let apellido = document.getElementById("apellido");
 let documento = document.getElementById("documento");
-//let titulo = document.getElementById("titulo"); // Indica un error que no encuentro dónde está. Si descomento esta parte va directamente a la pagina agregar profesores
+let titulo = document.getElementById("titulo"); 
 let cuil = document.getElementById("cuil");
 let imagen = document.getElementById("imagen");
 
