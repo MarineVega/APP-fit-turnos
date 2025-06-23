@@ -12,11 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnExportar = document.getElementById("exportarLocalStorage");
     const btnImportar = document.getElementById("importarLocalStorage");
 
+    formulario.style.display = "none";
+    listado.style.display = "block";
+    btnExportar.style.visibility = "hidden";
+    btnImportar.style.visibility = "hidden";
+    
     // Muestro u oculto secciones según el modo
     switch (modo) {
         case "consultar":
-            formulario.style.display = "none";
-            listado.style.display = "block";
             titulo.textContent = "Listado de Actividades";
             btnExportar.style.visibility = "visible";
             btnImportar.style.visibility = "visible";
@@ -27,34 +30,20 @@ document.addEventListener("DOMContentLoaded", () => {
             formulario.style.display = "block";
             listado.style.display = "none";
             titulo.textContent = "Agregar Actividad";
-            btnExportar.style.visibility = "hidden";
-            btnImportar.style.visibility = "hidden";
             limpiarFormulario();
             break
         
-            case "editar":
-            formulario.style.display = "none";
-            listado.style.display = "block";
+        case "editar":
             titulo.textContent = "Modificar Actividad";
-            btnExportar.style.visibility = "hidden";
-            btnImportar.style.visibility = "hidden";
             mostrarListadoActividades("editar");
             break
         
-            case "eliminar":
-            formulario.style.display = "none";
-            listado.style.display = "block";
+        case "eliminar":
             titulo.textContent = "Eliminar Actividad";
-            btnExportar.style.visibility = "hidden";
-            btnImportar.style.visibility = "hidden";
             mostrarListadoActividades("eliminar");
             break
         
         default:
-            formulario.style.display = "none";
-            listado.style.display = "block";            
-            btnExportar.style.visibility = "hidden";
-            btnImportar.style.visibility = "hidden";
             mostrarListadoActividades();
             break    
     }
@@ -174,6 +163,23 @@ document.addEventListener("DOMContentLoaded", () => {
             esValido = false;
         }
 
+        // Valido que no se ingrese un nombre de actividad existente
+        const nombreIngresado = nombre.value.trim().toLowerCase();      // normalizo el texto ingresado (quito espacios y lo paso a minúscula)
+        const editIndex = btnAceptar.dataset.editIndex;
+        const actividades = JSON.parse(localStorage.getItem("actividades")) || [];
+
+        const nombreDuplicado = actividades.some((act, i) =>            // recorro todas las actividades y busco si hay otra con el mismo nombre
+            act.nombre.trim().toLowerCase() === nombreIngresado &&
+            i != editIndex          // permito el mismo nombre si estoy editando ese mismo elemento (misma posicion en el array)
+        );
+
+        if (nombreDuplicado) {
+            mostrarMensajeError("nombreError", "Ya existe una actividad con ese nombre.");
+            return;         // cancela el guardado
+        }
+        
+
+
         if (esValido) {
             let actividades = JSON.parse(localStorage.getItem("actividades")) || [];
                         
@@ -208,14 +214,20 @@ document.addEventListener("DOMContentLoaded", () => {
             
             localStorage.setItem("actividades", JSON.stringify(actividades));
 
+            // Armo texto para usar en swal fire, identificando el agregar del modificar
+            const esEdicion = editIndex !== undefined && editIndex !== "";  // si estoy en el alta, el atributo data-edit-index está vacío o undefined; cuando edito, se le asigna un número
+            const textoSwal = esEdicion
+                ? 'La actividad ha sido actualizada.'
+                : 'La actividad ha sido creada.';
+
             Swal.fire({
                 title: '¡Operación Exitosa!',
-                text: 'La actividad ha sido creada.',
+                text: textoSwal,            //'La actividad ha sido creada.',
                 imageUrl: '../assets/img/exito.png', 
                 imageHeight: 100,
                 imageAlt: 'Éxito',
                 icon: 'success',
-                confirmButtonText: 'Consultar',
+                confirmButtonText: 'Volver',
                 customClass: {
                     confirmButton: 'btnAceptar' 
                 },
@@ -266,62 +278,64 @@ document.addEventListener("DOMContentLoaded", () => {
           
     // Muestro el listado de actividades, con opción de editar o eliminar
     function mostrarListadoActividades(modo = "consultar") {
-    const encabezado = document.getElementById("encabezadoActividades");
-    const tabla = document.getElementById("actividadesLista");
+        const encabezado = document.getElementById("encabezadoActividades");
+        const tabla = document.getElementById("actividadesLista");
 
-    // Limpio la tabla
-    encabezado.innerHTML = "";
-    tabla.innerHTML = "";
+        // Limpio la tabla
+        encabezado.innerHTML = "";
+        tabla.innerHTML = "";
 
-    // Creo el encabezado dinámicamente
-    const filaEncabezado = document.createElement("tr");
-    filaEncabezado.innerHTML = `
-        <th>Nombre</th>
-        <th>Descripción</th>
-        <th>Cupo Máximo</th>
-        <th>Imagen</th>
-        ${modo !== "consultar" ? "<th>Acción</th>" : ""}
-    `;
-    encabezado.appendChild(filaEncabezado);
+        // Creo el encabezado dinámicamente
+        const filaEncabezado = document.createElement("tr");
+        filaEncabezado.innerHTML = `
+            <th>Nombre</th>
+            <th>Detalle</th>
+            <th>Cupo Max.</th>
+            <th>Imagen</th>
+            ${modo !== "consultar" ? "<th></th>" : ""}
+        `;
+        
+        // Obtengo datos
+        const actividades = JSON.parse(localStorage.getItem("actividades")) || [];
+        
+        if (actividades.length > 0) {
+            // agrego el encabezado de la tabla cuando sé que hay datos para mostrar
+            encabezado.appendChild(filaEncabezado);
 
-    // Obtengo datos
-    const actividades = JSON.parse(localStorage.getItem("actividades")) || [];
+            actividades.forEach((actividad, index) => {
+                const fila = document.createElement("tr");
 
-    if (actividades.length > 0) {
-        actividades.forEach((actividad, index) => {
-            const fila = document.createElement("tr");
+                fila.innerHTML = `
+                    <td>${actividad.nombre}</td>
+                    <td>${actividad.descripcion}</td>
+                    <td id="cupo">${actividad.cupoMaximo}</td>
+                    <td id="imagen"><img src="${actividad.imagen || '../assets/img/icono_default.png'}"></td>
+                `;
 
-            fila.innerHTML = `
-                <td>${actividad.nombre}</td>
-                <td>${actividad.descripcion}</td>
-                <td id="cupo">${actividad.cupoMaximo}</td>
-                <td id="imagen"><img src="${actividad.imagen || '../assets/img/icono_default.png'}"></td>
-            `;
+                if (modo !== "consultar") {
+                    const celdaAccion = document.createElement("td");
+                    const boton = document.createElement("button");
+                    boton.className = "btnTabla";
 
-            if (modo !== "consultar") {
-                const celdaAccion = document.createElement("td");
-                const boton = document.createElement("button");
-                boton.className = "btnTabla";
+                    if (modo === "editar") {
+                        boton.innerHTML = `<img src="../assets/img/icono_editar.png" alt="Editar" class="iconoTabla">`; 
+                        boton.addEventListener("click", () => editarActividad(index));
+                    } else if (modo === "eliminar") {
+                        boton.innerHTML = `<img src="../assets/img/icono_eliminar.png" alt="Eliminar" class="iconoTabla">`;
+                        boton.addEventListener("click", () => eliminarActividad(index));
+                    }
 
-                if (modo === "editar") {
-                    boton.innerHTML = `<img src="../assets/img/icono_editar.png" alt="Editar" class="iconoTabla">`;
-                    boton.addEventListener("click", () => editarActividad(index));
-                } else if (modo === "eliminar") {
-                    boton.innerHTML = `<img src="../assets/img/icono_eliminar.png" alt="Eliminar" class="iconoTabla">`;
-                    boton.addEventListener("click", () => eliminarActividad(index));
+                    celdaAccion.appendChild(boton);
+                    fila.appendChild(celdaAccion);
                 }
 
-                celdaAccion.appendChild(boton);
-                fila.appendChild(celdaAccion);
-            }
-
+                tabla.appendChild(fila);
+            });
+        } else {
+            const fila = document.createElement("tr");
+            fila.innerHTML = `<td colspan="${modo !== "consultar" ? 5 : 4}">No hay actividades registradas.</td>`;
             tabla.appendChild(fila);
-        });
-    } else {
-        const fila = document.createElement("tr");
-        fila.innerHTML = `<td colspan="${modo !== "consultar" ? 5 : 4}">No hay actividades registradas.</td>`;
-        tabla.appendChild(fila);
-    }
+        }
     }
 
     function mostrarMensajeError(elementId, mensaje) {

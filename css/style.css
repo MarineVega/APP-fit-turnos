@@ -249,7 +249,7 @@ footer {
       display: flex;
       flex-direction: column;
       align-items: start;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       padding: 0% 5%;;      
       
       div {
@@ -265,7 +265,7 @@ footer {
           margin-top: 10px;
           border-radius: 6px;
           border-style: none;
-          font-size: 1.3rem;
+          font-size: 1.2rem;
           justify-content: flex-start;
           
           /* display: inline-flex; */
@@ -284,16 +284,15 @@ footer {
           color: transparent;
         }
       }
-
       
       .mensaje-error {
         color: red;
-        font-size: 1.1rem;
+        font-size: 1rem;
       }
       
       .advertencia {        
         padding-left: 4%;        
-        font-size: 0.9rem;
+        font-size: 0.8rem;
       }
 
       /* estilos exclusivos para horario.html */
@@ -305,7 +304,6 @@ footer {
           grid-template-columns: 1fr 1fr;   /* 2 columnas */
           gap: 5px;
 
-          
           label {
             position: relative;
             padding-left: 30px;
@@ -345,9 +343,9 @@ footer {
             /* background-repeat: no-repeat; */
             /* background-position: center; */
           }
-
-
+         
         }
+
 
         /* aumentar tamaño de los checkboxes */
         input[type="checkbox"] {
@@ -372,27 +370,69 @@ footer {
       display: block;
     }
     
-    .btnAceptar {
-      margin-top: 15%;
-    }
+    /* lo comenté porque no quedan alineados los botones aceptar y cancelar en la versión escritorio*/
+    /* .btnAceptar {
+      margin-top: 10%;
+    } */
     
+    .contenedorBotones {
+      margin-top: 5%;
+      display: flex;
+    }
+
+    .btnAceptar, .btnCancelar {     
+      font-size: 1rem;
+      height: 40px;
+      width: 150px;  
+    }
+
+    /* Botón de cuenta.html */
+    .btnAceptarLogin {
+      margin-top: 10%;
+      display: block;
+      margin: 0 auto;
+    }
   }
 
+  /*
   .btnTabla {
     background-color: transparent;
-    width: 70%;
+    
   }
 
   .btnTabla:hover {
     background-color: var(--color-primario);
   }
+*/
+  .btnTabla {
+    background-color: transparent; /* color de fondo */
+    border: 1px solid var(--color-terciario);       /* borde visible */
+    width: 85%;
+    border-radius: 8px;                             /* bordes redondeados */
+    padding: 9px;                                   /* espacio interno */
+    cursor: pointer;                                /* cursor de mano */
+    transition: background-color 0.2s, transform 0.1s;    
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);    /* sombra */
+  }
+
+  .btnTabla:hover {
+    background-color: var(--color-primario);        /* fondo al pasar el mouse */
+    transform: scale(1.05);                         /* pequeño agrandamiento */    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);     /* más sombra al pasar el mouse */
+  }
+
+
+  .btnTabla:active {
+    transform: scale(0.98) translateY(1px);       /* simula presión */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);   /* sombra reducida */
+  }
 
   .iconoTabla {
-    width: 90%;
+    width: 120%;
   }
 
   /* ver esta parte!!!! */
-  #tablaActividades {
+  #tablaActividades, #tablaHorarios {
     width: 100%;
     border-collapse: collapse;
     margin: 20px auto;
@@ -400,35 +440,49 @@ footer {
   }
 
   #tablaActividades th,
-  #tablaActividades td {
+  #tablaActividades td,
+  #tablaHorarios th,
+  #tablaHorarios td {
     border: 1px solid var(--color-fondo);
-    padding: 12px;    
+    padding: 5px;    
     word-wrap: break-word;
     word-break: break-word;   /* Fuerza corte incluso sin espacios */
     white-space: normal;      /* Permite que baje de línea */
-    max-width: 200px;         /* Límite de ancho de la celda para que corte */
 
+    /* max-width: 200px;         Límite de ancho de la celda para que corte */
+    font-size: 0.9rem;
+ 
+  
   }
 
   #tablaActividades #cupo,
-  #tablaActividades #imagen {
-    text-align: center;  
+  #tablaActividades #imagen, 
+  #tablaHorarios #cupo {
+    text-align: center;    
   }
 
 
-  #tablaActividades th {
+  #tablaActividades th,
+  #tablaHorarios th {
     background-color: var(--color-primario);
     color: var(--color-contraste-claro);
     text-align: center;
+    font-weight: normal;    
+    /* display: none; */
   }
 
-  #tablaActividades tr:nth-child(even) {
+  #tablaActividades tr:nth-child(even),
+  #tablaHorarios tr:nth-child(even) {
     background-color: var(--color-secundario);
   }
 }
 
 
-
+/* Media Queruy para distintas pantallas 
+    hasta   480 px -> Dispositivos móviles
+    hasta   768px  -> Tabletas
+    más de  1024px -> Pantallas de escritorio
+*/
 
 /* Estilos para SweetAlert */
 .swal2-html-container .swal2-file,
@@ -436,9 +490,9 @@ footer {
   font-size: 0.9rem;
 }
 
-
 /* Media Queries para pantallas de tablet */
-@media (min-width: 768px) {
+@media (min-width: 481px) {
+
   .mainActividad .seccionActividad, 
   .mainHorario .seccionHorario {
     max-width: 600px;
@@ -463,6 +517,11 @@ footer {
     font-size: 0.85rem;
   }
 
+  .mainActividad .btnTabla {
+    width: 80%;
+  }
+
+
   .mainActividad .btnAceptar,
   .mainActividad .btnCancelar,
   .mainHorario .btnAceptar,
@@ -480,9 +539,18 @@ footer {
 
 /* Media Queries para pantallas de escritorio */
 @media (min-width: 1024px) {
+
   .mainActividad .seccionActividad,
   .mainHorario .seccionHorario {
     max-width: 700px;
+  }
+
+  .mainActividad .seccionActividad .contenedorBotones,
+  .mainHorario .seccionHorario .contenedorBotones {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
   }
 
   .mainActividad .formActividad,
@@ -496,16 +564,18 @@ footer {
   
   .mainActividad .formActividad .inputActividad,
   .mainHorario .formHorario .inputHorario {
-    font-size: 0.95rem;    
-  }
-
-  .mainActividad .btnAceptar,
-  .mainActividad .btnCancelar,
-  .mainHorario .btnAceptar,
-  .mainHorario .btnCancelar {
-    width: 140px;
     font-size: 0.95rem;
   }
+
+  .mainActividad .seccionActividad .btnAceptar,
+  .mainActividad .seccionActividad .btnCancelar,
+  .mainHorario .btnAceptar,
+  .mainHorario .btnCancelar {
+    font-size: 1rem;
+    height: 50px;    
+    width: 200px;
+    }
+  
 
   .mainActividad .tituloConFlecha,
   .mainHorario .tituloConFlecha {
@@ -528,17 +598,28 @@ footer {
     font-size: 0.85rem;
   }
 
-  .mainActividad .btnAceptar , 
+  .mainActividad .btnTabla {
+    width: 70%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 1);    /* sombra */
+  }
+
+  .mainActividad .btnAceptar, 
   .mainHorario .btnAceptar {
     grid-column: 2;
     justify-self: end;
     margin-top: 30px;
   }
 
-  .mainActividad .btnCancelar , 
+  .mainActividad .btnCancelar, 
   .mainHorario .btnCancelar {
     grid-column: 1;
     justify-self: start;
     margin-top: 30px;
   }
+
+  .mainActividad #tablaActividades th,
+  .mainActividad #tablaActividades td {
+    font-size: 1.1rem;    
+  }
+
 }
