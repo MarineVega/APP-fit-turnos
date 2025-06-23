@@ -226,7 +226,7 @@ header nav .logo span {
   font-size: 0.9rem;
 }
 
-/* Media Queries para pantallas de tablet */
+/* Media Queries para pantallas de tablet */ /* Esto se debe adaptar al HTML de la página administrar */
 @media (min-width: 481px) {
 
   .mainActividad .seccionActividad, 
