@@ -42,7 +42,7 @@
             <form class="formHorario">
                 <div>
                     <label for="profesor">Profesor *</label>
-                    <select name="profesores" id="profesores" class="inputHorario">
+                    <select name="profesores" id="profesor" class="inputHorario">
                         <option value="">(Todos)</option>   
                         <option value="ana">Ana</option>
                         <option value="marcos">Marcos</option>
@@ -53,9 +53,10 @@
                 
                 <div>
                     <label for="actividad">Actividad *</label>                
-                    <select id="actividades" id="actividades" class="inputHorario"  required>
+                    <select id="actividad" class="inputHorario">
                       <option value="" disabled selected>Elegir una actividad</option>
                     </select>                    
+                    <div id="actividadError" class="mensaje-error"></div>    
                 </div>
 
                 <div>
@@ -66,26 +67,31 @@
 
                 <div class="contenedorDias">
                     <label class="etiquetaDias">Días *</label>
+                   
                     <div class="grillaDias">
-                        <!-- <label><input type="checkbox" name="dias" value="lunes"> Lunes</label> -->
-                        <input type="checkbox" id="lunes" />
-                        <label for="lunes">Lunes</label>
-                        
-                        <input type="checkbox" id="jueves">
-                        <label for="jueves">Jueves</label>
-                        
-                        <input type="checkbox" id="martes">
-                        <label for="martes">Martes</label>                       
+                        <div class="columnaDias">
+                            <input type="checkbox" id="lunes" />
+                            <label for="lunes">Lunes</label><br>
 
-                        <input type="checkbox" id="viernes">
-                        <label for="viernes">Viernes</label>
+                            <input type="checkbox" id="martes" />
+                            <label for="martes">Martes</label><br>
 
-                        <input type="checkbox" id="miercoles">
-                        <label for="miercoles">Miércoles</label>
+                            <input type="checkbox" id="miercoles" />
+                            <label for="miercoles">Miércoles</label><br>
+                        </div>
 
-                        <input type="checkbox" id="sabado">
-                        <label for="sabado">Sábado</label>
-                    </div>                    
+                        <div class="columnaDias">
+                            <input type="checkbox" id="jueves" />
+                            <label for="jueves">Jueves</label><br>
+
+                            <input type="checkbox" id="viernes" />
+                            <label for="viernes">Viernes</label><br>
+
+                            <input type="checkbox" id="sabado" />
+                            <label for="sabado">Sábado</label><br>
+                        </div>
+                    </div>
+                                    
                     <div id="diasError" class="mensaje-error"></div>   
                 </div>
 
@@ -106,42 +112,42 @@
                         <option value="19">19:00 a 20:00</option>
                         <option value="20">20:00 a 21:00</option>
                         <option value="21">21:00 a 22:00</option>
-                    </select>                    
+                    </select>       
+
+                    <div id="horarioError" class="mensaje-error"></div>
                 </div>
 
                 <label class="advertencia">* Campos obligatorios</label>
             </form>
-            
-            <!-- <button type="submit">Enviar</button> 
-            Debo agregar el type submit????? 
-            -->
-
+           
             <div class="contenedorBotones">
                 <button id="cancelar" class="btnCancelar">CANCELAR</button>
                 <button id="agregar" class="btnAceptar">AGREGAR</button>
             </div>
         </section>
 
-        <section id="listadoActividades">            
-            <table id="tablaActividades">
-                <thead id="encabezadoActividades">
+        <section id="listadoHorarios">            
+            <table id="tablaHorarios">
+                <thead id="encabezadoHorarios">
                     <!-- encabezado generado desde JS -->
                 </thead>
-                <tbody id="actividadesLista">
+                <tbody id="horariosLista">
                     <!-- Filas generadas dinámicamente -->
                 </tbody>
             </table>
         </section>
 
-<!-- 
+    <!-- 
         <h1>Página en construcción...</h1>
-        <img width="50%" height="50%" src="../assets/img/pagina_en_construccion.png" alt=""> -->
+        <img width="50%" height="50%" src="../assets/img/pagina_en_construccion.png" alt=""> 
+    -->
     </main>
 
     <script src="../js/horario.js"></script>
+
     <footer>
-        <button id="exportarLocalStorage" onclick="exportarLocalStorage()">Exportar Actividades</button>
-        <button id="importarLocalStorage" onclick="importarLocalStorage()">Importar Actividades</button>        
+        <button id="exportarLocalStorage" onclick="exportarLocalStorage()">Exportar Horarios</button>
+        <button id="importarLocalStorage" onclick="importarLocalStorage()">Importar Horarios</button>        
     </footer>
 
 </body>
