@@ -59,7 +59,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const formulario = document.getElementById("formularioProfesores");
     const listado = document.getElementById("listadoProfesores");
-    const titulo = document.getElementById("titulo");
     const btnAgregar = document.getElementById("agregar");
 
     // Muestro u oculto secciones según el modo
@@ -191,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
 let nombre = document.getElementById("nombre");
 let apellido = document.getElementById("apellido");
 let documento = document.getElementById("documento");
-// let titulo = document.getElementById("titulo"); // Indica un error que no encuentro dónde está. Si descomento esta parte va directamente a la pagina agregar profesores
+//let titulo = document.getElementById("titulo"); // Indica un error que no encuentro dónde está. Si descomento esta parte va directamente a la pagina agregar profesores
 let cuil = document.getElementById("cuil");
 let imagen = document.getElementById("imagen");
 
