@@ -10,9 +10,10 @@
 
     <!-- ícono de la página web -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
+    
     <title>FIT Turnos</title>
 
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/cdn.min.js"></script>
 </head>
 
 <body>
@@ -36,7 +37,6 @@
                 <div class="nav-links desktop-only">
                     <a href="#">Home</a>
                     <a href="#">Turnos</a>
-                    <a href="#">Perfil</a>
                 </div>
             </div>
 
@@ -45,11 +45,16 @@
             <div class="nav-right">
                 <!-- Menú visible solo en escritorio -->
                 <div class="nav-links desktop-only">
-                    <a href="#">Iniciar Sesion</a>
-                    <a href="#">Crear Cuenta</a>
+                    <a href="#" class="deslogueado" id="menuIniciarSesion">Iniciar Sesion</a>
+                    <a href="#" class="deslogueado" id="menuCrearCuenta">Crear Cuenta</a>
+                
+                    <a href="#" class="usuario-admin" id="menuAdmin">Administrar</a>
+                
+                    <a href="#" class="logueado" id="nombreUsuario">Perfil</a>
+                    <a href="#" class="logueado" id="menuCerrarSesion">Cerrar Sesion</a> 
                 </div>
 
-                <!-- Íconos comunes -->
+                <!-- iconos -->
                 <a href="#" class="icon">
                     <img src="../assets/img/buscar.png" alt="Buscar" loading="lazy">
                 </a>
@@ -59,18 +64,19 @@
             </div>
 
             <!-- Menú desplegable mobile -->
-            <div class="menu-desplegable oculto" id="menuDesplegable">
-                <a href="#">Home</a>
-                <a href="#">Iniciar Sesión</a>
-                <a href="#">Crear Cuenta</a>
-                <a href="#">Perfil</a>
-                <a href="#">Mensajes</a>
-                <a href="#">Turnos</a>
-                <a href="#">Administrar <span>(admin)</span></a>
-                <a href="#">Cerrar Sesión</a>
-            </div>
-
         </nav>
+        
+        <div class="menu-desplegable oculto" id="menuDesplegable">
+            <a href="#">Home</a>
+            
+            <a href="#" class="deslogueado" id="menuIniciarSesion">Iniciar Sesion</a>
+            <a href="#" class="deslogueado" id="menuCrearCuenta">Crear Cuenta</a>
+        
+            <a href="#" class="usuario-admin" id="menuAdmin">Administrar</a>
+        
+            <a href="#" class="logueado" id="nombreUsuario">Perfil</a>
+            <a href="#" class="logueado" id="menuCerrarSesion">Cerrar Sesion</a> 
+        </div>
     </header>
 
     <main class="mainPrincipal">
@@ -129,6 +135,18 @@
             </select>
         </div>
 
+        <section>
+            <div id="calendario">
+                <div id="controles">
+                    <button id="prev">◀</button>
+                    <span id="mes-actual"></span>
+                    <button id="next">▶</button>
+                </div>
+                <div id="dias-semana"></div>
+                <div id="grilla-dias"></div>
+            </div>
+        </section>
+
         <footer class="footer">
             <div class="footer-content">
                 <a href="../index.html" class="footer-logo">
@@ -176,9 +194,9 @@
 
 
 
-    <script src="../js/index.js"></script>
+    <script src="../js/menu.js"></script>
     <script src="../js/turnos.js"></script>
-
+    <script src="../js/calendario.js"></script>
 
 
 </body>

@@ -17,6 +17,9 @@
 
 </head>
 <body>
+    <!-- agregue sweetalert para usar imagenes e iconos-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+
     <header class="header">
         <nav>
             <a href="../index.html" class="logo">
@@ -29,9 +32,10 @@
 
         <div class="tituloConFlecha">
             <a href="../pages/administrar.html">
+            <!-- <a href="#" id="volverAtras"> -->
                 <img class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Ir hacia atrás">
             </a>
-            <p>Agregar Actividad</p>
+            <p id="titulo">Agregar Actividad</p>
              
             <a href="../pages/administrar.html">
                 <!-- sin flecha -->
@@ -43,7 +47,7 @@
             </a>  -->
         </div>
         
-        <section class="seccionActividad">
+        <section class="seccionActividad" id="formularioActividad">
             <form class="formActividad">
                 <div>
                     <label for="nombre">Nombre *</label>                
@@ -63,30 +67,43 @@
                     <div id="cupoMaximoError" class="mensaje-error"></div>    
                 </div>
 
+                <div>
+                   <!-- <div id="urlImagen">         se agregó esta clase, para poder ocultar el input en el modificar, ya que, aun no pude resolver el mostrar ruta de la imagen, para poder modificar-->
+                        <label for="imagen">URL de Imagen</label>
+                        <input type="file" id="imagen" class="inputActividad" accept="image/*">                 
+                        <label class="advertencia">Coloque la imagen en la carpeta <b>assets/img</b> antes de seleccionarla.</label>
+                  <!--  </div>  -->
+                    <img id="vistaPrevia" style="width: 100px; display: none; margin-top: 10px;">
+                </div>
+
                 <label class="advertencia">* Campos obligatorios</label>
             </form>
             
-            <button id="agregar" class="btnAceptar" >AGREGAR</button>
+            <button id="cancelar" class="btnCancelar">CANCELAR</button>
+            <button id="agregar" class="btnAceptar">AGREGAR</button>
         </section>
         
-        <!-- <section id="listadoActividades" style="display: none;">
-            <h2>Actividades creadas</h2>
-            <ul id="actividadesLista"></ul>
-        </section> -->
-
-        <section id="listadoActividades">
-            <h2>Actividades</h2>
-            <ul id="actividadesLista"></ul>
+        <section id="listadoActividades">            
+            <table id="tablaActividades">
+                <thead id="encabezadoActividades">
+                    <!-- encabezado generado desde JS -->
+                </thead>
+                <tbody id="actividadesLista">
+                    <!-- Filas generadas dinámicamente -->
+                </tbody>
+            </table>
         </section>
-
-
-
-
-        <!-- <h1>Página en construcción...</h1>
-        <img width="50%" height="50%" src="../assets/img/pagina_en_construccion.png" alt=""> -->
+      
     </main>
     
     <script src="../js/actividad.js"></script>
+    
+    <footer>
+        <button id="exportarLocalStorage" onclick="exportarLocalStorage()">Exportar Actividades</button>
+        <button id="importarLocalStorage" onclick="importarLocalStorage()">Importar Actividades</button>
+
+        <!-- <input type="file" id="importarLocalStorage" accept=".json" onchange="importarLocalStorage(event)"> -->
+    </footer>
 
 </body>
 </html>
