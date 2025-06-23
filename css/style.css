@@ -304,7 +304,6 @@ footer {
           grid-template-columns: 1fr 1fr;   /* 2 columnas */
           gap: 5px;
 
-          
           label {
             position: relative;
             padding-left: 30px;
@@ -344,9 +343,9 @@ footer {
             /* background-repeat: no-repeat; */
             /* background-position: center; */
           }
-
-
+         
         }
+
 
         /* aumentar tamaño de los checkboxes */
         input[type="checkbox"] {
@@ -433,7 +432,7 @@ footer {
   }
 
   /* ver esta parte!!!! */
-  #tablaActividades {
+  #tablaActividades, #tablaHorarios {
     width: 100%;
     border-collapse: collapse;
     margin: 20px auto;
@@ -441,7 +440,9 @@ footer {
   }
 
   #tablaActividades th,
-  #tablaActividades td {
+  #tablaActividades td,
+  #tablaHorarios th,
+  #tablaHorarios td {
     border: 1px solid var(--color-fondo);
     padding: 12px;    
     word-wrap: break-word;
@@ -455,12 +456,14 @@ footer {
   }
 
   #tablaActividades #cupo,
-  #tablaActividades #imagen {
+  #tablaActividades #imagen, 
+  #tablaHorarios #cupo {
     text-align: center;    
   }
 
 
-  #tablaActividades th {
+  #tablaActividades th,
+  #tablaHorarios th {
     background-color: var(--color-primario);
     color: var(--color-contraste-claro);
     text-align: center;
@@ -468,7 +471,8 @@ footer {
     /* display: none; */
   }
 
-  #tablaActividades tr:nth-child(even) {
+  #tablaActividades tr:nth-child(even),
+  #tablaHorarios tr:nth-child(even) {
     background-color: var(--color-secundario);
   }
 }
