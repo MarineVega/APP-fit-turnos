@@ -63,17 +63,13 @@
 
         
     <div id="filters">
-      <label for="profesorSelect">Profesor:</label>
-      <select id="profesorSelect">
-        <option value="">-- Todos --</option>
-      </select>
-
-      <!-- <button onclick="toggleVista()">Cambiar vista</button> -->
     </div>
 
-    <div id="calendar"></div>
-    <!-- <div id="listaTurnos"></div> -->
-  
+    <div class="calendar-wrapper">
+      <div id="calendar"></div>
+      <!-- <div id="listaTurnos"></div> -->
+    </div>
+
   </main>
 
   <!-- FullCalendar JS -->
@@ -84,6 +80,11 @@
 
   <!-- JS principal -->
   <script src="../js/turnos.js"></script>
+
+   <footer>
+      <button id="exportarLocalStorage" onclick="exportarLocalStorage()">Exportar Reservas</button>
+      <button id="importarLocalStorage" onclick="importarLocalStorage()">Importar Reservas</button>        
+    </footer>
 
 </body>
 </html>

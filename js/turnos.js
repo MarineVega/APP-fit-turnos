@@ -5,6 +5,7 @@ let actividadSeleccionada = actividadesCarrusel.length > 0 ? actividadesCarrusel
 let calendar;               // la vamos a inicializar después
 let carrusel, btnAtras, btnAdelante;
 
+
 function cargarCarrusel() {
   carrusel.innerHTML = "";
 
@@ -56,44 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Cargo los horarios desde localStorage
   const horariosRecurrentes = JSON.parse(localStorage.getItem("horarios")) || [];
 
-  // Datos iniciales de turnos
-  let turnos = [
-    { id: '1', title: 'Zumba', profesor: 'Paola', start: '2025-06-23T08:00:00', cupos: 5 },
-    { id: '2', title: 'Yoga', profesor: 'Sofía', start: '2025-06-23T10:00:00', cupos: 2 },
-    { id: '3', title: 'Zumba', profesor: 'Marcos', start: '2025-06-24T09:00:00', cupos: 10 },
-    { id: '4', title: 'Pilates', profesor: 'Laura', start: '2025-06-25T11:00:00', cupos: 4 },
-    { id: '5', title: 'Yoga', profesor: 'Sofía', start: '2025-06-26T08:00:00', cupos: 0 },
-  ];
-
-  /*
-  // Cargar reservas desde localStorage
-  let reservas = JSON.parse(localStorage.getItem('reservasTurnos')) || {};
-  turnos.forEach(t => {
-    if (reservas[t.id]) {
-      t.cupos = Math.max(0, t.cupos - reservas[t.id]);
-    }
-  });
-  */
-
-  // Filtros
-  const profesorSelect = document.getElementById('profesorSelect');
-
-  const actividades = [...new Set(turnos.map(t => t.title))];
-  const profesores = [...new Set(turnos.map(t => t.profesor))];
-
-  actividades.forEach(act => {
-    const option = document.createElement('option');
-    option.value = act;
-    option.textContent = act;
-  });
-
-  profesores.forEach(prof => {
-    const option = document.createElement('option');
-    option.value = prof;
-    option.textContent = prof;
-    profesorSelect.appendChild(option);
-  });
- 
+  // Filtros  
+  const horarios = JSON.parse(localStorage.getItem("horarios")) || [];
+  
   /*
   Toma los horarios guardados en localStorage.
   Genera eventos para los días futuros donde esa actividad se dicta (ej: todos los martes y jueves).
@@ -102,18 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
   */
   function getEventosFiltrados() {
     const actFilter = actividadSeleccionada;
-    const profFilter = profesorSelect.value;
+    let eventos = [];
 
-    let eventos = [...turnos]
-      .filter(t => !actFilter || t.title === actFilter)
-      .filter(t => !profFilter || t.profesor === profFilter)
-      .map(t => ({
-        id: t.id,
-        title: `${t.title} (${t.profesor}) - Cupos: ${t.cupos}`,
-        start: t.start,
-        color: t.cupos > 0 ? '#3788d8' : '#d9534f',
-        extendedProps: { cupos: t.cupos, profesor: t.profesor, actividad: t.title }
-      }));
+    const usuario = localStorage.getItem("usuarioLogueado") || "invitado";
 
     const diasSemana = {
       domingo: 0,
@@ -128,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const horarios = JSON.parse(localStorage.getItem("horarios")) || [];
+    const reservas = JSON.parse(localStorage.getItem("reservasTurnos")) || {};
     const hoy = new Date();
     const diasAMostrar = 14;
 
@@ -139,26 +97,53 @@ document.addEventListener("DOMContentLoaded", () => {
       horarios.forEach(horario => {
         const dias = horario.dias.split(',').map(d => d.trim().toLowerCase());
         const actividad = horario.actividad;
+        let cupoMaximo = horario.cupoMaximo ;
         const profesor = horario.profesor || "Profesor/a";
-        const cupos = horario.cupoMaximo ?? 10;
 
+        // Si cupoMaximo es NaN o null, lo busco desde la actividad
+        if (!cupoMaximo || isNaN(cupoMaximo)){
+          console.log("isNaN(cupoMaximo)")
+          const actividades = JSON.parse(localStorage.getItem("actividades")) || [];
+          const actividadData = actividades.find(a => a.nombre === actividad);
+          cupoMaximo = actividadData && actividadData.cupoMaximo ? parseInt(actividadData.cupoMaximo) : 10;
+        }
+      
         if (
           dias.some(d => diasSemana[d] === diaNumero) &&
-          (!actFilter || actividad === actFilter) &&
-          (!profFilter || profesor === profFilter)
+          (!actFilter || actividad === actFilter) /*&&
+          (!profFilter || profesor === profFilter)*/
         ) {
           const horaInicio = horario.horario.split(" a ")[0];
           const [hh, mm] = horaInicio.split(":").map(n => parseInt(n));
           const fechaClase = new Date(fecha);
           fechaClase.setHours(hh, mm, 0, 0);
 
+
+          const id = `recurrente-${actividad}-${fechaClase.toISOString()}`;          
+          const reservasActuales = reservas[id]?.cantidad || 0;
+          const cuposDisponibles = Math.max(0, cupoMaximo - reservasActuales);
+
+          console.log("cuposDisponibles: cupoMaximo - reservasActuales")
+          console.log(cupoMaximo)
+          console.log(reservasActuales)
+          console.log(cuposDisponibles)
+
+
+
+          const yaReservado = reservas[id]?.usuario === usuario;
+          const colorEvento = yaReservado
+            ? '#5cb85c'       // verde si está reservado por el usuario logueado
+            : (cuposDisponibles > 0 ? '#3788d8' : '#d9534f');
+
+            
           eventos.push({
-            id: `recurrente-${actividad}-${fechaClase.toISOString()}`,
-            title: `${actividad} (${profesor}) - Cupos: ${cupos}`,
-            start: fechaClase.toISOString(),          
-            color: '#5cb85c',
+            //id: `recurrente-${actividad}-${fechaClase.toISOString()}`,
+            id: id,
+            title: `${actividad} (${profesor}) - Cupos: ${cuposDisponibles}`,
+            start: fechaClase.toISOString(),
+            color: colorEvento,            
             extendedProps: {
-              cupos: cupos,
+              cupos: cuposDisponibles,
               profesor: profesor,
               actividad: actividad
             }
@@ -177,6 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const calendarEl = document.getElementById('calendar');
   calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'timeGridWeek',
+    displayEventTime: false,        /* oculto la hora dentro del cuadro */
     locale: 'es',
     slotMinTime: '08:00:00',
     slotMaxTime: '22:00:00',
@@ -190,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
     eventTimeFormat: false,       // para no mostrar la hora en cada cuadro
     events: getEventosFiltrados(),
       eventClick: function(info) {
-      reservarTurno(info.event.id);
+        reservarTurno(info.event.id);
       }
   });
   calendar.render();
@@ -226,58 +212,159 @@ document.addEventListener("DOMContentLoaded", () => {
     
   }
 
-  // Lógica común de reserva
-  function reservarTurno(id) {
-    const evento = turnos.find(t => t.id === id);
-    if (!evento || evento.cupos <= 0) return;
+  function reservarTurno(eventoId) {
+    const reservas = JSON.parse(localStorage.getItem("reservasTurnos")) || {};
+    const usuario = localStorage.getItem("usuarioLogueado") || "invitado";
 
-    Swal.fire({
-      title: 'Confirmar reserva',
-      html: `
-        <p><b>Actividad:</b> ${evento.title}</p>
-        <p><b>Profesor:</b> ${evento.profesor}</p>
-        <p><b>Hora:</b> ${new Date(evento.start).toLocaleString()}</p>
-        <p><b>Cupos disponibles:</b> ${evento.cupos}</p>
-        <p>¿Querés confirmar la reserva?</p>
-      `,
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Reservar',
-      cancelButtonText: 'Cancelar'
-    }).then(result => {
-      if (result.isConfirmed) {
-        evento.cupos--;
-        reservas[evento.id] = (reservas[evento.id] || 0) + 1;
-        localStorage.setItem('reservasTurnos', JSON.stringify(reservas));
+    // Buscar evento entre los generados por getEventosFiltrados
+    const evento = getEventosFiltrados().find(e => e.id === eventoId);
+    if (!evento) return;
 
-        Swal.fire('¡Reserva exitosa!', '', 'success');
+    const cuposDisponibles = evento.extendedProps.cupos;
+    const reserva = reservas[eventoId];
+    const yaReservado = reserva && reserva.usuario === usuario;
 
-        // Actualizar vistas
-        calendar.removeAllEvents();
-        calendar.addEventSource(getEventosFiltrados());
-        if (vistaLista) renderListaTurnos();
-      }
-    });
-  }
-
-  // Filtros
-  /*
-  actividadSelect.addEventListener('change', () => {
-    calendar.removeAllEvents();
-    calendar.addEventSource(getEventosFiltrados());
-    if (vistaLista) renderListaTurnos();
-  });
-*/
-
-  profesorSelect.addEventListener('change', () => {
-    calendar.removeAllEvents();
-    calendar.addEventSource(getEventosFiltrados());
-    if (vistaLista) renderListaTurnos();
-  });
+    const fechaObj = new Date(evento.start);
+    const fecha = fechaObj.toISOString().split("T")[0]; // yyyy-mm-dd
+    const hora = fechaObj.toTimeString().substring(0, 5); // HH:MM
 
   
+    // Si ya está reservado, permitir cancelar
+    if (yaReservado) {
+      Swal.fire({
+        title: '¿Querés cancelar tu reserva?',
+        html: `
+          <p><b>Actividad:</b> ${evento.extendedProps.actividad}</p>
+          <p><b>Profesor:</b> ${evento.extendedProps.profesor}</p>
+          <p><b>Fecha y hora:</b> ${fecha} ${hora}</p>
+        `,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Cancelar reserva',
+        cancelButtonText: 'Cerrar'
+      }).then(result => {
+        if (result.isConfirmed) {
+          delete reservas[eventoId];
+          localStorage.setItem("reservasTurnos", JSON.stringify(reservas));
+          Swal.fire('Reserva cancelada', '', 'success');
+
+          // Actualizar calendario
+          calendar.removeAllEvents();
+          calendar.addEventSource(getEventosFiltrados());
+        }
+      });
+
+      return;
+    }
+
+    // Si no está reservado y no hay cupos
+    if (cuposDisponibles <= 0) {
+      Swal.fire('Sin cupos disponibles', '', 'error');
+      return;
+    }
+
+    // Confirmar reserva nueva
+    Swal.fire({
+       title: '¿Confirmás tu reserva?',
+    html: `
+      <p><b>Actividad:</b> ${evento.extendedProps.actividad}</p>
+      <p><b>Profesor:</b> ${evento.extendedProps.profesor}</p>
+      <p><b>Fecha y hora:</b> ${fecha} ${hora}</p>
+      <p><b>Cupos disponibles:</b> ${cuposDisponibles}</p>
+    `,
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Reservar',
+    cancelButtonText: 'Cancelar'
+  }).then(result => {
+    if (result.isConfirmed) {
+      reservas[eventoId] = {
+        actividad: evento.extendedProps.actividad,
+        usuario: usuario,
+        fecha: fecha,
+        hora: hora,
+        cantidad: 1
+      };
+
+      localStorage.setItem("reservasTurnos", JSON.stringify(reservas));
+      Swal.fire('¡Reserva confirmada!', '', 'success');
+
+      // Actualizar calendario
+      calendar.removeAllEvents();
+      calendar.addEventSource(getEventosFiltrados());
+    }
+  });
+  } 
 })
 
 
 
+
+
+// Exportar localStorage a un archivo JSON
+function exportarLocalStorage() {
+    const datos = localStorage.getItem("reservasTurnos") || "[]";
+    const blob = new Blob([datos], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const enlace = document.createElement("a");
+    enlace.href = url;
+    enlace.download = "reservasTurnos_backup.json";
+    document.body.appendChild(enlace);
+    enlace.click();
+    document.body.removeChild(enlace);
+}
+
+// Importar un archivo JSON a localStorage
+function importarLocalStorage() {
+    Swal.fire({
+        title: 'Importar reservas de turnos',
+        html: `
+            <input type="file" id="inputArchivoImportar" accept=".json" class="swal2-file">
+            <label class="advertencia">Seleccione un archivo JSON con las reservas exportadas.</label>
+        `,
+        showCancelButton: true,
+        customClass: {
+            cancelButton: 'btnAceptar'
+        },
+        confirmButtonColor: '#033649',
+        confirmButtonText: 'Importar',
+        cancelButtonColor: '#6edc8c', 
+        cancelButtonText: 'Cancelar',
+
+        focusConfirm: false,
+        preConfirm: () => {
+            const archivo = document.getElementById('inputArchivoImportar').files[0];
+            if (!archivo) {
+                Swal.showValidationMessage('Por favor seleccione un archivo');
+                return;
+            }
+
+            return new Promise((resolve) => {
+                const lector = new FileReader();
+                lector.onload = function (e) {
+                    try {
+                        const datos = JSON.parse(e.target.result);
+                        if (!Array.isArray(datos)) {
+                            throw new Error("Formato no válido");
+                        }
+
+                        localStorage.setItem("reservasTurnos", JSON.stringify(datos));
+                        resolve();
+                    } catch (error) {
+                        Swal.showValidationMessage('Archivo inválido o corrupto');
+                    }
+                };
+                lector.readAsText(archivo);
+            });
+        }
+    }).then((resultado) => {
+        if (resultado.isConfirmed) {
+            Swal.fire('¡Importado!', 'Los horarios fueron cargadas correctamente.', 'success')
+                .then(() => {
+                    location.reload();
+                });
+        }
+    });
+}
 
