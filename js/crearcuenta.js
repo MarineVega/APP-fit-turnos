@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const email = document.getElementById("crearEmail");
   const pass = document.getElementById("crearPassword");
   const confirmar = document.getElementById("confirmarPassword");
+  const esAdmin = document.getElementById("esAdmin");
   const error = document.getElementById("crearError");
-  
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -26,27 +26,46 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // reemplazo alert
-    // SweetAlert2 
+    // Obtener usuarios existentes
+    const usuariosGuardados = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+    // Verificar si ya existe un usuario con ese email
+    const existe = usuariosGuardados.some(u => u.email === email.value);
+    if (existe) {
+      error.textContent = "Ya existe una cuenta registrada con ese correo.";
+      return;
+    }
+
+    // Crear nuevo usuario
+    const nuevoUsuario = {
+      nombre: nombre.value,
+      email: email.value,
+      password: pass.value,
+      esAdmin: esAdmin.checked
+    };
+
+    usuariosGuardados.push(nuevoUsuario);
+    localStorage.setItem("usuarios", JSON.stringify(usuariosGuardados));
+
     Swal.fire({
       title: '¡Operación Exitosa!',
       text: 'Bienvenid@, ya está todo listo, alcanza tus objetivos con nosotros.',
-      imageUrl: '../assets/img/exito.png', 
+      imageUrl: '../assets/img/exito.png',
+
       imageHeight: 100,
       imageAlt: 'Éxito',
       icon: 'success',
       confirmButtonText: 'Inicio',
       customClass: {
-        confirmButton: 'btnAceptar' 
+        confirmButton: 'btnAceptar'
       },
-      buttonsStyling: false 
+      buttonsStyling: false
     }).then((result) => {
       if (result.isConfirmed) {
-       
-        window.location.href = '../index.html'; // mando a la home
+        window.location.href = '../index.html';
       }
     });
 
-    form.reset(); // 
+    form.reset();
   });
 });

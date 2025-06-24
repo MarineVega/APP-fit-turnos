@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FIT Turnos — Calendario de reservas</title>
+
+  <!-- FullCalendar -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
+  <!-- SweetAlert2 -->
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet"/>
+
+  <style>
+    body{font-family:Arial, sans-serif;margin:20px}
+    #filters{margin-bottom:15px}
+    label{margin-right:10px}
+    select{padding:5px;margin-right:20px}
+  </style>
+</head>
+<body>
+
+<h2>Reserva tu turno — Calendario semanal</h2>
+
+<div id="filters">
+  <label for="actividadSelect">Actividad:</label>
+  <select id="actividadSelect"><option value="">-- Todas --</option></select>
+
+  <label for="profesorSelect">Profesor:</label>
+  <select id="profesorSelect"><option value="">-- Todos --</option></select>
+</div>
+
+<div id="calendar"></div>
+
+<!-- Librerías -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Nuestro código -->
+<script src="../js/turnos.js"></script>
+</body>
+</html>

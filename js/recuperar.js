@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(formId).style.display = "flex";
   };
 
-  //  "Recuperar paso 1"
+  // Paso 1: Enviar código por correo
   formRecuperar1.addEventListener("submit", (e) => {
     e.preventDefault();
     recuperarError1.textContent = "";
@@ -29,12 +29,35 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // simula el envio de codigo
-    alert("Se ha enviado un código de seguridad a tu email.");
-    mostrar("formRecuperar2");
+    const destino = recuperarEmail.value;
+    const codigo = generarCodigo();
+
+    localStorage.setItem("codigoRecuperacion", codigo);
+    // coloco el service de emailjs y el template creado
+    emailjs.send("service_vq2s3hg", "template_tth5c7f", {
+    email: destino,
+    codigo: codigo
+    })
+
+    .then(() => {
+      Swal.fire({
+        title: 'Código enviado',
+        text: 'Revisá tu correo para continuar con la recuperación.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+        customClass: {
+          confirmButton: 'btnAceptar'
+        },
+        buttonsStyling: false
+      });
+      mostrar("formRecuperar2");
+    }, (error) => {
+      console.error("Error al enviar correo:", error);
+      recuperarError1.textContent = "No se pudo enviar el correo. Intentalo más tarde.";
+    });
   });
 
-  //  "Recuperar paso 2"
+  // Paso 2: Validar código
   formRecuperar2.addEventListener("submit", (e) => {
     e.preventDefault();
     recuperarError2.textContent = "";
@@ -44,33 +67,56 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Simula una validación
-    if (codigoSeguridad.value === "123456") { // 
+    if (codigoSeguridad.value === localStorage.getItem("codigoRecuperacion")) {
       mostrar("formRecuperar3");
     } else {
-       Swal.fire({
-       title: '¡upps!, ocurrió un error',
-       text:'Algo salio mal, por favor intentalo nuevamente',
-       imageUrl: '../assets/img/error.png', // imagen
-       imageWidth: 100,
-       imageHeight: 100,
-       imageAlt: 'Checkmark',
-       icon: 'error', //
-       confirmButtonText: 'Cerrar',
-       customClass: {
-       confirmButton: 'btnAceptar'
-      },
-      buttonsStyling: false
+      Swal.fire({
+        title: '¡Upps!',
+        text:'Código incorrecto. Revisá tu correo.',
+        imageUrl: '../assets/img/error.png',
+        imageWidth: 100,
+        imageHeight: 100,
+        imageAlt: 'Error',
+        icon: 'error',
+        confirmButtonText: 'Cerrar',
+        customClass: {
+          confirmButton: 'btnAceptar'
+        },
+        buttonsStyling: false
       });
     }
   });
 
+  // Reenviar código
   reenviarCodigo.addEventListener("click", (e) => {
     e.preventDefault();
-    alert("Se ha reenviado un nuevo código de seguridad a tu email.");
+
+    const destino = recuperarEmail.value;
+    const codigo = generarCodigo();
+    localStorage.setItem("codigoRecuperacion", codigo);
+
+    emailjs.send("service_vq2s3hg", "template_tth5c7f", {
+      email: destino,
+      codigo: codigo
+    })
+    .then(() => {
+      Swal.fire({
+        title: 'Código reenviado',
+        text: 'Revisá tu correo nuevamente.',
+        icon: 'info',
+        confirmButtonText: 'Aceptar',
+        customClass: {
+          confirmButton: 'btnAceptar'
+        },
+        buttonsStyling: false
+      });
+    }, (error) => {
+      console.error("Error al reenviar código:", error);
+      recuperarError2.textContent = "No se pudo reenviar el código.";
+    });
   });
 
-  //"Recuperar paso 3"
+  // Paso 3: Cambiar contraseña
   formRecuperar3.addEventListener("submit", (e) => {
     e.preventDefault();
     recuperarError3.textContent = "";
@@ -81,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (nuevaPassword.value.length < 6) {
-      recuperarError3.textContent = "La contraseña debe tener al menos 6 caracteres.";
+        recuperarError3.textContent = "La contraseña debe tener al menos 6 caracteres.";
       return;
     }
 
@@ -90,20 +136,28 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-     Swal.fire({
-       title: '¡Operación exitosa!',
-       text:'Se ha actualizado la contraseña',
-       imageUrl: '../assets/img/exito.png', // imagen
-       imageWidth: 100,
-       imageHeight: 100,
-       imageAlt: 'Checkmark',
-       icon: 'success', //icono exito 
-       confirmButtonText: 'Cerrar'
-       });
-    mostrar("formLogin"); 
+    Swal.fire({
+      title: '¡Operación exitosa!',
+      text:'Se ha actualizado la contraseña',
+      imageUrl: '../assets/img/exito.png',
+      imageWidth: 100,
+      imageHeight: 100,
+      imageAlt: 'Éxito',
+      icon: 'success',
+      confirmButtonText: 'Cerrar'
+    });
+
+    mostrar("formLogin");
+    
     document.getElementById("modoTitulo").textContent = "Iniciar Sesión";
     formRecuperar1.reset();
     formRecuperar2.reset();
     formRecuperar3.reset();
+
+    localStorage.removeItem("codigoRecuperacion");
   });
+ // genero codigo de recuperacion de cuenta para enviar por mail
+  function generarCodigo() {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+  }
 });
