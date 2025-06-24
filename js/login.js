@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       form.reset();
     } else {
       error.textContent = "Email o contraseña incorrectos.";
+
     }
   });
 });

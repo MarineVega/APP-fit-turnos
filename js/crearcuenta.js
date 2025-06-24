@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       title: '¡Operación Exitosa!',
       text: 'Bienvenid@, ya está todo listo, alcanza tus objetivos con nosotros.',
       imageUrl: '../assets/img/exito.png',
+
       imageHeight: 100,
       imageAlt: 'Éxito',
       icon: 'success',

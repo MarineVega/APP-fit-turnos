@@ -148,10 +148,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     mostrar("formLogin");
+    
     document.getElementById("modoTitulo").textContent = "Iniciar Sesión";
     formRecuperar1.reset();
     formRecuperar2.reset();
     formRecuperar3.reset();
+
     localStorage.removeItem("codigoRecuperacion");
   });
  // genero codigo de recuperacion de cuenta para enviar por mail

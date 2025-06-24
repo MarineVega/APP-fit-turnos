@@ -97,7 +97,7 @@ header {
 }
 
 /* Estilos de index.html, actividad.html, horario.html */
-.mainPrincipal, .mainActividad, .mainHorario, .mainTurno {
+.mainPrincipal, .mainActividad, .mainHorario {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -235,7 +235,7 @@ footer {
 
 
 /* Estilos de las páginas Actividad y Horario */
-.mainActividad, .mainHorario, mainTurno {
+.mainActividad, .mainHorario {
   .seccionActividad, .seccionHorario {
     width: 100%;
     display: flex;
@@ -250,7 +250,7 @@ footer {
       flex-direction: column;
       align-items: start;
       font-size: 1.2rem;
-      padding: 0% 5%;
+      padding: 0% 5%;;      
       
       div {
         width: 100%;
@@ -476,132 +476,6 @@ footer {
     background-color: var(--color-secundario);
   }
 }
-
-
-/* * * * * Estilo de carrusel para turnos * * * * */
-.contenedor-actividades {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 5px;
-  align-items: center;
-  margin: 0px 0px 30px 0px;
-  width: 100%;
-}
-
-.carrusel-actividades {
-  display: flex;  
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;  
-  width: 80%;
-}
-
-.actividad-card {
-  width: 100px;
-  height: 100px;
-  text-align: center;
-  padding: 0px 10px;
-  opacity: 0.5;
-  transition: transform 0.3s, opacity 0.3s;  
-}
-
-.actividad-card img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-top: 5px;
-}
-
-.actividad-card p {
-  font-size: 0.8rem;
-}
-
-.actividad-card.seleccionada {
-  transform: scale(1.2);
-  opacity: 1;
-}
-
-.flecha-carrusel {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  display: flex !important;
-}
-
-.flecha-carrusel img {
-  width: 24px;
-  height: 24px;
-}
-/* * * * * * * * * * * * * * * * * * * * * * * * */
-
-/* * * * * * * Calendario de Turnos * * * * * *  */
-.calendar-wrapper {
-  width: 100%;
-  overflow-x: auto;   /* para mostrar scroll bar horizontal */
-}
-
-#calendar {
-  min-width: 768px;
-  width: 100%;
-
-}
-
-/* oculto la hora dentro del cuadro */
-/*
-.fc-event-time {
-  display: none !important;
-}
-*/
-
-/* OJO!!!!! ver por qué no funciona */
-/* Fija la columna de horas (lado izquierdo) */
-.fc .fc-timegrid-slot-label {
-  position: sticky;           /* mantiene la columna pegada al borde izquierdo */
-  left: 0;                    /* indica que se "pegue" al borde izquierdo */
-  z-index: 5;                 /*  evita que se tape con otros elementos */
-  background-color: var(--color-fondo); /* evita que se superponga de forma traslúcida */
-}
-
-
-.tarjeta-turno {
-  background-color: var(--color-contraste-claro);
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-  color: var(--color-terciario);  
-}
-
-.tarjeta-turno button {
-  margin-top: 10px;
-  background-color: var(--color-secundario);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-size: 0.5rem;
-  cursor: pointer;
-}
-
-.tarjeta-turno button:disabled {
-  background-color: gray;
-  cursor: not-allowed;
-}
-.fc-v-event .fc-event-title {
-  bottom: 0px;
-  max-height: 100%;
-  overflow: hidden;
-  top: 0px;
-  font-size: 0.7rem;    /* tamaño de la letra de cada celda */
-}
-
-/* * * * * * * * * * * * * * * * * * * * * * * * */
-
 
 
 /* Media Queruy para distintas pantallas 
