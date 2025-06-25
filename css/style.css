@@ -394,6 +394,10 @@ footer {
     }
   }
 
+  .marcaAgua {
+    visibility: hidden;
+  }
+
   /*
   .btnTabla {
     background-color: transparent;
@@ -618,7 +622,6 @@ footer {
 
 /* Media Queries para pantallas de tablet */
 @media (min-width: 481px) {
-
   .mainActividad .seccionActividad, 
   .mainHorario .seccionHorario {
     max-width: 600px;
