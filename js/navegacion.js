@@ -39,4 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("flechaVolver").addEventListener("click", () => {
     history.back();
   });
+   
+  // Si llega con ?form=crear, mostrar directamente el formulario de registro
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("form") === "crear") {
+    mostrar("formCrear");
+    titulo.textContent = "Crear Cuenta";
+  }
 });
