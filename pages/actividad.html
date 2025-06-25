@@ -9,10 +9,10 @@
     
     <!-- ícono de la página web -->
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    
-    <title>FIT Turnos - Actividad</title>
 
+    <title>FIT Turnos - Actividad</title>
 </head>
+  
 <body>
     <!-- agregue sweetalert para usar imagenes e iconos-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
@@ -29,7 +29,6 @@
 
         <div class="tituloConFlecha">
             <a href="../pages/administrar.html">
-            <!-- <a href="#" id="volverAtras"> -->
                 <img class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Ir hacia atrás">
             </a>
             <p id="titulo">Agregar Actividad</p>
@@ -43,7 +42,6 @@
                 <img class="flecha" src="../assets/img/icono_flecha_adelante.png" alt="Ir hacia adelante">
             </a>  -->
         </div>
-
         <section class="seccionActividad" id="formularioActividad">
             <form class="formActividad">
                 <div>
@@ -75,10 +73,12 @@
 
                 <label class="advertencia">* Campos obligatorios</label>
             </form>
+
              <div class="contenedorBotones">
                  <button id="cancelar" class="btnCancelar">CANCELAR</button>
                  <button id="agregar" class="btnAceptar">AGREGAR</button>
              </div>
+
         </section>
         
         <section id="listadoActividades">            
@@ -90,12 +90,13 @@
                     <!-- Filas generadas dinámicamente -->
                 </tbody>
             </table>
+
         </section>
       
     </main>
     
     <script src="../js/actividad.js"></script>
-    
+
     <footer>
         <button id="exportarLocalStorage" onclick="exportarLocalStorage()">Exportar Actividades</button>
         <button id="importarLocalStorage" onclick="importarLocalStorage()">Importar Actividades</button>        
