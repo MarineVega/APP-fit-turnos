@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+
+  <!-- FullCalendar CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
+
+  <!-- SweetAlert2 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet"/>
+
+  <!-- configuración de estilos -->
+  <link rel="stylesheet" href="../css/style.css">
+    
+  <!-- ícono de la página web -->
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    
+  <title>FIT Turnos - Turnos</title>
+
+</head>
+<body>
+
+  <!-- agregue sweetalert para usar imagenes e iconos-->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+
+  <header class="header">
+    <nav>
+        <a href="../index.html" class="logo">
+            <img src="../assets/img/Logo_Fit_Home.png" alt="Icono FIT Turnos" loading="lazy">                
+        </a>    
+    </nav>
+  </header>
+  
+  <main class="mainTurno">
+    <div class="tituloConFlecha">
+      <a href="../pages/administrar.html">      
+        <img class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Ir hacia atrás">
+      </a>
+
+      <p id="titulo">Reserva tu Turno</p>
+        
+      <a href="../pages/administrar.html">
+        <img class="flechaInvisible" src="" alt="">
+      </a> 
+    </div>
+
+
+    <div class="contenedor-actividades">      
+      <button class="flecha-carrusel" id="flechaAtras" onclick="moverCarrusel(-1)">
+        <img src="../assets/img/icono_flecha_atras.png" alt="Anterior">
+      </button>
+
+      <div class="carrusel-actividades" id="carruselActividades">
+        <!-- dinámico -->
+      </div>
+      
+      <button class="flecha-carrusel" id="flechaAdelante" onclick="moverCarrusel(1)">
+        <img src="../assets/img/icono_flecha_adelante.png" alt="Siguiente">
+      </button>
+    </div>
+
+
+        
+    <div id="filters">
+    </div>
+
+    <div class="calendar-wrapper">
+      <div id="calendar"></div>
+      <!-- <div id="listaTurnos"></div> -->
+    </div>
+
+  </main>
+
+  <!-- FullCalendar JS -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- JS principal -->
+  <script src="../js/turnos.js"></script>
+
+   <footer>
+      <button id="exportarLocalStorage" onclick="exportarLocalStorage()">Exportar Reservas</button>
+      <button id="importarLocalStorage" onclick="importarLocalStorage()">Importar Reservas</button>        
+    </footer>
+
+
+</body>
+</html>

@@ -134,3 +134,7 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# para que ignore la carpeta personal que está en la raiz
+/personal/
+

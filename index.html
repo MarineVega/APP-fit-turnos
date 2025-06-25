@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-sgit ccale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- configuración de estilos -->
     <link rel="stylesheet" href="./css/style.css">
@@ -41,28 +41,19 @@
             <img src="./assets/img/icono_natacion.png" alt="">
         </div>
 
-        <br>
-
         <div class="slogan">
             <p>Tu entrenamiento, tu horario, tu control</p>
         </div>        
-        
-        <br>
-        
-        <button class="btnAceptar" onclick="window.location.href='../pages/cuenta.html'">INICIAR SESIÓN</button>
-        
-        <a class="registrarse" href="./pages/cuenta.html"> o Registrarse</a>
+         
+        <!-- <button class="btnAceptar" onclick="window.location.href='../pages/cuenta.html'">INICIAR SESIÓN</button> -->
 
-        <button class="btnAceptar" onclick="window.location.href='./pages/actividad.html'">Agregar Actividad</button>
+        <button class="btnAceptar"
+        type="button"
+        onclick="location.href='./pages/cuenta.html'">  INICIAR SESIÓN
+       </button>
 
-        <!-- 
-        <script>
-            document.getElementById("btnAceptar").addEventListener("click", function() {
-                window.location.href = "/pages/cuenta.html";
-            });
-        </script> -->
-
-        <br>
+         <!-- aca lo que hago es que lleve a la parte del registrarse en navegacion.js -->
+        <a href="./pages/cuenta.html?form=crear" class="btnAceptar">REGISTRARSE</a>
 
         <!-- <section id="listaActividades">
             <h2>Actividades guardadas</h2>
@@ -79,33 +70,6 @@
     </main>
 
     <script src="./js/index.js"></script>
-
-
-    <!-- 
-    /*generalidades*/
-h1{
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 20px
-}
-
-h2{
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 20px
-}
-
-/*media querys para dispositivos hasta 800px para el h1 y h2*/
- 
-@media screen and (max-width: 800px) {
-    h1{
-        font-size: 2.2rem;
-    }
-    h2{
-        font-size: 1.8rem;
-    }
-} 
-    -->
 
 </body>
 </html>

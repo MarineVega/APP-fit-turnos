@@ -9,13 +9,10 @@
     
     <!-- ícono de la página web -->
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    
-    <!-- íconos de google -->
-    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 
     <title>FIT Turnos - Actividad</title>
-
 </head>
+  
 <body>
     <!-- agregue sweetalert para usar imagenes e iconos-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
@@ -45,7 +42,6 @@
                 <img class="flecha" src="../assets/img/icono_flecha_adelante.png" alt="Ir hacia adelante">
             </a>  -->
         </div>
-        
         <section class="seccionActividad" id="formularioActividad">
             <form class="formActividad">
                 <div>
@@ -67,16 +63,22 @@
                 </div>
 
                 <div>
-                    <label for="imagen">URL de Imagen</label>
-                    <input type="file" id="imagen" class="inputActividad" accept="image/*">
+                   <!-- <div id="urlImagen">         se agregó esta clase, para poder ocultar el input en el modificar, ya que, aun no pude resolver el mostrar ruta de la imagen, para poder modificar-->
+                        <label for="imagen">URL de Imagen</label>
+                        <input type="file" id="imagen" class="inputActividad" accept="image/*">                 
+                        <label class="advertencia">Coloque la imagen en la carpeta <b>assets/img</b> antes de seleccionarla.</label>
+                  <!--  </div>  -->
                     <img id="vistaPrevia" style="width: 100px; display: none; margin-top: 10px;">
-                    <label class="advertencia">Coloque la imagen en la carpeta <b>assets/img</b> antes de seleccionarla.</label>
                 </div>
 
                 <label class="advertencia">* Campos obligatorios</label>
             </form>
-            
-            <button id="agregar" class="btnAceptar">AGREGAR</button>
+
+             <div class="contenedorBotones">
+                 <button id="cancelar" class="btnCancelar">CANCELAR</button>
+                 <button id="agregar" class="btnAceptar">AGREGAR</button>
+             </div>
+
         </section>
         
         <section id="listadoActividades">            
@@ -87,12 +89,18 @@
                 <tbody id="actividadesLista">
                     <!-- Filas generadas dinámicamente -->
                 </tbody>
-            </table>            
+            </table>
+
         </section>
       
     </main>
     
     <script src="../js/actividad.js"></script>
+
+    <footer>
+        <button id="exportarLocalStorage" onclick="exportarLocalStorage()">Exportar Actividades</button>
+        <button id="importarLocalStorage" onclick="importarLocalStorage()">Importar Actividades</button>        
+    </footer>
 
 </body>
 </html>

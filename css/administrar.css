@@ -103,7 +103,6 @@ header nav .logo span {
 }
 
 /* Estilo de las tarjetas*/
-
 .card {
   background: linear-gradient(to right, #a9cdbb, #c1d8e4);
   border-radius: 15px;
@@ -124,6 +123,7 @@ header nav .logo span {
   font-size: 1em;
   color: rgb(66, 65, 65);
 }
+
 
 .card p, .card ul {
   width: 60%;
