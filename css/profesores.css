@@ -557,3 +557,31 @@ footer {
     margin-top: 30px;
   }
 }
+
+/* Imágenes visibles solo en la versión de escritorio */
+
+.imagen-lateral {
+  display: none;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60vh; 
+  max-height: 500px;
+  z-index: 0;
+  opacity: 0.9;
+  pointer-events: none; 
+}
+
+@media (min-width: 1024px) {
+  .imagen-lateral {
+    display: block;
+  }
+
+  .imagen-lateral.izquierda {
+    left: 10px;
+  }
+
+  .imagen-lateral.derecha {
+    right: 10px;
+  }
+}
