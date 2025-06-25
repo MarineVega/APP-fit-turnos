@@ -235,8 +235,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-
-
     let btnAceptar = document.getElementById("agregar");
     let btnCancelar = document.getElementById("cancelar");
 
@@ -368,30 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-
-
-
 })
-
-
-/* control para q elija al menos 1 día
-const form = document.getElementById("formulario");
-const diasError = document.getElementById("diasError");
-
-form.addEventListener("submit", function (e) {
-    const checkboxes = document.querySelectorAll('input[name="dias"]:checked');
-    if (checkboxes.length === 0) {
-    e.preventDefault(); // Detiene el envío del formulario
-    errorDias.style.display = "block";
-    } else {
-    errorDias.style.display = "none";
-    }
-});
-*/
-
-
-
-
 
 // Exportar localStorage a un archivo JSON
 function exportarLocalStorage() {
