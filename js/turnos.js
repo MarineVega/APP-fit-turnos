@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const [hh, mm] = horaInicio.split(":").map(n => parseInt(n));
           const fechaClase = new Date(fecha);
           fechaClase.setHours(hh, mm, 0, 0);
-
+        
 
           //const id = `recurrente-${actividad}-${fechaClase.toISOString()}`;
           const id = `recurrente-${actividad}-${profesor}-${fechaClase.toISOString()}-${horario.horario}`;
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
             //title: `${actividad} (${profesor}) - Cupos: ${cuposDisponibles}`,
             //title: `${actividad} Cupo: ${cuposDisponibles}`,
             //title: `${profesor} Cupo: ${cuposDisponibles}`,
-            title: `${profesor ? "Profesor: " + profesor : ""} Cupo: ${cuposDisponibles}`, // si profesor tiene valor, lo muestra seguido de un espacio; si es null, undefined o "", no muestra nada
+            title: `${horaInicio} ${profesor ? "\n" + profesor : ""} \nCupo: ${cuposDisponibles}`, // si profesor tiene valor, lo muestra seguido de un espacio; si es null, undefined o "", no muestra nada
             start: fechaClase.toISOString(),
             color: colorEvento,            
             extendedProps: {
@@ -210,14 +210,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Alternancia de vistas
   let vistaLista = false;
-
+/*
   function toggleVista() {
     vistaLista = !vistaLista;
     document.getElementById("calendar").style.display = vistaLista ? "none" : "block";
     document.getElementById("listaTurnos").style.display = vistaLista ? "block" : "none";
     if (vistaLista) renderListaTurnos();
   }
-
+*/
+/*
   // Renderizar tarjetas estilo app
   function renderListaTurnos() {
     const lista = document.getElementById("listaTurnos");
@@ -237,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
       lista.appendChild(div);
     });
     
-  }
+  }*/
 
   function reservarTurno(eventoId) {
     const reservas = JSON.parse(localStorage.getItem("reservasTurnos")) || {};
@@ -303,25 +304,44 @@ document.addEventListener("DOMContentLoaded", () => {
     showCancelButton: true,
     confirmButtonText: 'Reservar',
     cancelButtonText: 'Cancelar'
-  }).then(result => {
-    if (result.isConfirmed) {
-      reservas[eventoId] = {
-        actividad: evento.extendedProps.actividad,
-        usuario: usuario,
-        fecha: fecha,
-        hora: hora,
-        cantidad: 1
-      };
+    }).then(result => {
+      // valido si ya hay otra reserva del usuario en esa fecha y hora (aunque sea distinta actividad)
+        const conflicto = Object.entries(reservas).find(([id, r]) => {
+          return r.usuario === usuario && r.fecha === fecha && r.hora === hora && id !== eventoId;
+        });
 
-      localStorage.setItem("reservasTurnos", JSON.stringify(reservas));
-      Swal.fire('¡Reserva confirmada!', '', 'success');
+        if (conflicto) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Conflicto de horario',
+            html: `
+              Ya tenés una reserva para ese día y hora.<br>
+              No podés reservar más de una actividad al mismo tiempo.
+            `,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'Cerrar'
+          });
+          return;
+        }
 
-      // Actualizar calendario
-      calendar.removeAllEvents();
-      calendar.addEventSource(getEventosFiltrados());
-    }
-  });
-  } 
+      if (result.isConfirmed) {
+        reservas[eventoId] = {
+          actividad: evento.extendedProps.actividad,
+          usuario: usuario,
+          fecha: fecha,
+          hora: hora,
+          cantidad: 1
+        };
+
+        localStorage.setItem("reservasTurnos", JSON.stringify(reservas));
+        Swal.fire('¡Reserva confirmada!', '', 'success');
+
+        // Actualizar calendario
+        calendar.removeAllEvents();
+        calendar.addEventSource(getEventosFiltrados());
+      }
+    });
+  }
 })
 
 

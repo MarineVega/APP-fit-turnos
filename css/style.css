@@ -763,6 +763,8 @@ h2#fc-dom-1 {
   overflow: hidden;
   top: 0px;
   font-size: 0.7rem;    /* tamaño de la letra de cada celda */
+ 
+  white-space: pre-line !important;   /* que respete \n como salto de línea real */
 }
 
 /* botones de navegación de FullCalendar */
