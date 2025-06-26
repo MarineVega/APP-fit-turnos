@@ -12,6 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
         select.appendChild(option);
     });
 
+    // Obtengo profesores del localStorage, para mostrar en el combo
+    const profesores = JSON.parse(localStorage.getItem("profesores")) || [];
+
+    const selectProfesor = document.getElementById("profesor");
+
+    profesores.forEach(profesor => {
+        const option = document.createElement("option");
+        option.textContent = profesor.nombre; 
+        selectProfesor.appendChild(option);
+    });
+
+
     // Obtengo el modo por medio del parámetro que recibe
     const params = new URLSearchParams(window.location.search);
     const modo = params.get("modo");
@@ -95,13 +107,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 const fila = document.createElement("tr");
 
                 fila.innerHTML = `
-                    <td>${horario.actividad}</td>                    
-                    <td>${horario.profesor ?? "(Todos)"}</td>                        
+                    <td>${horario.actividad}</td>
+                    <td>${horario.profesor ?? ""}</td>                  
                     <td id="cupo">${horario.cupoMaximo ?? ""}</td>
                     <td>${horario.dias}</td>
                     <td>${horario.horario}</td>
                 `;
-
+                // <td>${horario.profesor ?? "(Todos)"}</td>       
                 // ?? es el operador de coalescencia nula: si lo de la izquierda es null o undefined, devuelve lo de la derecha
 
                 if (modo !== "consultar") {
@@ -299,7 +311,33 @@ document.addEventListener("DOMContentLoaded", () => {
                 horario: horario.options[horario.selectedIndex].text
             };
 
-            const editIndex = btnAceptar.dataset.editIndex;
+            const editIndex = btnAceptar.dataset.editIndex;            
+            const esEdicion = editIndex !== undefined && editIndex !== "";      // si estoy en el alta, el atributo data-edit-index está vacío o undefined; cuando edito, se le asigna un número
+            
+            
+            // Validación: no permito duplicados exactos
+            /* comparo actividad, horario y profesor
+            si estoy editando, excluye el índice actual para que pueda guardar sin que se bloquee
+            si encuentra uno igual, muestra alerta y no guarda */
+            const yaExiste = horarios.some((h, i) => 
+                h.actividad === nuevoHorario.actividad &&
+                h.horario === nuevoHorario.horario &&
+                (h.profesor || "") === (nuevoHorario.profesor || "") &&
+                (!esEdicion || i !== parseInt(editIndex))           // ignoro el actual si estoy editando
+            );
+             
+            if (yaExiste) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Horario duplicado',
+                    text: 'Ya existe un horario con la misma actividad, profesor y hora.',
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'Cerrar'
+                });
+                return;
+            }
+            
+
             
             if (editIndex !== undefined && editIndex !== "") {
                 // editar horario existente
@@ -311,8 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
             localStorage.setItem("horarios", JSON.stringify(horarios));
 
-            // Armo texto para usar en swal fire, identificando el agregar del modificar
-            const esEdicion = editIndex !== undefined && editIndex !== "";  // si estoy en el alta, el atributo data-edit-index está vacío o undefined; cuando edito, se le asigna un número
+            // Armo texto para usar en swal fire, identificando el agregar del modificar            
             const textoSwal = esEdicion
                 ? 'El horario ha sido actualizado.'
                 : 'El horario ha sido creado.';
@@ -434,5 +471,6 @@ function importarLocalStorage() {
         }
     });
 }
+
 
 
