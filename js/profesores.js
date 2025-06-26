@@ -318,7 +318,7 @@ function mostrarListadoProfesores(modo= "consultar") {
         });
     } else {
         const fila = document.createElement("tr");
-        fila.innerHTML = `<td colspan="${modo !== "consultar" ? 5 : 4}">No hay actividades registradas.</td>`;
+        fila.innerHTML = `<td colspan="${modo !== "consultar" ? 5 : 4}">No hay profesores registrados.</td>`;
         tabla.appendChild(fila);
     }
 }

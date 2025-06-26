@@ -11,16 +11,71 @@
      <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     
     <title>FIT Turnos</title>
-
 </head>
+
 <body>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+    
     <header class="header">
-        <nav>
-            <a href="#" class="logo">
-                <img src="./assets/img/Logo_Fit_Home.png" alt="Icono FIT Turnos" loading="lazy">                
-            </a>    
+        <nav class="navbar">
+            <!-- Zona izquierda -->
+
+            <div class="nav-left">
+                <!-- icono hamburguesa SOLO en mobile -->
+                <a href="#" class="icon" id="btnMenu">
+                    <img src="./assets/img/menu.png" alt="Menú" loading="lazy">
+                </a>
+
+                <!-- Logo -->
+                <a href="#" class="logo">
+                    <img src="./assets/img/Logo_Fit_Home.png" alt="Logo" loading="lazy">
+                </a>
+
+                <!-- menu visible solo en escritorio -->
+                <div class="nav-links desktop-only">
+                    <a href="./pages/turnos.html">Turnos</a>
+                    <a href="./pages/administrar.html" id="menuAdmin">Administrar</a>
+                </div>
+
+            </div>
+
+            <!-- Zona derecha -->
+
+            <div class="nav-right">
+                <!-- Menú visible solo en escritorio -->
+                <div class="nav-links desktop-only">
+                    <a href="./pages/cuenta.html" id="menuIniciarSesion">Iniciar Sesión</a>
+                    <a href="./pages/cuenta.html?form=crear" id="menuCrearCuenta">Crear Cuenta</a>
+                                
+                    <a href="#" id="userBar">Perfil</a>
+                    <a href="#" id="menuCerrarSesion">Cerrar Sesión</a> 
+                </div>
+
+                <!-- iconos -->
+                <a href="#" class="icon">
+                    <img src="./assets/img/buscar.png" alt="Buscar" loading="lazy">
+                </a>
+                <a href="#" class="icon">
+                    <img src="./assets/img/notif.png" alt="Notificaciones" loading="lazy">
+                </a>
+            </div>
+
+            <!-- Menú desplegable mobile -->
         </nav>
+        
+        <div class="menu-desplegable" id="menuDesplegable">
+            <a href="#" class="" id="nombreUsuario">Perfil</a>
+            <a href="#">Inicio</a>
+            
+            <a href="./pages/cuenta.html" class="" id="menuIniciarSesion">Iniciar Sesión</a>
+            <a href="./pages/cuenta.html?form=crear" class="" id="menuCrearCuenta">Crear Cuenta</a>
+        
+            <a href="./pages/administrar.html" class="" id="menuAdmin">Administrar</a>        
+            <a href="./pages/turnos.html"class="" id="menuAdmin">Turnos</a>
+            
+            <a href="#" class="" id="menuCerrarSesion">Cerrar Sesión</a> 
+        </div> 
     </header>
 
     
@@ -45,31 +100,24 @@
             <p>Tu entrenamiento, tu horario, tu control</p>
         </div>        
          
-        <!-- <button class="btnAceptar" onclick="window.location.href='../pages/cuenta.html'">INICIAR SESIÓN</button> -->
+        <button class="btnAceptar" type="button" onclick="location.href='./pages/cuenta.html'">INICIAR SESIÓN</button>
 
-        <button class="btnAceptar"
-        type="button"
-        onclick="location.href='./pages/cuenta.html'">  INICIAR SESIÓN
-       </button>
-
-         <!-- aca lo que hago es que lleve a la parte del registrarse en navegacion.js -->
-        <a href="./pages/cuenta.html?form=crear" class="btnAceptar">REGISTRARSE</a>
-
-        <!-- <section id="listaActividades">
-            <h2>Actividades guardadas</h2>
-            <ul id="actividadesUl"></ul>
-        </section>
-
-        <button onclick=descargarActividades()>Descargar Actividades</button> -->
-
+        <!-- aca lo que hago es que lleve a la parte del registrarse en navegacion.js -->
+        <a href="./pages/cuenta.html?form=crear" class="btnAceptar">REGISTRARSE</a>        
 
         <img class="logoMedusa" src="./assets/img/Logo Medusa.jpg" alt="Logo Medusa Soft">
         
-        <!-- <h1>Página en construcción...</h1>
-        <img width="50%" height="50%" src="./assets/img/pagina_en_construccion.png" alt=""> -->
     </main>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <p>FIT Turnos</p>
+            <p>© 2025 FIT Turnos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
     <script src="./js/index.js"></script>
+    <script src="./js/usuarioactivo.js"></script>
 
 </body>
 </html>

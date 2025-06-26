@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // si el usuario es administrador debe mostrarle en el menu la opcion administrar
       if (usuarioActivo.esAdmin) {
-        nombreUsuario.textContent = usuarioActivo.nombre + " (Admin)";
+        nombreUsuario.textContent = 'Hola ' + usuarioActivo.nombre + '!';
         // se supone que el elemento existe pero se hace para evitar errores.    
         if (menuAdmin) {
           menuAdmin.style.display = "block";
