@@ -1,7 +1,7 @@
 // Cargar todas las actividades del localStorage  
 let actividadesCarrusel = JSON.parse(localStorage.getItem("actividades")) || [];
 let indiceInicio = 0;
-let actividadSeleccionada = actividadesCarrusel.length > 0 ? actividadesCarrusel[1].nombre : null;
+let actividadSeleccionada = actividadesCarrusel.length > 0 ? actividadesCarrusel[0].nombre : null;
 let calendar;               // la vamos a inicializar después
 let carrusel, btnAtras, btnAdelante;
 
