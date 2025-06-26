@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
       userBar.style.display = "flex";
 
       // si el usuario es administrador debe mostrarle en el menu la opcion administrar
-      if (usuarioActivo.esAdmin) {
+      if (usuarioActivo.esAdmin) {        
         nombreUsuario.textContent = 'Hola ' + usuarioActivo.nombre + '!';
         // se supone que el elemento existe pero se hace para evitar errores.    
         if (menuAdmin) {
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     }
-
+    // oculta las opciones de iniciar sesión y crear cuenta
     // es buena practica preguntar si existe el elemento antes de manipularlo
     if (menuIniciarSesion) {
       menuIniciarSesion.style.display = "none";
@@ -38,7 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (menuCrearCuenta) {
       menuCrearCuenta.style.display = "none";
     }
-  } else {
+  }
+  // si no hay usuario activo, oculta la barra de usuario y muestra las opciones de iniciar sesión y crear cuenta 
+    else {
     if (menuIniciarSesion) {
       menuIniciarSesion.style.display = "block";
     }
@@ -53,6 +55,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (userBar) {
       userBar.style.display = "none";
+    }
+
+     // oculta cerrar sesión
+    if (menuCerrarSesion) {
+      menuCerrarSesion.style.display = "none";
     }
   }
 
@@ -79,6 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
           window.location.href = "index.html";
         }
       });
-    });
-  }
+    });
+  }
 });
