@@ -954,7 +954,7 @@ button {
   }
 }
 
-.mainPrincipal, .mainActividad, .mainHorario, .mainTurno {
+.mainPrincipal, .mainActividad, .mainHorario, .mainTurno, .mainCuenta {
   margin-top: 100px; /* deja espacio para el header */
 }
 
