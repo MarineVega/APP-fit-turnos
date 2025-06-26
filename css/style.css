@@ -173,8 +173,8 @@ body {
   align-items: center;
   
   .logoFit {
-    width: 50%;
-    height: 50%;
+    width: 200px;
+    height: 200px;
   }
 
   .contenedorIconos_1, .contenedorIconos_2 {
@@ -838,7 +838,12 @@ button {
   }
 
   .mainPrincipal {
-    .logoFit, .logoMedusa {      
+    .logoFit {
+      width: 300px;
+      height: 300px;
+    }
+    
+    .logoMedusa {      
       width: 20%;
     }
 
