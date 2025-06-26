@@ -1014,7 +1014,7 @@ h2#fc-dom-1 {
   }
 }
 
-.mainPrincipal, .mainActividad, .mainHorario, .mainTurno {
+.mainPrincipal, .mainActividad, .mainHorario, .mainTurno, .mainCuenta {
   margin-top: 100px; /* deja espacio para el header */
 }
 
