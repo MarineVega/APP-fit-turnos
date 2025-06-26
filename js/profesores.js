@@ -186,7 +186,6 @@ imagen.addEventListener("change", () => {
 
 let btnAceptar = document.getElementById("agregar");
 
-
 //Agregar / Editar Profesor
 btnAceptar.addEventListener("click", (e) => {
     e.preventDefault();
@@ -204,14 +203,38 @@ btnAceptar.addEventListener("click", (e) => {
         esValido = false;
     }
 
-   /* if ((documento.value === "") || (documento.value < 1) || (documento.value > 10)) {
-        mostrarMensajeError("documentoError", "El documento ingresado es incorrecto.");
+    function validarDNI(documento) {
+      const regex = /^\d{8}$/;  
+      return regex.test(documento);
+    }
+
+    function existeDNI(documentoNuevo) {
+    let profesores = JSON.parse(localStorage.getItem("profesores")) || [];
+    console.log(profesores);
+    return profesores.some(profesores => profesores.documento === documentoNuevo);
+    }
+
+    if (!validarDNI(documento.value)) {
+    mostrarMensajeError("documentoError", "El documento ingresado es incorrecto.");
+    esValido = false;
+    } else if (existeDNI(documento.value)) {
+    mostrarMensajeError("documentoError", "Ya existe un usuario con ese documento.");
+    esValido = false;
+    }
+
+    function validarCUIL(cuil) {
+      const regex = /^\d{11}$/;  
+      console.log(cuil);
+      return regex.test(cuil);
+    }
+
+    if (!validarCUIL(cuil.value))  {
+        mostrarMensajeError("cuilError", "El CUIL/CUIT ingresado es incorrecto.");
         esValido = false;
-    }*/
+    }
 
     if (esValido) {
         let profesores = JSON.parse(localStorage.getItem("profesores")) || [];
-        
         const archivoImagen = imagen.files[0];
         const nombreImagen = archivoImagen ? archivoImagen.name : null;
         const rutaImagen = nombreImagen ? `../assets/img/${nombreImagen}` : null;
@@ -265,7 +288,6 @@ btnAceptar.addEventListener("click", (e) => {
         document.getElementById(input.id + "Error").textContent = "";
     });
 });
-
 
 // Muestro el listado de profesores, con opción de editar o eliminar
 function mostrarListadoProfesores(modo= "consultar") {
