@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const dias = horario.dias.split(',').map(d => d.trim().toLowerCase());
         const actividad = horario.actividad;
         let cupoMaximo = horario.cupoMaximo ;
-        const profesor = horario.profesor || "Profesor/a";
+        const profesor = horario.profesor;
 
         // Si cupoMaximo es NaN o null, lo busco desde la actividad
         //if (!cupoMaximo || isNaN(cupoMaximo)){
@@ -146,7 +146,9 @@ document.addEventListener("DOMContentLoaded", () => {
             //id: `recurrente-${actividad}-${fechaClase.toISOString()}`,
             id: id,
             //title: `${actividad} (${profesor}) - Cupos: ${cuposDisponibles}`,
-            title: `${actividad} Cupo: ${cuposDisponibles}`,
+            //title: `${actividad} Cupo: ${cuposDisponibles}`,
+            //title: `${profesor} Cupo: ${cuposDisponibles}`,
+            title: `${profesor ? "Profesor: " + profesor : ""} Cupo: ${cuposDisponibles}`, // si profesor tiene valor, lo muestra seguido de un espacio; si es null, undefined o "", no muestra nada
             start: fechaClase.toISOString(),
             color: colorEvento,            
             extendedProps: {
@@ -169,12 +171,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const calendarEl = document.getElementById('calendar');
   calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'timeGridWeek',
-    displayEventTime: false,        /* oculto la hora dentro del cuadro */
-    locale: 'es',
+    initialDate: new Date(),        // centra el calendario en el día actual
+    displayEventTime: false,        // oculto la hora dentro del cuadro
+    locale: 'es',                   // idioma español
+    buttonText: {
+      today: 'hoy',
+      month: 'mes',
+      week: 'semana',
+      day: 'día',
+      list: 'lista'
+    },    
     slotMinTime: '08:00:00',
     slotMaxTime: '22:00:00',
     allDaySlot: false,
-    height: 600,
+    height: 500,
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
@@ -187,6 +197,16 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   });
   calendar.render();
+
+  // busca la columna del día actual y hace scroll hacia ella
+  setTimeout(() => {
+    const hoy = new Date();
+    const hoyColumna = document.querySelector(`.fc-timegrid-col[data-date="${hoy.toISOString().split('T')[0]}"]`);
+    if (hoyColumna) {
+      hoyColumna.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    }
+  }, 100);
+
 
   // Alternancia de vistas
   let vistaLista = false;

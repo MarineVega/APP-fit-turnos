@@ -253,7 +253,7 @@ button {
 .mainPrincipal .btnAceptar,
 .mainPrincipal a.btnAceptar {
   font-size: 1rem;
-  height: 80px;    
+  height: 50px;    
   width: 200px;
   margin: 5px 0;
   text-align: center;
@@ -273,6 +273,11 @@ button {
   background-color: var(--color-primario);  
   color: var(--color-contraste-claro);
 }
+
+a.btnAceptar:hover {
+  background-color: var(--color-fondo);
+}
+
 
 /* Estilos de las páginas Actividad y Horario */
 .mainActividad, .mainHorario, .mainTurno {
@@ -696,14 +701,19 @@ button {
 
 /* * * * * * * Calendario de Turnos * * * * * *  */
 .calendar-wrapper {
-  width: 100%;
+  width: 98%; 
   overflow-x: auto;   /* para mostrar scroll bar horizontal */
+  position: relative;  
+  
 }
 
-#calendar {
-  min-width: 768px;
-  width: 100%;
+.calendar-scroll {
+  min-width: 900px;
+}
 
+#calendar {  
+  min-width: 400px;
+  width: 100%;
 }
 
 /* OJO!!!!! ver por qué no funciona */
@@ -715,6 +725,14 @@ button {
   background-color: var(--color-fondo); /* evita que se superponga de forma traslúcida */
 }
 
+h2#fc-dom-1 {
+  font-size: 20px;
+}
+
+/* header de fullCalendar */
+.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
+  width: 100%;
+}
 
 .tarjeta-turno {
   background-color: var(--color-contraste-claro);
@@ -746,6 +764,40 @@ button {
   top: 0px;
   font-size: 0.7rem;    /* tamaño de la letra de cada celda */
 }
+
+/* botones de navegación de FullCalendar */
+.fc-button {
+  background-color: var(--color-secundario) !important;
+  color: var(--color-contraste-oscuro) !important;
+  width: 80px;
+  height: 40px;
+  border: 1.5px solid var(--color-secundario) !important;
+  border-radius: 8px !important;
+  font-size: 0.8rem !important;
+  padding: 8px 14px;
+  text-transform: none !important;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.2) !important;
+  transition: background-color 0.3s ease, transform 0.1s ease !important;
+}
+
+.fc-button:hover {
+  background-color: var(--color-primario) !important;
+  color: var(--color-contraste-claro) !important;
+  transform: scale(1.05) !important;
+}
+
+.fc-button:disabled {
+  background-color: #ccc !important;
+  color: #666 !important;
+  cursor: not-allowed !important;
+  border-color: #ccc !important;
+}
+
+/* Opcional: quitar las mayúsculas automáticas */
+.fc .fc-button {
+  text-transform: none !important;
+}
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -806,6 +858,7 @@ button {
     font-size: 1.1rem;
     padding: 2% 5%;
   }
+
 }
 
 /* Media Queries para pantallas de escritorio */
@@ -866,7 +919,7 @@ button {
   .mainPrincipal .btnAceptar,
   .mainPrincipal a.btnAceptar {
     font-size: 1.2rem;
-    height: 100px;    
+    height: 80px;    
     width: 250px;
     margin: 10px 0;
     /* display: block; */
@@ -951,6 +1004,11 @@ button {
   .mainActividad #tablaActividades th,
   .mainActividad #tablaActividades td {
     font-size: 1.1rem;    
+  }
+
+  /* botones del header de fullCalendar */
+  .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
+    width: 100%;
   }
 }
 
