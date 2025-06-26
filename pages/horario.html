@@ -16,7 +16,7 @@
     <!-- agregue sweetalert para usar imagenes e iconos-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
 
-     <header class="header">
+    <header class="header">
         <nav>
             <a href="../index.html" class="logo">
                 <img src="../assets/img/Logo_Fit_Home.png" alt="Icono FIT Turnos" loading="lazy">                
@@ -42,13 +42,17 @@
             <form class="formHorario">
                 <div>
                     <label for="profesor">Profesor *</label>
-                    <select name="profesores" id="profesor" class="inputHorario">
+                    <select id="profesor" class="inputHorario">
+                      <option value="" disabled selected>(Todos)</option>
+                    </select>   
+                    
+                    <!-- <select name="profesores" id="profesor" class="inputHorario">
                         <option value="">(Todos)</option>   
                         <option value="ana">Ana</option>
                         <option value="marcos">Marcos</option>
                         <option value="paola">Paola</option>
                         <option value="sergio">Sergio</option>
-                    </select>                    
+                    </select>                     -->
                 </div>
                 
                 <div>
@@ -102,7 +106,7 @@
                         <option value="9">9:00 a 10:00</option>
                         <option value="10">10:00 a 11:00</option>
                         <option value="11">11:00 a 12:00</option>
-                        <option value="12">12:00 a 12:00</option>
+                        <option value="12">12:00 a 13:00</option>
                         <option value="13">13:00 a 14:00</option>
                         <option value="14">14:00 a 15:00</option>
                         <option value="15">15:00 a 16:00</option>

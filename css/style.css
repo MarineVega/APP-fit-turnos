@@ -36,7 +36,7 @@
   font-family: "Poppins", "Roboto", sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;  
+  box-sizing: border-box;
 }
 
 
@@ -51,68 +51,136 @@
   --color-contraste-oscuro: #222222;
 }
 
+header {
+  nav {        
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    width: 100%;    
+    background: var(--color-primario);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    position: fixed;
+    z-index: 5;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    margin-left: 20px;
+    margin-right: 30px;
+  }
+
+  a {
+    text-decoration: none;
+    display: flex;
+    font-size: 1.3rem;
+    color: var(--color-contraste-claro);
+  }
+
+  .logo img {
+    width: 50px;
+  }
+
+  .icon img {
+    height: 20px;    
+    margin-left: 10px;
+  }
+      
+  span {
+    font-size: 0.7rem;
+    padding-top: 10px;
+  }
+}
+
+/* menu desplegable hamburguesa */
+.menu-desplegable {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  background: var(--color-primario);
+  width: 245px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+  border-radius: 0 0 10px 10px;
+  transform: translateY(-20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s ease-in-out;
+  z-index: 4;
+}
+
+.menu-desplegable a {
+  color: var(--color-contraste-claro);
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.menu-desplegable span {
+  font-size: 0.8rem;
+  color: var(--color-fondo);
+}
+
+.menu-desplegable.mostrar {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: var(--color-primario);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links {
+  display: none; /* escondido por defecto (mobile) */
+}
+
+.desktop-only {
+  display: none; /* escondido en mobile */
+}
+
 /* estilos del body */
 body {
   background-color: var(--color-fondo);
   color: var(--color-terciario);
 }
 
-header {
-  nav {
-    top: 0;
-    width: 100%; 
-    height: 25%; 
-    padding: 16px; 
-    background: var(--color-primario);
 
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
-    justify-content: flex-start; 
-    align-items: center; 
-    gap: 33px; 
-    display: inline-flex;
-
-    a {
-      text-decoration: none;
-      display: flex;
-      font-size: 1.5rem;
-      color: var(--color-cuarto);
-      font-weight: bold;
-    }
-
-    .logo {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-
-      img {
-        width: 50px;
-      }
-      
-      span {
-        font-size: 0.7rem;
-        padding-top: 10px;
-      }
-    }
-  }
-}
 
 /* Estilos de index.html, actividad.html, horario.html */
-.mainPrincipal, .mainActividad, .mainHorario {
+.mainPrincipal, .mainActividad, .mainHorario, .mainTurno {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* padding-left: 20px;
-  padding-right: 20px; */
-
+  
   .logoFit {
-    width: 50%;
-    height: 50%;
+    width: 200px;
+    height: 200px;
   }
 
   .contenedorIconos_1, .contenedorIconos_2 {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;  /* permitir múltiples filas */
+    flex-wrap: wrap;      /* permitir múltiples filas */
     justify-content: space-between;   
     img {
       width: 70px;
@@ -154,20 +222,6 @@ header {
   .flechaInvisible {
     visibility: hidden;
   }
-
-/*  lo saco de la clase main, para poder usarlo en todas las páginas, sin necesidad de agregar el main de cada página acá
-  .tituloConFlecha {    
-    width: 100%;
-    padding: 5% 3%;  
-    display: flex;
-    color: var(--color-contraste-oscuro);
-    font-weight: 600;
-    letter-spacing: 0.1rem;
-    align-items: center;
-    justify-content:space-between;   
-    font-size: 1.3rem;
-  }
-*/ 
 }
 
 .tituloConFlecha {    
@@ -195,6 +249,15 @@ button {
   width: 200px;       
   margin: 10px;  
 }
+
+.mainPrincipal .btnAceptar,
+.mainPrincipal a.btnAceptar {
+  font-size: 1rem;
+  height: 50px;    
+  width: 200px;
+  margin: 5px 0;
+  text-align: center;
+}
   
 .btnCancelar {
   background-color: var(--color-contraste-claro);
@@ -211,31 +274,13 @@ button {
   color: var(--color-contraste-claro);
 }
 
-
-
-
-footer {  
-  display: flex;
-  flex-direction: row;
-  justify-content: center;  
-}
-
-/* Botón para exportar Local Storage a JSON */
-#exportarLocalStorage, #importarLocalStorage{
+a.btnAceptar:hover {
   background-color: var(--color-fondo);
-  color: var(--color-terciario);  
-  font-size: 0.9rem;
 }
-
-#exportarLocalStorage:hover, #importarLocalStorage:hover {
-  background-color: var(--color-terciario);
-  color: var(--color-contraste-claro);
-}
-
 
 
 /* Estilos de las páginas Actividad y Horario */
-.mainActividad, .mainHorario {
+.mainActividad, .mainHorario, .mainTurno {
   .seccionActividad, .seccionHorario {
     width: 100%;
     display: flex;
@@ -250,7 +295,7 @@ footer {
       flex-direction: column;
       align-items: start;
       font-size: 1.2rem;
-      padding: 0% 5%;;      
+      padding: 0% 5%;
       
       div {
         width: 100%;
@@ -266,15 +311,9 @@ footer {
           border-radius: 6px;
           border-style: none;
           font-size: 1.2rem;
-          justify-content: flex-start;
-          
-          /* display: inline-flex; */
-          
+          justify-content: flex-start;          
         }
 
-      
-
-        
         .inputActividad::placeholder {
           color: var(--color-fondo);
         }
@@ -339,13 +378,9 @@ footer {
           input[type="checkbox"]:checked + label::before {
             background-color: var(--color-secundario);  /* fondo verde */
             border-color: var(--color-secundario);            
-            background-image: url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.00039 10.8002L3.20039 8.00024L2.26672 8.93358L6.00039 12.6672L14.0004 4.66724L13.0671 3.73358L6.00039 10.8002Z"/></svg>'); /* muestro un tilde blanco con SVG embebido (imagen del check)*/            
-            /* background-repeat: no-repeat; */
-            /* background-position: center; */
-          }
-         
+            background-image: url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.00039 10.8002L3.20039 8.00024L2.26672 8.93358L6.00039 12.6672L14.0004 4.66724L13.0671 3.73358L6.00039 10.8002Z"/></svg>'); /* muestro un tilde blanco con SVG embebido (imagen del check)*/
+          }         
         }
-
 
         /* aumentar tamaño de los checkboxes */
         input[type="checkbox"] {
@@ -358,10 +393,8 @@ footer {
 
         .etiquetaDias {
           font-weight: bold;
-          /* margin-bottom: 8px; */
           display: block;
         }
-
       }
     }
     
@@ -369,12 +402,7 @@ footer {
       font-weight: bold;      
       display: block;
     }
-    
-    /* lo comenté porque no quedan alineados los botones aceptar y cancelar en la versión escritorio*/
-    /* .btnAceptar {
-      margin-top: 10%;
-    } */
-    
+        
     .contenedorBotones {
       margin-top: 5%;
       display: flex;
@@ -394,16 +422,6 @@ footer {
     }
   }
 
-  /*
-  .btnTabla {
-    background-color: transparent;
-    
-  }
-
-  .btnTabla:hover {
-    background-color: var(--color-primario);
-  }
-*/
   .btnTabla {
     background-color: transparent; /* color de fondo */
     border: 1px solid var(--color-terciario);       /* borde visible */
@@ -430,13 +448,11 @@ footer {
   .iconoTabla {
     width: 120%;
   }
-
-  /* ver esta parte!!!! */
+  
   #tablaActividades, #tablaHorarios {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px auto;
-    
+    margin: 20px auto;    
   }
 
   #tablaActividades th,
@@ -448,11 +464,7 @@ footer {
     word-wrap: break-word;
     word-break: break-word;   /* Fuerza corte incluso sin espacios */
     white-space: normal;      /* Permite que baje de línea */
-
-    /* max-width: 200px;         Límite de ancho de la celda para que corte */
-    font-size: 0.9rem;
- 
-  
+    font-size: 0.9rem;  
   }
 
   #tablaActividades #cupo,
@@ -467,8 +479,7 @@ footer {
     background-color: var(--color-primario);
     color: var(--color-contraste-claro);
     text-align: center;
-    font-weight: normal;    
-    /* display: none; */
+    font-weight: normal;
   }
 
   #tablaActividades tr:nth-child(even),
@@ -476,6 +487,321 @@ footer {
     background-color: var(--color-secundario);
   }
 }
+
+/*ESTILO DE HTML CUENTA,LOGIN,ETC.*/
+.mainCuenta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-fondo);
+  color: var(--color-terciario);
+}
+
+.seccionCuenta {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formCuenta {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  font-size: 1.3rem;
+  padding: 0% 5%;
+  color: var(--color-contraste-oscuro);
+}
+
+.formCuenta > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1%;
+}
+
+.inputCuenta {
+  background: var(--color-contraste-claro);
+  width: 100%;
+  padding: 2%;
+  margin-top: 10px;
+  border-radius: 6px;
+  border-style: none;
+  font-size: 1.3rem;
+}
+
+.inputCuenta::placeholder {
+  color: var(--color-fondo);
+}
+
+.inputCuenta:focus::placeholder {
+  color: transparent;
+}
+
+.btnCuentaLogin {
+  margin-top: 10%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 8px;
+  background-color: var(--color-secundario);
+  border: 1.5px solid var(--color-secundario);
+  color: var(--color-contraste-oscuro);
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  height: 50px;
+  width: 200px;
+  cursor: pointer;
+}
+
+.btnCuentaLogin:hover {
+  background-color: var(--color-primario);
+  color: var(--color-contraste-claro);
+}
+
+.tituloConFlecha {
+  width: 100%;
+  padding: 5% 3%;
+  display: flex;
+  color: var(--color-contraste-oscuro);
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.3rem;
+}
+
+.flecha {
+  cursor: pointer;
+}
+
+.flechaInvisible {
+  visibility: hidden;
+}
+
+.adventencia {
+  padding-left: 4%;
+  font-size: 0.9rem;
+  color: red;
+}
+/*__________TERMINA CSS CUENTA___________*/
+
+
+/* footer */
+.footer {
+  background-color: var(--color-primario);
+  color: var(--color-cuarto);
+  padding: 8px 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+  bottom: 0;
+  left: 0;  
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-logo img {
+  height: 45px;
+}
+
+.oculto {
+  display: none;
+}
+
+
+/* Botón para exportar/importar Local Storage a JSON */
+.btnsImportarExportar {  
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  visibility: hidden;
+}
+
+#exportarLocalStorage, #importarLocalStorage{
+  background-color: var(--color-fondo);
+  color: var(--color-terciario);  
+  font-size: 0.9rem;
+}
+#exportarLocalStorage:hover, #importarLocalStorage:hover {
+  background-color: var(--color-terciario);
+  color: var(--color-contraste-claro);
+}
+
+
+
+
+/* * * * * Estilo de carrusel para turnos * * * * */
+.contenedor-actividades {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5px;
+  align-items: center;
+  margin: 0px 0px 30px 0px;
+  width: 100%;
+}
+
+.carrusel-actividades {
+  display: flex;  
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;  
+  width: 80%;
+}
+
+.actividad-card {
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  padding: 0px 10px;
+  opacity: 0.5;
+  transition: transform 0.3s, opacity 0.3s;  
+}
+
+.actividad-card img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.actividad-card p {
+  font-size: 0.8rem;
+}
+
+.actividad-card.seleccionada {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+.flecha-carrusel {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex !important;
+}
+
+.flecha-carrusel img {
+  width: 24px;
+  height: 24px;
+}
+/* * * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * Calendario de Turnos * * * * * *  */
+.calendar-wrapper {
+  width: 98%; 
+  overflow-x: auto;   /* para mostrar scroll bar horizontal */
+  position: relative;  
+  
+}
+
+.calendar-scroll {
+  min-width: 900px;
+}
+
+#calendar {  
+  min-width: 400px;
+  width: 100%;
+}
+
+/* OJO!!!!! ver por qué no funciona */
+/* Fija la columna de horas (lado izquierdo) */
+.fc .fc-timegrid-slot-label {
+  position: sticky;           /* mantiene la columna pegada al borde izquierdo */
+  left: 0;                    /* indica que se "pegue" al borde izquierdo */
+  z-index: 5;                 /*  evita que se tape con otros elementos */
+  background-color: var(--color-fondo); /* evita que se superponga de forma traslúcida */
+}
+
+h2#fc-dom-1 {
+  font-size: 20px;
+}
+
+/* header de fullCalendar */
+.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
+  width: 100%;
+}
+
+.tarjeta-turno {
+  background-color: var(--color-contraste-claro);
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+  color: var(--color-terciario);  
+}
+
+.tarjeta-turno button {
+  margin-top: 10px;
+  background-color: var(--color-secundario);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.5rem;
+  cursor: pointer;
+}
+
+.tarjeta-turno button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+.fc-v-event .fc-event-title {
+  bottom: 0px;
+  max-height: 100%;
+  overflow: hidden;
+  top: 0px;
+  font-size: 0.7rem;    /* tamaño de la letra de cada celda */
+ 
+  white-space: pre-line !important;   /* que respete \n como salto de línea real */
+}
+
+/* botones de navegación de FullCalendar */
+.fc-button {
+  background-color: var(--color-secundario) !important;
+  color: var(--color-contraste-oscuro) !important;
+  width: 80px;
+  height: 40px;
+  border: 1.5px solid var(--color-secundario) !important;
+  border-radius: 8px !important;
+  font-size: 0.8rem !important;
+  padding: 8px 14px;
+  text-transform: none !important;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.2) !important;
+  transition: background-color 0.3s ease, transform 0.1s ease !important;
+}
+
+.fc-button:hover {
+  background-color: var(--color-primario) !important;
+  color: var(--color-contraste-claro) !important;
+  transform: scale(1.05) !important;
+}
+
+.fc-button:disabled {
+  background-color: #ccc !important;
+  color: #666 !important;
+  cursor: not-allowed !important;
+  border-color: #ccc !important;
+}
+
+/* Opcional: quitar las mayúsculas automáticas */
+.fc .fc-button {
+  text-transform: none !important;
+}
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * */
 
 
 /* Media Queruy para distintas pantallas 
@@ -492,7 +818,6 @@ footer {
 
 /* Media Queries para pantallas de tablet */
 @media (min-width: 481px) {
-
   .mainActividad .seccionActividad, 
   .mainHorario .seccionHorario {
     max-width: 600px;
@@ -535,10 +860,73 @@ footer {
     font-size: 1.1rem;
     padding: 2% 5%;
   }
+
 }
 
 /* Media Queries para pantallas de escritorio */
 @media (min-width: 1024px) {
+  #btnMenu {
+    display: none;        /* oculta hamburguesa */
+  }
+  
+  .nav-links.desktop-only {
+    display: flex;
+    gap: 20px;
+  }
+
+  .menu-desplegable {
+    display: none !important;
+  }
+
+  .nav-links a {
+    position: relative;
+    padding: 7px 13px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 1rem;
+  }
+
+  .nav-links a:hover {
+    background-color: var(--color-secundario);
+    color: var(--color-primario);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .mainPrincipal {
+    .logoFit {
+      width: 300px;
+      height: 300px;
+    }
+    
+    .logoMedusa {      
+      width: 20%;
+    }
+
+    .contenedorIconos_1, .contenedorIconos_2 {
+      width: 40%;
+      display: flex;
+      flex-wrap: wrap;      /* permitir múltiples filas */  
+      justify-content: space-between;     
+      img {
+        width: 70px;
+        height: 70px;
+        margin: 10px;
+      }    
+    }
+    .contenedorIconos_2 {
+      justify-content: space-evenly;
+    }
+  }
+
+  .mainPrincipal .btnAceptar,
+  .mainPrincipal a.btnAceptar {
+    font-size: 1.2rem;
+    height: 80px;    
+    width: 250px;
+    margin: 10px 0;
+    /* display: block; */
+    text-align: center;    
+  }
 
   .mainActividad .seccionActividad,
   .mainHorario .seccionHorario {
@@ -556,8 +944,7 @@ footer {
   .mainActividad .formActividad,
   .mainHorario .formHorario {
     font-size: 0.95rem;
-    display: grid;
-    /* grid-template-columns: 1fr 1fr; */
+    display: grid;    
     gap: 20px;
     padding: 0 5%;
   }
@@ -574,9 +961,8 @@ footer {
     font-size: 1rem;
     height: 50px;    
     width: 200px;
-    }
+  }
   
-
   .mainActividad .tituloConFlecha,
   .mainHorario .tituloConFlecha {
     font-size: 1.5rem;
@@ -622,4 +1008,24 @@ footer {
     font-size: 1.1rem;    
   }
 
+  /* botones del header de fullCalendar */
+  .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
+    width: 100%;
+  }
 }
+
+.mainPrincipal, .mainActividad, .mainHorario, .mainTurno, .mainCuenta {
+  margin-top: 100px; /* deja espacio para el header */
+}
+
+/* para que el footer siempre quede abajo, incluso si el contenido no ocupa toda la altura de la pantalla*/
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+

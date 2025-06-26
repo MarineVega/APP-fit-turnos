@@ -1,0 +1,587 @@
+/* configuro la fuente, nombre y ubicación -> Principal Poppins y alternativa Roboto*/
+/* Poppins */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Roboto */
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/Roboto/Roboto-Italic-VariableFont_wdth,wght.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf")
+    format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/*  * -> selector universal // configuro la fuente para todo el sitio */
+* {
+  font-family: "Poppins", "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;  
+}
+
+
+/* configuración de variables*/
+:root {
+  --color-fondo: #bababa;
+  --color-primario: #007a5e;
+  --color-secundario: #6edc8c;
+  --color-terciario: #033649;
+  --color-cuarto: #45c4ed;
+  --color-contraste-claro: #f5f5f5;
+  --color-contraste-oscuro: #222222;
+}
+
+/* estilos del body */
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-terciario);
+}
+
+header {
+  nav {
+    top: 0;
+    width: 100%; 
+    height: 25%; 
+    padding: 16px; 
+    background: var(--color-primario);
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
+    justify-content: flex-start; 
+    align-items: center; 
+    gap: 33px; 
+    display: inline-flex;
+
+    a {
+      text-decoration: none;
+      display: flex;
+      font-size: 1.5rem;
+      color: var(--color-cuarto);
+      font-weight: bold;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      img {
+        width: 50px;
+      }
+      
+      span {
+        font-size: 0.7rem;
+        padding-top: 10px;
+      }
+    }
+  }
+}
+
+/* Estilos de index.html, actividad.html, horario.html */
+.mainPrincipal, .mainProfesores, .mainHorario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding-left: 20px;
+  padding-right: 20px; */
+
+  .logoFit {
+    width: 50%;
+    height: 50%;
+  }
+
+  .contenedorIconos_1, .contenedorIconos_2 {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;  /* permitir múltiples filas */
+    justify-content: space-between;   
+    img {
+      width: 70px;
+      height: 70px;
+      margin: 10px;
+    }    
+  }
+
+  .contenedorIconos_2 {
+    justify-content: space-evenly;
+  }
+
+  .slogan {
+    width: 80%;     
+    text-align: center; 
+    color: #222222; 
+    font-size: 1.8rem; 
+    font-weight: 500; 
+    line-height: 40px;     
+    word-wrap: break-word;
+    padding: 5% 0%;
+  }
+
+  .registrarse {
+    color: #222222;
+    font-size: 1.4rem;
+    line-height: 40px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.1rem;
+    padding: 2% 0%;
+  }
+
+  .logoMedusa {
+    width: 70%;    
+    border-radius: 10px;    
+    margin: 20px 0px;
+  }
+
+  .flechaInvisible {
+    visibility: hidden;
+  }
+
+/*  lo saco de la clase main, para poder usarlo en todas las páginas, sin necesidad de agregar el main de cada página acá
+  .tituloConFlecha {    
+    width: 100%;
+    padding: 5% 3%;  
+    display: flex;
+    color: var(--color-contraste-oscuro);
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    align-items: center;
+    justify-content:space-between;   
+    font-size: 1.3rem;
+  }
+*/ 
+}
+
+.tituloConFlecha {    
+  width: 100%;
+  padding: 5% 3%;         /* que las flechas no queden en el borde */ /* top-botton 2% right-left 3% */
+  display: flex;
+  color: var(--color-contraste-oscuro);
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  align-items: center;
+  justify-content:space-between;    /* coloca las flechas en los extremos */
+  font-size: 1.3rem;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: var(--color-secundario);
+  border: 1.5px solid var(--color-secundario);
+  color: var(--color-contraste-oscuro);
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+    
+  height: 50px;
+  width: 200px;       
+  margin: 10px;  
+}
+  
+.btnCancelar {
+  background-color: var(--color-contraste-claro);
+  border: 1.5px solid var(--color-terciario);
+}
+
+.btnCancelar:hover {
+  background-color: var(--color-terciario);  
+  color: var(--color-contraste-claro);
+}
+
+.btnAceptar:hover {
+  background-color: var(--color-primario);  
+  color: var(--color-contraste-claro);
+}
+
+footer {  
+  display: flex;
+  flex-direction: row;
+  justify-content: center;  
+}
+
+/* Botón para exportar Local Storage a JSON */
+#exportarLocalStorage, #importarLocalStorage{
+  background-color: var(--color-fondo);
+  color: var(--color-terciario);  
+  font-size: 0.9rem;
+}
+
+#exportarLocalStorage:hover, #importarLocalStorage:hover {
+  background-color: var(--color-terciario);
+  color: var(--color-contraste-claro);
+}
+
+/* Estilos de las páginas Actividad y Horario */
+.mainProfesores, .mainHorario {
+  .seccionProfesores, .seccionHorario {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    justify-items: center;
+
+    .formProfesores, .formHorario {
+      width: 100%;
+      color: var(--color-contraste-oscuro);
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      font-size: 1.3rem;
+      padding: 0% 5%;;      
+      
+      div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;        
+        padding: 1%;
+        
+        .inputProfesores, .inputHorario {
+          background: var(--color-contraste-claro);
+          width: 100%;
+          padding: 2%;
+          margin-top: 10px;
+          border-radius: 6px;
+          border-style: none;
+          font-size: 1.3rem;
+          justify-content: flex-start;
+          
+          /* display: inline-flex; */
+          
+        }
+
+        .inputProfesores::placeholder {
+          color: var(--color-fondo);
+        }
+
+        /* para que desaparezca el placeholder al hacer clic en el input */
+        .inputProfesores:focus::placeholder {
+          color: transparent;
+        }
+      }
+
+      .mensaje-error {
+        color: red;
+        font-size: 1.1rem;
+      }
+      
+      .advertencia {        
+        padding-left: 4%;        
+        font-size: 0.9rem;
+      }
+
+      /* estilos exclusivos para horario.html */
+      .contenedorDias {
+        max-width: 100%;
+
+        .grillaDias {
+          display: grid;
+          grid-template-columns: 1fr 1fr;   /* 2 columnas */
+          gap: 5px;
+
+          
+          label {
+            position: relative;
+            padding-left: 30px;
+            cursor: pointer;
+            user-select: none;
+
+            /* estilo del contenedor visible del checkbox */
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            margin: 0.2rem;
+          }
+
+          /* ya que el checkbox no permite mucho estilo, debo ocultar el checkbox original y usar un elemento visual para reemplazarlo */
+
+          /* oculto el checkbox original*/
+          input[type="checkbox"] {
+            display: none;
+          }
+          /* estilo personalizado de la "caja" del checkbox */
+          label::before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            border: 2px solid var(--color-terciario);
+            background-color: var(--color-fondo);
+            border-radius: 4px;
+            transition: background-color 0.2s;
+          }
+          /* cuando el checkbox está marcado */
+          input[type="checkbox"]:checked + label::before {
+            background-color: var(--color-secundario);  /* fondo verde */
+            border-color: var(--color-secundario);            
+            background-image: url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.00039 10.8002L3.20039 8.00024L2.26672 8.93358L6.00039 12.6672L14.0004 4.66724L13.0671 3.73358L6.00039 10.8002Z"/></svg>'); /* muestro un tilde blanco con SVG embebido (imagen del check)*/            
+            /* background-repeat: no-repeat; */
+            /* background-position: center; */
+          }
+        }
+
+        /* aumentar tamaño de los checkboxes */
+        input[type="checkbox"] {
+          width: 20px;                /* width y height -> definen el tamaño del checkbox. */
+          height: 20px;
+          transform: scale(1.4);      /* aumento el tamaño general */
+          margin-right: 15px;         /* espacio entre el checkbox y el texto */
+          cursor: pointer;
+        }
+
+        .etiquetaDias {
+          font-weight: bold;
+          /* margin-bottom: 8px; */
+          display: block;
+        }
+
+      }
+    }
+    
+    .etiquetaHoras {
+      font-weight: bold;      
+      display: block;
+    }
+    
+    .btnAceptar {
+      margin-top: 15%;
+    }
+    
+  }
+
+  .btnTabla {
+    background-color: transparent;
+    width: 70%;
+  }
+
+  .btnTabla:hover {
+    background-color: var(--color-primario);
+  }
+
+  .iconoTabla {
+    width: 90%;
+  }
+
+  /* ver esta parte!!!! */
+  #tablaProfesores {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    
+  }
+
+  #tablaProfesores th,
+  #tablaProfesores td {
+    border: 1px solid var(--color-fondo);
+    padding: 12px;    
+    word-wrap: break-word;
+    word-break: break-word;   /* Fuerza corte incluso sin espacios */
+    white-space: normal;      /* Permite que baje de línea */
+    max-width: 200px;         /* Límite de ancho de la celda para que corte */
+
+  }
+
+  #tablaProfesores #cupo,
+  #tablaProfesores #imagen {
+    text-align: center;  
+  }
+
+
+  #tablaProfesores th {
+    background-color: var(--color-primario);
+    color: var(--color-contraste-claro);
+    text-align: center;
+  }
+
+  #tablaProfesores tr:nth-child(even) {
+    background-color: var(--color-secundario);
+  }
+}
+
+/* Estilos para SweetAlert */
+.swal2-html-container .swal2-file,
+.swal2-html-container .advertencia {
+  font-size: 0.9rem;
+}
+
+/* footer */ 
+
+.footer {
+  background-color: var(--color-primario);
+  color: var(--color-cuarto);
+  padding: 20px 10px;
+  width: 100%;
+  /*position: fixed;*/
+  text-align: center;
+  font-size: 0.9rem;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; 
+
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-logo img {
+  height: 45px;
+}
+
+
+/* Media Queries para pantallas de tablet */
+@media (min-width: 768px) {
+  .mainProfesores .seccionProfesores, 
+  .mainHorario .seccionHorario {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .mainProfesores .formProfesores,
+  .mainHorario .formHorario {
+    font-size: 1rem;
+    padding: 0 10%;
+  }
+
+  .mainProfesores .formProfesores .inputProfesores,
+  .mainHorario .formHorario .inputHorario {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .mainProfesores .formProfesores .advertencia,
+  .mainHorario .formHorario .advertencia {
+    font-size: 0.85rem;
+  }
+
+  .mainProfesores .btnAceptar,
+  .mainProfesores .btnCancelar,
+  .mainHorario .btnAceptar,
+  .mainHorario .btnCancelar {
+    width: 150px;
+    font-size: 1rem;
+  }
+
+  .mainProfesores .tituloConFlecha,
+  .mainHorario .tituloConFlecha {
+    font-size: 1.1rem;
+    padding: 2% 5%;
+  }
+}
+
+/* Media Queries para pantallas de escritorio */
+@media (min-width: 1024px) {
+  .mainProfesores .seccionProfesores,
+  .mainHorario .seccionHorario {
+    max-width: 700px;
+  }
+
+  .mainProfesores .formProfesores,
+  .mainHorario .formHorario {
+    font-size: 0.95rem;
+    display: grid;
+    /* grid-template-columns: 1fr 1fr; */
+    gap: 20px;
+    padding: 0 5%;
+  }
+  
+  .mainProfesores .formProfesores .inputProfesores,
+  .mainHorario .formHorario .inputHorario {
+    font-size: 0.95rem;    
+  }
+
+  .mainProfesores .btnAceptar,
+  .mainProfesores .btnCancelar,
+  .mainHorario .btnAceptar,
+  .mainHorario .btnCancelar {
+    width: 140px;
+    font-size: 0.95rem;
+  }
+
+  .mainProfesores .tituloConFlecha,
+  .mainHorario .tituloConFlecha {
+    font-size: 1.5rem;
+  }
+
+  .mainProfesores .formProfesores > div,
+  .mainHorario .formHorario > div {
+    padding: 0; 
+  }
+
+  .mainProfesores .formProfesores .mensaje-error,
+  .mainHorario .formHorario .mensaje-error {
+    font-size: 0.85rem;
+  }
+
+  .mainProfesores .formProfesores label.advertencia,
+  .mainHorario .formHorario label.advertencia  {
+    grid-column: span 2;
+    font-size: 0.85rem;
+  }
+
+  .mainProfesores .btnAceptar , 
+  .mainHorario .btnAceptar {
+    grid-column: 2;
+    justify-self: end;
+    margin-top: 30px;
+  }
+
+  .mainProfesores .btnCancelar , 
+  .mainHorario .btnCancelar {
+    grid-column: 1;
+    justify-self: start;
+    margin-top: 30px;
+  }
+}
+
+/* Imágenes visibles solo en la versión de escritorio */
+
+.imagen-lateral {
+  display: none;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60vh; 
+  max-height: 500px;
+  z-index: 0;
+  opacity: 0.9;
+  pointer-events: none; 
+}
+
+@media (min-width: 1024px) {
+  .imagen-lateral {
+    display: block;
+  }
+
+  .imagen-lateral.izquierda {
+    left: 10px;
+  }
+
+  .imagen-lateral.derecha {
+    right: 10px;
+  }
+}
