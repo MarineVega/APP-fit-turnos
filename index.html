@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./css/style.css">
     
     <!-- ícono de la página web -->
-     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     
     <title>FIT Turnos</title>
 </head>
@@ -34,7 +34,7 @@
 
                 <!-- menu visible solo en escritorio -->
                 <div class="nav-links desktop-only">
-                    <a href="./pages/turnos.html">Turnos</a>
+                    <a href="./pages/turnos.html" id="menuTurnos">Turnos</a>
                     <a href="./pages/administrar.html" id="menuAdmin">Administrar</a>
                 </div>
 
@@ -61,20 +61,20 @@
                 </a>
             </div>
 
-            <!-- Menú desplegable mobile -->
         </nav>
         
+        <!-- Menú desplegable mobile -->
         <div class="menu-desplegable" id="menuDesplegable">
-            <a href="#" class="" id="nombreUsuario">Perfil</a>
+            <a href="#" id="nombreUsuario">Perfil</a>
             <a href="#">Inicio</a>
             
-            <a href="./pages/cuenta.html" class="" id="menuIniciarSesion">Iniciar Sesión</a>
-            <a href="./pages/cuenta.html?form=crear" class="" id="menuCrearCuenta">Crear Cuenta</a>
+            <a href="./pages/cuenta.html" id="menuHamburguesaIniciarSesion">Iniciar Sesión</a>
+            <a href="./pages/cuenta.html?form=crear" id="menuHamburguesaCrearCuenta">Crear Cuenta</a>
         
-            <a href="./pages/administrar.html" class="" id="menuAdmin">Administrar</a>        
-            <a href="./pages/turnos.html"class="" id="menuAdmin">Turnos</a>
+            <a href="./pages/administrar.html" id="menuHamburguesaAdmin">Administrar</a>        
+            <a href="./pages/turnos.html" id="menuHamburguesaTurnos">Turnos</a>
             
-            <a href="#" class="" id="menuCerrarSesion">Cerrar Sesión</a> 
+            <a href="#" id="menuHamburguesaCerrarSesion">Cerrar Sesión</a> 
         </div> 
     </header>
 
@@ -100,10 +100,8 @@
             <p>Tu entrenamiento, tu horario, tu control</p>
         </div>        
          
-        <button class="btnAceptar" type="button" onclick="location.href='./pages/cuenta.html'">INICIAR SESIÓN</button>
-
-        <!-- aca lo que hago es que lleve a la parte del registrarse en navegacion.js -->
-        <a href="./pages/cuenta.html?form=crear" class="btnAceptar">REGISTRARSE</a>        
+        <button id="botonIniciarSesion" class="btnAceptar" type="button" onclick="location.href='./pages/cuenta.html'">INICIAR SESIÓN</button>
+        <a id="linkRegistrarse" href="./pages/cuenta.html?form=crear" class="btnAceptar">REGISTRARSE</a>        
 
         <img class="logoMedusa" src="./assets/img/Logo Medusa.jpg" alt="Logo Medusa Soft">
         
