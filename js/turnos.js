@@ -101,8 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const profesor = horario.profesor || "Profesor/a";
 
         // Si cupoMaximo es NaN o null, lo busco desde la actividad
-        if (!cupoMaximo || isNaN(cupoMaximo)){
-          console.log("isNaN(cupoMaximo)")
+        //if (!cupoMaximo || isNaN(cupoMaximo)){
+        if (cupoMaximo == null || isNaN(cupoMaximo)) {
+          /*console.log("isNaN(cupoMaximo)")
+          console.log(cupoMaximo)
+          console.log(!cupoMaximo)*/
           const actividades = JSON.parse(localStorage.getItem("actividades")) || [];
           const actividadData = actividades.find(a => a.nombre === actividad);
           cupoMaximo = actividadData && actividadData.cupoMaximo ? parseInt(actividadData.cupoMaximo) : 10;
@@ -119,15 +122,18 @@ document.addEventListener("DOMContentLoaded", () => {
           fechaClase.setHours(hh, mm, 0, 0);
 
 
-          const id = `recurrente-${actividad}-${fechaClase.toISOString()}`;          
+          //const id = `recurrente-${actividad}-${fechaClase.toISOString()}`;
+          const id = `recurrente-${actividad}-${profesor}-${fechaClase.toISOString()}-${horario.horario}`;
+         // console.log("ID único generado:", id);
+
           const reservasActuales = reservas[id]?.cantidad || 0;
           const cuposDisponibles = Math.max(0, cupoMaximo - reservasActuales);
-
+/*
           console.log("cuposDisponibles: cupoMaximo - reservasActuales")
           console.log(cupoMaximo)
           console.log(reservasActuales)
           console.log(cuposDisponibles)
-
+*/
 
 
           const yaReservado = reservas[id]?.usuario === usuario;
@@ -139,7 +145,8 @@ document.addEventListener("DOMContentLoaded", () => {
           eventos.push({
             //id: `recurrente-${actividad}-${fechaClase.toISOString()}`,
             id: id,
-            title: `${actividad} (${profesor}) - Cupos: ${cuposDisponibles}`,
+            //title: `${actividad} (${profesor}) - Cupos: ${cuposDisponibles}`,
+            title: `${actividad} Cupo: ${cuposDisponibles}`,
             start: fechaClase.toISOString(),
             color: colorEvento,            
             extendedProps: {
@@ -296,8 +303,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   } 
 })
-
-
 
 
 
