@@ -164,7 +164,11 @@ body {
   color: var(--color-terciario);
 }
 
-
+/* Oculta por defecto los enlaces de admin */
+#menuAdmin,
+#menuHamburguesaAdmin {
+  display: none;
+}
 
 /* Estilos de index.html, actividad.html, horario.html */
 .mainPrincipal, .mainActividad, .mainHorario, .mainTurno {
