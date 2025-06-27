@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
       buttonsStyling: false
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = '../index.html';
+        window.location.href = '../pages/cuenta.html?form=login' 
       }
     });
 
