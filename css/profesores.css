@@ -356,6 +356,18 @@ button {
   display: none;
 }
 
+/* para que el footer siempre quede abajo, incluso si el contenido no ocupa toda la altura de la pantalla*/
+
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
 /* Media Queries para pantallas de tablet */
 
 @media (min-width: 768px) {
