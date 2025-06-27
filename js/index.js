@@ -1,94 +1,108 @@
 document.addEventListener("DOMContentLoaded", function () {
-    /* menu desplegable hamburguesa */
-    
-    const btnMenu = document.getElementById('btnMenu');
-    const menu = document.getElementById('menuDesplegable');
-    
-    // mostrar o esconder menu al apretar en el icono
-    btnMenu.addEventListener('click', (e) => {
-        e.preventDefault();
-        menu.classList.toggle('mostrar');
+
+  /* =========================================================
+     MENÚ DESPLEGABLE HAMBURGUESA
+     ========================================================= */
+  const btnMenu = document.getElementById("btnMenu");
+  const menu    = document.getElementById("menuDesplegable");
+
+  /* Mostrar / ocultar menú al hacer clic en el ícono */
+  if (btnMenu) {
+    btnMenu.addEventListener("click", function (e) {
+      e.preventDefault();
+      menu.classList.toggle("mostrar");
     });
-    
-    // esconde el menu si se apreta afuera del menu
-    document.addEventListener('click', (e) => {
-        const clickeaDentro = menu.contains(e.target);
-        const clickeaBoton = btnMenu.contains(e.target);
-    
-        if (!clickeaDentro && !clickeaBoton) {
-            menu.classList.remove('mostrar');
-        }
-    });
-  const nombreUsuario = document.getElementById("nombreUsuario");
+  }
+
+  /* Esconde el menú si se hace clic fuera de él */
+  document.addEventListener("click", function (e) {
+    const clickeaDentro = menu.contains(e.target);
+    const clickeaBoton  = btnMenu.contains(e.target);
+
+    if (!clickeaDentro && !clickeaBoton) {
+      menu.classList.remove("mostrar");
+    }
+  });
+
+  /* =========================================================
+     ELEMENTOS DEL NAVBAR (ESCRITORIO)
+     ========================================================= */
+  const nombreUsuario    = document.getElementById("nombreUsuario");
   const menuCerrarSesion = document.getElementById("menuCerrarSesion");
-  const userBar = document.getElementById("userBar");
+  const userBar          = document.getElementById("userBar");
 
   const menuIniciarSesion = document.getElementById("menuIniciarSesion");
-  const menuCrearCuenta = document.getElementById("menuCrearCuenta");
-  const menuAdmin = document.getElementById("menuAdmin");
-  const menuTurnos = document.getElementById("menuTurnos");
+  const menuCrearCuenta   = document.getElementById("menuCrearCuenta");
+  const menuAdmin         = document.getElementById("menuAdmin");
+  const menuTurnos        = document.getElementById("menuTurnos");
 
-  // elementos del menú hamburguesa
+  /* =========================================================
+     ELEMENTOS DEL MENÚ HAMBURGUESA
+     ========================================================= */
+  const nombreUsuarioMobile = document.getElementById("nombreUsuarioMobile");
   const menuHamburguesaIniciarSesion = document.getElementById("menuHamburguesaIniciarSesion");
-  const menuHamburguesaCrearCuenta = document.getElementById("menuHamburguesaCrearCuenta");
-  const menuHamburguesaAdmin = document.getElementById("menuHamburguesaAdmin");
-  const menuHamburguesaTurnos = document.getElementById("menuHamburguesaTurnos");
-  const menuHamburguesaCerrarSesion = document.getElementById("menuHamburguesaCerrarSesion");
+  const menuHamburguesaCrearCuenta   = document.getElementById("menuHamburguesaCrearCuenta");
+  const menuHamburguesaAdmin         = document.getElementById("menuHamburguesaAdmin");
+  const menuHamburguesaTurnos        = document.getElementById("menuHamburguesaTurnos");
+  const menuHamburguesaCerrarSesion  = document.getElementById("menuHamburguesaCerrarSesion");
 
-  // elementos del body (main)
+  /* =========================================================
+     ELEMENTOS DEL CUERPO PRINCIPAL
+     ========================================================= */
   const botonIniciarSesion = document.getElementById("botonIniciarSesion");
-  const linkRegistrarse = document.getElementById("linkRegistrarse");
+  const linkRegistrarse    = document.getElementById("linkRegistrarse");
 
+  /* =========================================================
+     USUARIO ACTIVO (localStorage)
+     ========================================================= */
   const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
 
-  // si el usuario esta activo, pone el nombre en la barra de navegacion si existe
-  
+  /* =========================================================
+     SEGÚN ESTADO DEL USUARIO
+     ========================================================= */
   if (usuarioActivo) {
-    
-    if (nombreUsuario && userBar) {
+
+    /* --- Mostrar nombre de usuario y barra --- */
+    if (nombreUsuarioMobile) {
+       if (usuarioActivo.esAdmin === true) {
+          nombreUsuarioMobile.textContent = usuarioActivo.nombre + " (Admin)";
+     } else {
+           nombreUsuarioMobile.textContent = usuarioActivo.nombre;
+     }
+    nombreUsuarioMobile.style.display = "inline-block";
+   }
+    /* --- Mostrar nombre de usuario (escritorio) --- */
+   if (nombreUsuario) {
+    if (usuarioActivo.esAdmin === true) {
+      nombreUsuario.textContent = usuarioActivo.nombre + " (Admin)";
+    } else {
+      nombreUsuario.textContent = usuarioActivo.nombre;
+    }
+     nombreUsuario.style.display = "inline-block";
+  }
+
+    if (userBar) {
       userBar.style.display = "flex";
-
-      // si el usuario es administrador debe mostrarle en el menu la opcion administrar
-      if (usuarioActivo.esAdmin) {
-        nombreUsuario.textContent = usuarioActivo.nombre + " (Admin)";
-
-        // mostrar botón de administrar
-        if (menuAdmin) {
-          menuAdmin.style.display = "block";
-        }
-        if (menuHamburguesaAdmin) {
-          menuHamburguesaAdmin.style.display = "block";
-        }
-      } else {
-        console.log(menuAdmin);
-        nombreUsuario.textContent = usuarioActivo.nombre;
-
-        // ocultar botón de administrar
-        if (menuAdmin) {
-          menuAdmin.style.display = "none";
-        }
-        if (menuHamburguesaAdmin) {
-          menuHamburguesaAdmin.style.display = "none";
-        }
-        if (menuIniciarSesion) {
-        menuIniciarSesion.style.display = "none";
-        }
-        if (menuCrearCuenta) {
-          menuCrearCuenta.style.display = "none";
-        }
-       // muestra turnos
-        if (menuTurnos) {
-          menuTurnos.style.display = "block";
-        }
-        if (menuHamburguesaTurnos) {
-          menuHamburguesaTurnos.style.display = "block";
-        }
-        
     }
 
+    /* --- Botón Administrar (escritorio y hamburguesa) --- */
+    if (usuarioActivo.esAdmin === true) {
+      if (menuAdmin) {
+        menuAdmin.style.display = "block";
+      }
+      if (menuHamburguesaAdmin) {
+        menuHamburguesaAdmin.style.display = "block";
+      }
+    } else {
+      if (menuAdmin) {
+        menuAdmin.style.display = "none";
+      }
+      if (menuHamburguesaAdmin) {
+        menuHamburguesaAdmin.style.display = "none";
+      }
     }
 
-    // oculta las opciones de iniciar sesión y crear cuenta (escritorio y hamburguesa)
+    /* --- Ocultar Iniciar sesión / Crear cuenta (ya logueado) --- */
     if (menuIniciarSesion) {
       menuIniciarSesion.style.display = "none";
     }
@@ -102,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
       menuHamburguesaCrearCuenta.style.display = "none";
     }
 
-    // muestra cerrar sesión
+    /* --- Mostrar Cerrar sesión (escritorio y hamburguesa) --- */
     if (menuCerrarSesion) {
       menuCerrarSesion.style.display = "block";
     }
@@ -110,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
       menuHamburguesaCerrarSesion.style.display = "block";
     }
 
-    // muestra turnos
+    /* --- Mostrar Turnos (escritorio y hamburguesa) --- */
     if (menuTurnos) {
       menuTurnos.style.display = "block";
     }
@@ -118,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
       menuHamburguesaTurnos.style.display = "block";
     }
 
-    // oculta botones del cuerpo principal (inicio y registrarse)
+    /* --- Ocultar botones principales (home) --- */
     if (botonIniciarSesion) {
       botonIniciarSesion.style.display = "none";
     }
@@ -127,7 +141,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
   } else {
-    // si no hay usuario activo, muestra las opciones de iniciar sesión y crear cuenta 
+    /* =======================================================
+       USUARIO NO LOGUEADO
+       ======================================================= */
+
+    /* --- Mostrar Iniciar sesión / Crear cuenta --- */
     if (menuIniciarSesion) {
       menuIniciarSesion.style.display = "block";
     }
@@ -141,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
       menuHamburguesaCrearCuenta.style.display = "block";
     }
 
-    // oculta opciones exclusivas para usuarios logueados
+    /* --- Ocultar opciones exclusivas de usuarios logueados --- */
     if (menuAdmin) {
       menuAdmin.style.display = "none";
     }
@@ -161,11 +179,12 @@ document.addEventListener("DOMContentLoaded", function () {
       menuHamburguesaTurnos.style.display = "none";
     }
 
+    /* --- Ocultar barra de usuario --- */
     if (userBar) {
       userBar.style.display = "none";
     }
 
-    // muestra botones del cuerpo principal
+    /* --- Mostrar botones principales (home) --- */
     if (botonIniciarSesion) {
       botonIniciarSesion.style.display = "inline-block";
     }
@@ -174,7 +193,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // aca consulta si desea cerrar la sesion si es Sí borra el usuario activo y vuelve a index
+  /* =========================================================
+     EVENTOS DE CERRAR SESIÓN
+     ========================================================= */
+
+  /* Cerrar sesión desde menú de escritorio */
   if (menuCerrarSesion) {
     menuCerrarSesion.addEventListener("click", function (e) {
       e.preventDefault();
@@ -192,7 +215,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         buttonsStyling: false
       }).then(function (result) {
-        if (result.isConfirmed) {
+        if (result.isConfirmed === true) {
           localStorage.removeItem("usuarioActivo");
           window.location.href = "index.html";
         }
@@ -200,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // cerrar sesión desde menú hamburguesa
+  /* Cerrar sesión desde menú hamburguesa */
   if (menuHamburguesaCerrarSesion) {
     menuHamburguesaCerrarSesion.addEventListener("click", function (e) {
       e.preventDefault();
@@ -218,11 +241,12 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         buttonsStyling: false
       }).then(function (result) {
-        if (result.isConfirmed) {
+        if (result.isConfirmed === true) {
           localStorage.removeItem("usuarioActivo");
           window.location.href = "index.html";
         }
       });
     });
   }
+
 });

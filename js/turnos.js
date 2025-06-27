@@ -5,11 +5,39 @@ let actividadSeleccionada = actividadesCarrusel.length > 0 ? actividadesCarrusel
 let calendar;               // la vamos a inicializar después
 let carrusel, btnAtras, btnAdelante;
 
+// configuro estilos para sweetalert    
+const swalEstilo = Swal.mixin({
+  imageWidth: 200,       // ancho en píxeles
+  imageHeight: 200,      // alto en píxeles 
+  background: '#bababa',  
+  confirmButtonColor: '#6edc8c',
+  customClass: {
+    confirmButton: 'btnAceptar',    
+    cancelButton: 'btnCancelar'
+  }  
+});
+  
 
 function cargarCarrusel() {
   carrusel.innerHTML = "";
 
-  const visibles = actividadesCarrusel.slice(indiceInicio, indiceInicio + 3);
+  const total = actividadesCarrusel.length;
+  
+  if (total === 0) {
+    carrusel.innerHTML = "<p>No hay actividades disponibles.</p>";
+    return;
+  }
+  
+  const visibles = [];
+
+  //const visibles = actividadesCarrusel.slice(indiceInicio, indiceInicio + 3);
+  
+  // muestro siempre las actividades con "loop infinito" circular, xq si sumaba de 3, no mostraba ni la 1º ni la última actividad si no era múltiplo de 3
+  for (let i = 0; i < 3; i++) {
+    const index = (indiceInicio + i) % total;
+    visibles.push(actividadesCarrusel[index]);
+  }
+  
   visibles.forEach((actividad, index) => {
     const div = document.createElement("div");
     div.className = "actividad-card";
@@ -22,9 +50,7 @@ function cargarCarrusel() {
     carrusel.appendChild(div);
   });
 
-  if (visibles[1]) {
-    actividadSeleccionada = visibles[1].nombre;
-  }
+  actividadSeleccionada = visibles[1].nombre;
 
   // Mostrar u ocultar flechas
   const hayMasDeTres = actividadesCarrusel.length > 3;
@@ -34,10 +60,9 @@ function cargarCarrusel() {
 
 
 window.moverCarrusel = function(direccion) {
+  
   const total = actividadesCarrusel.length;
-  indiceInicio += direccion;
-  if (indiceInicio < 0) indiceInicio = total - 3;
-  if (indiceInicio > total - 3) indiceInicio = 0;
+  indiceInicio = (indiceInicio + direccion + total) % total;
   cargarCarrusel();
 
   // Actualizar eventos en calendario cuando cambia actividad
@@ -46,6 +71,32 @@ window.moverCarrusel = function(direccion) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  
+  /* =========================================================
+  MENÚ DESPLEGABLE HAMBURGUESA
+  ========================================================= */
+  const btnMenu = document.getElementById("btnMenu");
+  const menu    = document.getElementById("menuDesplegable");
+  
+  /* Mostrar / ocultar menú al hacer clic en el ícono */
+  if (btnMenu) {
+      btnMenu.addEventListener("click", function (e) {
+          e.preventDefault();
+          menu.classList.toggle("mostrar");
+      });
+  }
+  
+  /* Esconde el menú si se hace clic fuera de él */
+  document.addEventListener("click", function (e) {
+      const clickeaDentro = menu.contains(e.target);
+      const clickeaBoton  = btnMenu.contains(e.target);
+      
+      if (!clickeaDentro && !clickeaBoton) {
+          menu.classList.remove("mostrar");
+      }
+  });
+  
+  
   
   // Carrusel dinámico de actividades desde localStorage
   carrusel = document.getElementById("carruselActividades");
@@ -100,12 +151,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let cupoMaximo = horario.cupoMaximo ;
         const profesor = horario.profesor;
 
-        // Si cupoMaximo es NaN o null, lo busco desde la actividad
-        //if (!cupoMaximo || isNaN(cupoMaximo)){
+        // Si cupoMaximo es NaN o null, lo busco desde la actividad        
         if (cupoMaximo == null || isNaN(cupoMaximo)) {
-          /*console.log("isNaN(cupoMaximo)")
-          console.log(cupoMaximo)
-          console.log(!cupoMaximo)*/
           const actividades = JSON.parse(localStorage.getItem("actividades")) || [];
           const actividadData = actividades.find(a => a.nombre === actividad);
           cupoMaximo = actividadData && actividadData.cupoMaximo ? parseInt(actividadData.cupoMaximo) : 10;
@@ -121,26 +168,15 @@ document.addEventListener("DOMContentLoaded", () => {
           const fechaClase = new Date(fecha);
           fechaClase.setHours(hh, mm, 0, 0);
         
-
-          //const id = `recurrente-${actividad}-${fechaClase.toISOString()}`;
           const id = `recurrente-${actividad}-${profesor}-${fechaClase.toISOString()}-${horario.horario}`;
-         // console.log("ID único generado:", id);
-
+        
           const reservasActuales = reservas[id]?.cantidad || 0;
           const cuposDisponibles = Math.max(0, cupoMaximo - reservasActuales);
-/*
-          console.log("cuposDisponibles: cupoMaximo - reservasActuales")
-          console.log(cupoMaximo)
-          console.log(reservasActuales)
-          console.log(cuposDisponibles)
-*/
-
 
           const yaReservado = reservas[id]?.usuario === usuario;
           const colorEvento = yaReservado
             ? '#5cb85c'       // verde si está reservado por el usuario logueado
             : (cuposDisponibles > 0 ? '#3788d8' : '#d9534f');
-
             
           eventos.push({
             //id: `recurrente-${actividad}-${fechaClase.toISOString()}`,
@@ -190,6 +226,10 @@ document.addEventListener("DOMContentLoaded", () => {
       center: 'title',
       right: 'timeGridWeek,timeGridDay'
     },
+    // cambio el puntero del mous en aquellas celdas que tienen info, para poder reservar/cancelar
+    dayCellDidMount: function(info) {    
+      info.el.style.cursor = 'pointer';
+    },
     eventTimeFormat: false,       // para no mostrar la hora en cada cuadro
     events: getEventosFiltrados(),
       eventClick: function(info) {
@@ -207,39 +247,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, 100);
 
-
-  // Alternancia de vistas
-  let vistaLista = false;
-/*
-  function toggleVista() {
-    vistaLista = !vistaLista;
-    document.getElementById("calendar").style.display = vistaLista ? "none" : "block";
-    document.getElementById("listaTurnos").style.display = vistaLista ? "block" : "none";
-    if (vistaLista) renderListaTurnos();
-  }
-*/
-/*
-  // Renderizar tarjetas estilo app
-  function renderListaTurnos() {
-    const lista = document.getElementById("listaTurnos");
-    lista.innerHTML = "";
-    const eventos = getEventosFiltrados();
-
-    eventos.forEach(evento => {
-      const div = document.createElement("div");
-      div.className = "tarjeta-turno";
-      div.innerHTML = `
-        <h3>${evento.extendedProps.actividad}</h3>
-        <p><strong>Profesor:</strong> ${evento.extendedProps.profesor}</p>
-
-        <p><strong>Cupos:</strong> ${evento.extendedProps.cupos}</p>
-        <button ${evento.extendedProps.cupos === 0 ? "disabled" : ""} onclick="reservarTurno('${evento.id}')">Reservar</button>
-      `;
-      lista.appendChild(div);
-    });
-    
-  }*/
-
   function reservarTurno(eventoId) {
     const reservas = JSON.parse(localStorage.getItem("reservasTurnos")) || {};
     const usuario = localStorage.getItem("usuarioLogueado") || "invitado";
@@ -256,25 +263,38 @@ document.addEventListener("DOMContentLoaded", () => {
     const fecha = fechaObj.toISOString().split("T")[0]; // yyyy-mm-dd
     const hora = fechaObj.toTimeString().substring(0, 5); // HH:MM
 
-  
     // Si ya está reservado, permitir cancelar
     if (yaReservado) {
-      Swal.fire({
+      swalEstilo.fire({
         title: '¿Querés cancelar tu reserva?',
+        imageUrl: '../assets/img/pensando.png',
         html: `
-          <p><b>Actividad:</b> ${evento.extendedProps.actividad}</p>
-          <p><b>Profesor:</b> ${evento.extendedProps.profesor}</p>
-          <p><b>Fecha y hora:</b> ${fecha} ${hora}</p>
+        <p><b>Actividad:</b> ${evento.extendedProps.actividad}</p>
+        ${evento.extendedProps.profesor ? '<p><b>Profesor: </b>' + evento.extendedProps.profesor: "" }</p>        
+        <p><b>Fecha y hora:</b> ${fecha} ${hora}</p>
         `,
-        icon: 'warning',
+        //icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Cancelar reserva',
-        cancelButtonText: 'Cerrar'
+        confirmButtonText: 'Sí, cancelar',
+        cancelButtonText: 'No',
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#6edc8c',
+        customClass: {
+          cancelButton: 'btnAceptar'
+        }
       }).then(result => {
         if (result.isConfirmed) {
           delete reservas[eventoId];
           localStorage.setItem("reservasTurnos", JSON.stringify(reservas));
-          Swal.fire('Reserva cancelada', '', 'success');
+          swalEstilo.fire({
+            title: 'Reserva cancelada', 
+            text: '',             
+            icon: 'success',
+            confirmButtonColor: '#6edc8c',
+            customClass: {
+              confirmButton: 'btnAceptar'
+            } 
+          });
 
           // Actualizar calendario
           calendar.removeAllEvents();
@@ -286,24 +306,44 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Si no está reservado y no hay cupos
-    if (cuposDisponibles <= 0) {
-      Swal.fire('Sin cupos disponibles', '', 'error');
+    if (cuposDisponibles <= 0) {      
+      swalEstilo.fire({
+        title: '', 
+        text: 'Sin cupos disponibles',
+        imageUrl: '../assets/img/error.png',
+      });
+
       return;
     }
 
     // Confirmar reserva nueva
-    Swal.fire({
-       title: '¿Confirmás tu reserva?',
-    html: `
-      <p><b>Actividad:</b> ${evento.extendedProps.actividad}</p>
-      <p><b>Profesor:</b> ${evento.extendedProps.profesor}</p>
-      <p><b>Fecha y hora:</b> ${fecha} ${hora}</p>
-      <p><b>Cupos disponibles:</b> ${cuposDisponibles}</p>
-    `,
-    icon: 'question',
-    showCancelButton: true,
-    confirmButtonText: 'Reservar',
-    cancelButtonText: 'Cancelar'
+    swalEstilo.fire({
+      title: '¿Confirmás tu reserva?',
+      html: `
+        <p><b>Actividad:</b> ${evento.extendedProps.actividad}</p>      
+        ${evento.extendedProps.profesor ? '<p><b>Profesor: </b>' + evento.extendedProps.profesor: "" }</p>        
+        <p><b>Fecha y hora:</b> ${fecha} ${hora}</p>
+        <p><b>Cupos disponibles:</b> ${cuposDisponibles}</p>
+      `,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+
+      // cambio dinámicamente el color del texto del botón Cancelar; tengo que agregar el bloque didRender dentro del swalEstilo... porque es una función que se ejecuta cuando se muestra el alerta, y el mixin solo define una configuración base.
+      didRender: () => {
+      const cancelButton = Swal.getCancelButton();
+      if (cancelButton) {
+        cancelButton.style.color = '#222222';   // cambio el color de texto del botón Cancelar
+        // cambia de color la letra cuando paso el mouse (sería el hover)
+        cancelButton.addEventListener('mouseover', () => {
+          cancelButton.style.color = '#f5f5f5';
+        });
+        cancelButton.addEventListener('mouseout', () => {
+          cancelButton.style.color = '#222222';
+        });
+      }
+    }      
     }).then(result => {
       // valido si ya hay otra reserva del usuario en esa fecha y hora (aunque sea distinta actividad)
         const conflicto = Object.entries(reservas).find(([id, r]) => {
@@ -311,15 +351,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (conflicto) {
-          Swal.fire({
-            icon: 'error',
+          swalEstilo.fire({
+           // icon: 'error',
             title: 'Conflicto de horario',
+            imageUrl: '../assets/img/error.png',
             html: `
               Ya tenés una reserva para ese día y hora.<br>
               No podés reservar más de una actividad al mismo tiempo.
             `,
             confirmButtonColor: '#d33',
-            confirmButtonText: 'Cerrar'
+            confirmButtonText: 'Cerrar',
+            customClass: {
+              confirmButton: ''   // elimino la clase
+            }
           });
           return;
         }
@@ -334,7 +378,15 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         localStorage.setItem("reservasTurnos", JSON.stringify(reservas));
-        Swal.fire('¡Reserva confirmada!', '', 'success');
+        //swalEstilo.fire('¡Reserva confirmada!', '', 'success');
+
+         swalEstilo.fire({
+            title: '¡Reserva confirmada!', 
+            text: '',             
+            icon: 'success',
+            imageUrl: '../assets/img/chica_ok.png'
+          });
+        
 
         // Actualizar calendario
         calendar.removeAllEvents();
