@@ -1,55 +1,252 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const actividades = JSON.parse(localStorage.getItem("actividades")) || [];
-    const lista = document.getElementById("actividadesUl");
+document.addEventListener("DOMContentLoaded", function () {
 
-    actividades.forEach((actividad, index) => {
-        const li = document.createElement("li");
-        li.innerHTML = `
-            <strong>${actividad.nombre}</strong><br>
-            ${actividad.descripcion}<br>
-            Cupo máximo: ${actividad.cupoMaximo}
-        `;
-        lista.appendChild(li);
+  /* =========================================================
+     MENÚ DESPLEGABLE HAMBURGUESA
+     ========================================================= */
+  const btnMenu = document.getElementById("btnMenu");
+  const menu    = document.getElementById("menuDesplegable");
+
+  /* Mostrar / ocultar menú al hacer clic en el ícono */
+  if (btnMenu) {
+    btnMenu.addEventListener("click", function (e) {
+      e.preventDefault();
+      menu.classList.toggle("mostrar");
     });
-});
+  }
 
+  /* Esconde el menú si se hace clic fuera de él */
+  document.addEventListener("click", function (e) {
+    const clickeaDentro = menu.contains(e.target);
+    const clickeaBoton  = btnMenu.contains(e.target);
 
+    if (!clickeaDentro && !clickeaBoton) {
+      menu.classList.remove("mostrar");
+    }
+  });
 
-function descargarActividades() {
-    // Obtener los datos del localStorage
-    const actividadesGuardadas = localStorage.getItem("actividades");
+  /* =========================================================
+     ELEMENTOS DEL NAVBAR (ESCRITORIO)
+     ========================================================= */
+  const nombreUsuario    = document.getElementById("nombreUsuario");
+  const menuCerrarSesion = document.getElementById("menuCerrarSesion");
+  const userBar          = document.getElementById("userBar");
 
-    // Si no hay datos, mostrar mensaje
-    if (!actividadesGuardadas) {
-        alert("No hay actividades guardadas.");
-        return;
+  const menuIniciarSesion = document.getElementById("menuIniciarSesion");
+  const menuCrearCuenta   = document.getElementById("menuCrearCuenta");
+  const menuAdmin         = document.getElementById("menuAdmin");
+  const menuTurnos        = document.getElementById("menuTurnos");
+
+  /* =========================================================
+     ELEMENTOS DEL MENÚ HAMBURGUESA
+     ========================================================= */
+  const nombreUsuarioMobile = document.getElementById("nombreUsuarioMobile");
+  const menuHamburguesaIniciarSesion = document.getElementById("menuHamburguesaIniciarSesion");
+  const menuHamburguesaCrearCuenta   = document.getElementById("menuHamburguesaCrearCuenta");
+  const menuHamburguesaAdmin         = document.getElementById("menuHamburguesaAdmin");
+  const menuHamburguesaTurnos        = document.getElementById("menuHamburguesaTurnos");
+  const menuHamburguesaCerrarSesion  = document.getElementById("menuHamburguesaCerrarSesion");
+
+  /* =========================================================
+     ELEMENTOS DEL CUERPO PRINCIPAL
+     ========================================================= */
+  const botonIniciarSesion = document.getElementById("botonIniciarSesion");
+  const linkRegistrarse    = document.getElementById("linkRegistrarse");
+
+  /* =========================================================
+     USUARIO ACTIVO (localStorage)
+     ========================================================= */
+  const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+
+  /* =========================================================
+     SEGÚN ESTADO DEL USUARIO
+     ========================================================= */
+  if (usuarioActivo) {
+
+    /* --- Mostrar nombre de usuario y barra --- */
+    if (nombreUsuarioMobile) {
+       if (usuarioActivo.esAdmin === true) {
+          nombreUsuarioMobile.textContent = usuarioActivo.nombre + " (Admin)";
+     } else {
+           nombreUsuarioMobile.textContent = usuarioActivo.nombre;
+     }
+    nombreUsuarioMobile.style.display = "inline-block";
+   }
+    /* --- Mostrar nombre de usuario (escritorio) --- */
+   if (nombreUsuario) {
+    if (usuarioActivo.esAdmin === true) {
+      nombreUsuario.textContent = usuarioActivo.nombre + " (Admin)";
+    } else {
+      nombreUsuario.textContent = usuarioActivo.nombre;
+    }
+     nombreUsuario.style.display = "inline-block";
+  }
+
+    if (userBar) {
+      userBar.style.display = "flex";
     }
 
-    // Crear un Blob con los datos
-    const blob = new Blob([actividadesGuardadas], { type: "application/json" });
+    /* --- Botón Administrar (escritorio y hamburguesa) --- */
+    if (usuarioActivo.esAdmin === true) {
+      if (menuAdmin) {
+        menuAdmin.style.display = "block";
+      }
+      if (menuHamburguesaAdmin) {
+        menuHamburguesaAdmin.style.display = "block";
+      }
+    } else {
+      if (menuAdmin) {
+        menuAdmin.style.display = "none";
+      }
+      if (menuHamburguesaAdmin) {
+        menuHamburguesaAdmin.style.display = "none";
+      }
+    }
 
-    // Crear un enlace temporal
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "actividades.json"; // nombre del archivo
+    /* --- Ocultar Iniciar sesión / Crear cuenta (ya logueado) --- */
+    if (menuIniciarSesion) {
+      menuIniciarSesion.style.display = "none";
+    }
+    if (menuCrearCuenta) {
+      menuCrearCuenta.style.display = "none";
+    }
+    if (menuHamburguesaIniciarSesion) {
+      menuHamburguesaIniciarSesion.style.display = "none";
+    }
+    if (menuHamburguesaCrearCuenta) {
+      menuHamburguesaCrearCuenta.style.display = "none";
+    }
 
-    // Forzar la descarga
-    document.body.appendChild(link);
-    link.click();
+    /* --- Mostrar Cerrar sesión (escritorio y hamburguesa) --- */
+    if (menuCerrarSesion) {
+      menuCerrarSesion.style.display = "block";
+    }
+    if (menuHamburguesaCerrarSesion) {
+      menuHamburguesaCerrarSesion.style.display = "block";
+    }
 
-    // Limpiar
-    document.body.removeChild(link);
-    URL.revokeObjectURL(link.href);
-}
+    /* --- Mostrar Turnos (escritorio y hamburguesa) --- */
+    if (menuTurnos) {
+      menuTurnos.style.display = "block";
+    }
+    if (menuHamburguesaTurnos) {
+      menuHamburguesaTurnos.style.display = "block";
+    }
 
-/* en HTML agregar un botón para descargar las actividades */
-// <button onclick="descargarActividades()">Descargar Actividades</button>
+    /* --- Ocultar botones principales (home) --- */
+    if (botonIniciarSesion) {
+      botonIniciarSesion.style.display = "none";
+    }
+    if (linkRegistrarse) {
+      linkRegistrarse.style.display = "none";
+    }
 
-/*
-¿Qué hace esto?
-Toma el contenido del localStorage bajo la clave "actividades".
+  } else {
+    /* =======================================================
+       USUARIO NO LOGUEADO
+       ======================================================= */
 
-Lo convierte en un archivo .json.
+    /* --- Mostrar Iniciar sesión / Crear cuenta --- */
+    if (menuIniciarSesion) {
+      menuIniciarSesion.style.display = "block";
+    }
+    if (menuCrearCuenta) {
+      menuCrearCuenta.style.display = "block";
+    }
+    if (menuHamburguesaIniciarSesion) {
+      menuHamburguesaIniciarSesion.style.display = "block";
+    }
+    if (menuHamburguesaCrearCuenta) {
+      menuHamburguesaCrearCuenta.style.display = "block";
+    }
 
-Lo descarga automáticamente como actividades.json.
-*/
+    /* --- Ocultar opciones exclusivas de usuarios logueados --- */
+    if (menuAdmin) {
+      menuAdmin.style.display = "none";
+    }
+    if (menuHamburguesaAdmin) {
+      menuHamburguesaAdmin.style.display = "none";
+    }
+    if (menuCerrarSesion) {
+      menuCerrarSesion.style.display = "none";
+    }
+    if (menuHamburguesaCerrarSesion) {
+      menuHamburguesaCerrarSesion.style.display = "none";
+    }
+    if (menuTurnos) {
+      menuTurnos.style.display = "none";
+    }
+    if (menuHamburguesaTurnos) {
+      menuHamburguesaTurnos.style.display = "none";
+    }
+
+    /* --- Ocultar barra de usuario --- */
+    if (userBar) {
+      userBar.style.display = "none";
+    }
+
+    /* --- Mostrar botones principales (home) --- */
+    if (botonIniciarSesion) {
+      botonIniciarSesion.style.display = "inline-block";
+    }
+    if (linkRegistrarse) {
+      linkRegistrarse.style.display = "inline-block";
+    }
+  }
+
+  /* =========================================================
+     EVENTOS DE CERRAR SESIÓN
+     ========================================================= */
+
+  /* Cerrar sesión desde menú de escritorio */
+  if (menuCerrarSesion) {
+    menuCerrarSesion.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      Swal.fire({
+        title: "¿Cerrar sesión?",
+        text: "¿Querés salir de tu cuenta?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, salir",
+        cancelButtonText: "Cancelar",
+        customClass: {
+          confirmButton: "btnAceptar",
+          cancelButton: "btnCancelar"
+        },
+        buttonsStyling: false
+      }).then(function (result) {
+        if (result.isConfirmed === true) {
+          localStorage.removeItem("usuarioActivo");
+          window.location.href = "index.html";
+        }
+      });
+    });
+  }
+
+  /* Cerrar sesión desde menú hamburguesa */
+  if (menuHamburguesaCerrarSesion) {
+    menuHamburguesaCerrarSesion.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      Swal.fire({
+        title: "¿Cerrar sesión?",
+        text: "¿Querés salir de tu cuenta?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, salir",
+        cancelButtonText: "Cancelar",
+        customClass: {
+          confirmButton: "btnAceptar",
+          cancelButton: "btnCancelar"
+        },
+        buttonsStyling: false
+      }).then(function (result) {
+        if (result.isConfirmed === true) {
+          localStorage.removeItem("usuarioActivo");
+          window.location.href = "index.html";
+        }
+      });
+    });
+  }
+
+});

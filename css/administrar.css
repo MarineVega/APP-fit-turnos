@@ -50,38 +50,111 @@ body {
 }
 
 /* Header / navegación */
-header nav {
-  top: 0;
-  width: 100%;
-  padding: 16px;
+header {
+  nav {        
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    width: 100%;    
+    background: var(--color-primario);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    position: fixed;
+    z-index: 5;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    margin-left: 20px;
+    margin-right: 30px;
+  }
+
+  a {
+    text-decoration: none;
+    display: flex;
+    font-size: 1.3rem;
+    color: var(--color-contraste-claro);
+  }
+
+  .logo img {
+    width: 50px;
+  }
+
+  .icon img {
+    height: 20px;    
+    margin-left: 10px;
+  }
+      
+  span {
+    font-size: 0.7rem;
+    padding-top: 10px;
+  }
+}
+
+/* menu desplegable hamburguesa */
+.menu-desplegable {
+  position: fixed;
+  top: 80px;
+  left: 0;
   background: var(--color-primario);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 33px;
-}
-
-header nav a {
-  text-decoration: none;
-  font-size: 1.5rem;
-  color: var(--color-cuarto);
-  font-weight: bold;
-}
-
-header nav .logo {
+  width: 245px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  gap: 22px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+  border-radius: 0 0 10px 10px;
+  transform: translateY(-20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s ease-in-out;
+  z-index: 4;
 }
 
-header nav .logo img {
-  width: 50px;
+.menu-desplegable a {
+  color: var(--color-contraste-claro);
+  font-size: 1rem;
+  text-decoration: none;
 }
 
-header nav .logo span {
-  font-size: 0.7rem;
-  padding-top: 10px;
+.menu-desplegable span {
+  font-size: 0.8rem;
+  color: var(--color-fondo);
+}
+
+.menu-desplegable.mostrar {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: var(--color-primario);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links {
+  display: none; /* escondido por defecto (mobile) */
+}
+
+.desktop-only {
+  display: none; /* escondido en mobile */
 }
 
 .tituloConFlecha {    
@@ -214,22 +287,16 @@ header nav .logo span {
   cursor: pointer;
 }
 
-/* footer */ 
-
+/* footer */
 .footer {
   background-color: var(--color-primario);
   color: var(--color-cuarto);
-  padding: 20px 10px;
+  padding: 8px 10px;
   width: 100%;
-  /*position: fixed;*/
   text-align: center;
   font-size: 0.9rem;
   bottom: 0;
-  left: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center; 
-
+  left: 0;  
 }
 
 .footer-content {
@@ -241,6 +308,10 @@ header nav .logo span {
 
 .footer-logo img {
   height: 45px;
+}
+
+.oculto {
+  display: none;
 }
 
 /* Media Queruy para distintas pantallas 
