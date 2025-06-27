@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
   /* =========================================================
      ELEMENTOS DEL MENÚ HAMBURGUESA
      ========================================================= */
+  const nombreUsuarioMobile = document.getElementById("nombreUsuarioMobile");
   const menuHamburguesaIniciarSesion = document.getElementById("menuHamburguesaIniciarSesion");
   const menuHamburguesaCrearCuenta   = document.getElementById("menuHamburguesaCrearCuenta");
   const menuHamburguesaAdmin         = document.getElementById("menuHamburguesaAdmin");
@@ -62,13 +63,23 @@ document.addEventListener("DOMContentLoaded", function () {
   if (usuarioActivo) {
 
     /* --- Mostrar nombre de usuario y barra --- */
-    if (nombreUsuario) {
-      if (usuarioActivo.esAdmin === true) {
-        nombreUsuario.textContent = usuarioActivo.nombre + " (Admin)";
-      } else {
-        nombreUsuario.textContent = usuarioActivo.nombre;
-      }
+    if (nombreUsuarioMobile) {
+       if (usuarioActivo.esAdmin === true) {
+          nombreUsuarioMobile.textContent = usuarioActivo.nombre + " (Admin)";
+     } else {
+           nombreUsuarioMobile.textContent = usuarioActivo.nombre;
+     }
+    nombreUsuarioMobile.style.display = "inline-block";
+   }
+    /* --- Mostrar nombre de usuario (escritorio) --- */
+   if (nombreUsuario) {
+    if (usuarioActivo.esAdmin === true) {
+      nombreUsuario.textContent = usuarioActivo.nombre + " (Admin)";
+    } else {
+      nombreUsuario.textContent = usuarioActivo.nombre;
     }
+     nombreUsuario.style.display = "inline-block";
+  }
 
     if (userBar) {
       userBar.style.display = "flex";
