@@ -1,30 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
-    /* =========================================================
-    MENÚ DESPLEGABLE HAMBURGUESA
-    ========================================================= */
-    const btnMenu = document.getElementById("btnMenu");
-    const menu    = document.getElementById("menuDesplegable");
-    
-    /* Mostrar / ocultar menú al hacer clic en el ícono */
-    if (btnMenu) {
-        btnMenu.addEventListener("click", function (e) {
-            e.preventDefault();
-            menu.classList.toggle("mostrar");
-        });
-    }
-    
-    /* Esconde el menú si se hace clic fuera de él */
-    document.addEventListener("click", function (e) {
-        const clickeaDentro = menu.contains(e.target);
-        const clickeaBoton  = btnMenu.contains(e.target);
-        
-        if (!clickeaDentro && !clickeaBoton) {
-            menu.classList.remove("mostrar");
-        }
-    });
-    
-    
     // configuro estilos para sweetalert
     const swalEstilo = Swal.mixin({
         imageWidth: 200,       // ancho en píxeles

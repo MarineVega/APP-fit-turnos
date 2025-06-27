@@ -71,33 +71,6 @@ window.moverCarrusel = function(direccion) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  
-  /* =========================================================
-  MENÚ DESPLEGABLE HAMBURGUESA
-  ========================================================= */
-  const btnMenu = document.getElementById("btnMenu");
-  const menu    = document.getElementById("menuDesplegable");
-  
-  /* Mostrar / ocultar menú al hacer clic en el ícono */
-  if (btnMenu) {
-      btnMenu.addEventListener("click", function (e) {
-          e.preventDefault();
-          menu.classList.toggle("mostrar");
-      });
-  }
-  
-  /* Esconde el menú si se hace clic fuera de él */
-  document.addEventListener("click", function (e) {
-      const clickeaDentro = menu.contains(e.target);
-      const clickeaBoton  = btnMenu.contains(e.target);
-      
-      if (!clickeaDentro && !clickeaBoton) {
-          menu.classList.remove("mostrar");
-      }
-  });
-  
-  
-  
   // Carrusel dinámico de actividades desde localStorage
   carrusel = document.getElementById("carruselActividades");
   btnAtras = document.getElementById("flechaAtras");
@@ -120,8 +93,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function getEventosFiltrados() {
     const actFilter = actividadSeleccionada;
     let eventos = [];
-
-    const usuario = localStorage.getItem("usuarioLogueado") || "invitado";
+    
+    const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
 
     const diasSemana = {
       domingo: 0,
@@ -173,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const reservasActuales = reservas[id]?.cantidad || 0;
           const cuposDisponibles = Math.max(0, cupoMaximo - reservasActuales);
 
-          const yaReservado = reservas[id]?.usuario === usuario;
+          const yaReservado = reservas[id]?.usuario === usuario.nombre;
           const colorEvento = yaReservado
             ? '#5cb85c'       // verde si está reservado por el usuario logueado
             : (cuposDisponibles > 0 ? '#3788d8' : '#d9534f');
@@ -249,7 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function reservarTurno(eventoId) {
     const reservas = JSON.parse(localStorage.getItem("reservasTurnos")) || {};
-    const usuario = localStorage.getItem("usuarioLogueado") || "invitado";
+    const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
 
     // Buscar evento entre los generados por getEventosFiltrados
     const evento = getEventosFiltrados().find(e => e.id === eventoId);
@@ -257,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const cuposDisponibles = evento.extendedProps.cupos;
     const reserva = reservas[eventoId];
-    const yaReservado = reserva && reserva.usuario === usuario;
+    const yaReservado = reserva && reserva.usuario === usuario.nombre;
 
     const fechaObj = new Date(evento.start);
     const fecha = fechaObj.toISOString().split("T")[0]; // yyyy-mm-dd
@@ -347,7 +320,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }).then(result => {
       // valido si ya hay otra reserva del usuario en esa fecha y hora (aunque sea distinta actividad)
         const conflicto = Object.entries(reservas).find(([id, r]) => {
-          return r.usuario === usuario && r.fecha === fecha && r.hora === hora && id !== eventoId;
+          return r.usuario === usuario.nombre && r.fecha === fecha && r.hora === hora && id !== eventoId;
         });
 
         if (conflicto) {
@@ -371,7 +344,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (result.isConfirmed) {
         reservas[eventoId] = {
           actividad: evento.extendedProps.actividad,
-          usuario: usuario,
+          usuario: usuario.nombre,
           fecha: fecha,
           hora: hora,
           cantidad: 1
@@ -385,8 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {
             text: '',             
             icon: 'success',
             imageUrl: '../assets/img/chica_ok.png'
-          });
-        
+          });        
 
         // Actualizar calendario
         calendar.removeAllEvents();
