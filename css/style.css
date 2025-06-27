@@ -169,6 +169,34 @@ body {
 #menuHamburguesaAdmin {
   display: none;
 }
+/* Estilos de video lateral -------------------------------*/
+.video-lateral {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 100vh;        /* altura total de pantalla */
+  width: 320px;         /* ancho deseado */
+  object-fit: cover;    /* recorta en lugar de deformar */
+  z-index: -1;
+  pointer-events: none;
+}
+
+.izquierda {
+  left: 0;
+}
+
+.derecha {
+  right: 0;
+}
+
+/* Opcional: esconder en pantallas chicas */
+@media (max-width: 768px) {
+  .video-lateral {
+    display: none;
+  }
+}
+
+/*____________________________________________________________*/
 
 /* Estilos de index.html, actividad.html, horario.html */
 .mainPrincipal, .mainActividad, .mainHorario, .mainTurno {
