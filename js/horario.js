@@ -1,4 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
+    
+     /* =========================================================
+    MENÚ DESPLEGABLE HAMBURGUESA
+    ========================================================= */
+    const btnMenu = document.getElementById("btnMenu");
+    const menu    = document.getElementById("menuDesplegable");
+    
+    /* Mostrar / ocultar menú al hacer clic en el ícono */
+    if (btnMenu) {
+        btnMenu.addEventListener("click", function (e) {
+            e.preventDefault();
+            menu.classList.toggle("mostrar");
+        });
+    }
+    
+    /* Esconde el menú si se hace clic fuera de él */
+    document.addEventListener("click", function (e) {
+        const clickeaDentro = menu.contains(e.target);
+        const clickeaBoton  = btnMenu.contains(e.target);
+        
+        if (!clickeaDentro && !clickeaBoton) {
+            menu.classList.remove("mostrar");
+        }
+    });
+    
+    
+    // configuro estilos para sweetalert
+    const swalEstilo = Swal.mixin({
+        imageWidth: 200,       // ancho en píxeles
+        imageHeight: 200,      // alto en píxeles 
+        background: '#bababa',
+        confirmButtonColor: '#6edc8c',
+        customClass: {
+            confirmButton: 'btnAceptar',
+            cancelButton: 'btnCancelar'
+        }
+    });
 
     // Obtengo actividades del localStorage, para mostrar en el combo
     const actividades = JSON.parse(localStorage.getItem("actividades")) || [];
@@ -194,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function eliminarHorario(index) {
-        Swal.fire({
+        swalEstilo.fire({
             title: '¿Estás seguro?',
             text: "Esta acción eliminará el horario permanentemente.",
             icon: 'warning',
@@ -213,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 localStorage.setItem("horarios", JSON.stringify(horarios));
                 mostrarListadoHorarios("eliminar");
 
-                Swal.fire({
+                swalEstilo.fire({
                     title: 'Eliminada',
                     text: 'El horario ha sido eliminado.',
                     icon:'success',
@@ -327,12 +364,13 @@ document.addEventListener("DOMContentLoaded", () => {
             );
              
             if (yaExiste) {
-                Swal.fire({
+                swalEstilo.fire({
                     icon: 'error',
                     title: 'Horario duplicado',
                     text: 'Ya existe un horario con la misma actividad, profesor y hora.',
                     confirmButtonColor: '#d33',
-                    confirmButtonText: 'Cerrar'
+                    confirmButtonText: 'Cerrar',
+                    customClass: ''
                 });
                 return;
             }
@@ -354,11 +392,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 ? 'El horario ha sido actualizado.'
                 : 'El horario ha sido creado.';
 
-            Swal.fire({
+            swalEstilo.fire({
                 title: '¡Operación Exitosa!',
                 text: textoSwal,             //'El horario ha sido creado.',
-                imageUrl: '../assets/img/exito.png', 
-                imageHeight: 100,
+                imageUrl: '../assets/img/exito.png',                 
                 imageAlt: 'Éxito',
                 icon: 'success',
                 confirmButtonText: 'Volver',
@@ -421,7 +458,7 @@ function exportarLocalStorage() {
 
 // Importar un archivo JSON a localStorage
 function importarLocalStorage() {
-    Swal.fire({
+    swalEstilo.fire({
         title: 'Importar horarios',
         html: `
             <input type="file" id="inputArchivoImportar" accept=".json" class="swal2-file">
