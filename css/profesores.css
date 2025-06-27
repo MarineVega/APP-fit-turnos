@@ -321,6 +321,34 @@ button {
   }
 }
 
+/* Imágenes visibles solo en la versión de escritorio */
+
+.imagen-lateral {
+  display: none;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 35vh; 
+  max-height: 500px;
+  z-index: 10;
+}
+
+@media (min-width: 1500px) {
+  .imagen-lateral {
+    display: block;
+  }
+
+  .imagen-lateral.izquierda {
+    left: 4%;
+    background-color:#9ebff5;
+    border-radius: 200px;
+  }
+
+  .imagen-lateral.derecha {
+    right: 6%;
+  }
+}
+
 /* Estilos para SweetAlert */
 
 .swal2-html-container .swal2-file,
@@ -476,30 +504,3 @@ main {
   }
 }
 
-/* Imágenes visibles solo en la versión de escritorio */
-
-.imagen-lateral {
-  display: none;
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 35vh; 
-  max-height: 500px;
-  z-index: 10;
-}
-
-@media (min-width: 1500px) {
-  .imagen-lateral {
-    display: block;
-  }
-
-  .imagen-lateral.izquierda {
-    left: 4%;
-    background-color:#9ebff5;
-    border-radius: 200px;
-  }
-
-  .imagen-lateral.derecha {
-    right: 6%;
-  }
-}
