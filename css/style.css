@@ -164,6 +164,40 @@ body {
   color: var(--color-terciario);
 }
 
+/* Oculta por defecto los enlaces de admin */
+#menuAdmin,
+#menuHamburguesaAdmin {
+  display: none;
+}
+
+/* Estilos de video lateral -------------------------------*/
+.video-lateral {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 100vh;        /* altura total de pantalla */
+  width: 320px;         /* ancho deseado */
+  object-fit: cover;    /* recorta en lugar de deformar */
+  z-index: -1;
+  pointer-events: none;
+}
+
+.izquierda {
+  left: 0;
+}
+
+.derecha {
+  right: 0;
+}
+
+/* Opcional: esconder en pantallas chicas */
+@media (max-width: 768px) {
+  .video-lateral {
+    display: none;
+  }
+}
+
+/*____________________________________________________________*/
 
 
 /* Estilos de index.html, actividad.html, horario.html */
@@ -800,8 +834,40 @@ h2#fc-dom-1 {
   text-transform: none !important;
 }
 
-
 /* * * * * * * * * * * * * * * * * * * * * * * * */
+
+/* para que el ícono ✔ se vea más*/
+.swal2-icon.swal2-success {
+  border-color: #28a745 !important; /* borde círculo */
+  color: #28a745 !important;        /* símbolo */
+}
+
+.swal2-icon.swal2-success [class^='swal2-success-line'] {
+  background-color: #28a745 !important;   /*líneas del check */
+}
+
+.swal2-icon.swal2-success .swal2-success-ring {
+  border: 4px solid #28a745 !important;   /*círculo externo */
+}
+
+
+/* para que el ícono error se vea más*/
+.swal2-icon.swal2-error {
+  border-color: #a72828 !important; /* borde círculo */
+  color: #a72828 !important;        /* símbolo */
+}
+
+/* para que el ícono warning se vea más*/
+.swal2-icon.swal2-warning {
+  border-color: #d17f03 !important; /* borde círculo */
+  color: #d17f03 !important;        /* símbolo */
+}
+
+/* para que el ícono question se vea más*/
+.swal2-icon.swal2-question {
+  border-color: #045a79 !important; /* borde círculo */
+  color: #045a79 !important;        /* símbolo */
+}
 
 
 /* Media Queruy para distintas pantallas 
@@ -856,7 +922,8 @@ h2#fc-dom-1 {
   }
 
   .mainActividad .tituloConFlecha,
-  .mainHorario .tituloConFlecha {
+  .mainHorario .tituloConFlecha,
+  .mainTurno .tituloConFlecha {
     font-size: 1.1rem;
     padding: 2% 5%;
   }
@@ -964,7 +1031,8 @@ h2#fc-dom-1 {
   }
   
   .mainActividad .tituloConFlecha,
-  .mainHorario .tituloConFlecha {
+  .mainHorario .tituloConFlecha,
+  .mainTurno .tituloConFlecha {
     font-size: 1.5rem;
   }
 

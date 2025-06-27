@@ -46,6 +46,9 @@
             <div class="nav-right">
                 <!-- Menú visible solo en escritorio -->
                 <div class="nav-links desktop-only">
+
+                    <a href="#" id="nombreUsuario" style="display: none;"></a> 
+
                     <a href="./pages/cuenta.html" id="menuIniciarSesion">Iniciar Sesión</a>
                     <a href="./pages/cuenta.html?form=crear" id="menuCrearCuenta">Crear Cuenta</a>
                        
@@ -65,8 +68,9 @@
         
         <!-- Menú desplegable mobile -->
         <div class="menu-desplegable" id="menuDesplegable">
-            
-            
+
+           <a href="#" id="nombreUsuarioMobile" style="display: none;"></a>
+
             <a href="./pages/cuenta.html" id="menuHamburguesaIniciarSesion">Iniciar Sesión</a>
             <a href="./pages/cuenta.html?form=crear" id="menuHamburguesaCrearCuenta">Crear Cuenta</a>
         
@@ -103,7 +107,18 @@
         <a id="linkRegistrarse" href="./pages/cuenta.html?form=crear" class="btnAceptar">REGISTRARSE</a>        
 
         <img class="logoMedusa" src="./assets/img/Logo Medusa.jpg" alt="Logo Medusa Soft">
-        
+ 
+        <!-- Video izquierdo -->
+       <video class="video-lateral izquierda" autoplay muted loop playsinline>
+        <source src="../APP-fit-turnos/assets/video/izquierda.mp4" type="video/mp4">       
+       </video>
+
+       <!-- Video derecho -->
+       <video class="video-lateral derecha" autoplay muted loop playsinline>
+        <source src="../APP-fit-turnos/assets/video/derecha.mp4" type="video/mp4">    
+       </video>
+
+
     </main>
     
     <footer class="footer">
@@ -112,9 +127,8 @@
             <p>© 2025 FIT Turnos. Todos los derechos reservados.</p>
         </div>
     </footer>
-
+    <!-- Para que maneje la logica del usuario segun tipo y estado tiene que estar en todas las paginas-->
     <script src="./js/index.js"></script>
-   
 
 </body>
 </html>

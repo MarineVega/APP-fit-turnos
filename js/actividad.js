@@ -1,25 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
-
-    /* menu desplegable hamburguesa */
-    const btnMenu = document.getElementById('btnMenu');
-    const menu = document.getElementById('menuDesplegable');
-
-    // mostrar o esconder menu al apretar en el icono
-    btnMenu.addEventListener('click', (e) => {
-        e.preventDefault();
-        menu.classList.toggle('mostrar');
-    });
-
-    // esconde el menu si se apreta afuera del menu
-    document.addEventListener('click', (e) => {
+    
+    /* =========================================================
+    MENÚ DESPLEGABLE HAMBURGUESA
+    ========================================================= */
+    const btnMenu = document.getElementById("btnMenu");
+    const menu    = document.getElementById("menuDesplegable");
+    
+    /* Mostrar / ocultar menú al hacer clic en el ícono */
+    if (btnMenu) {
+        btnMenu.addEventListener("click", function (e) {
+            e.preventDefault();
+            menu.classList.toggle("mostrar");
+        });
+    }
+    
+    /* Esconde el menú si se hace clic fuera de él */
+    document.addEventListener("click", function (e) {
         const clickeaDentro = menu.contains(e.target);
-        const clickeaBoton = btnMenu.contains(e.target);
-
+        const clickeaBoton  = btnMenu.contains(e.target);
+        
         if (!clickeaDentro && !clickeaBoton) {
-            menu.classList.remove('mostrar');
+            menu.classList.remove("mostrar");
         }
     });
-
+    
+    
+    // configuro estilos para sweetalert
+    const swalEstilo = Swal.mixin({
+        imageWidth: 200,       // ancho en píxeles
+        imageHeight: 200,      // alto en píxeles 
+        background: '#bababa',
+        confirmButtonColor: '#6edc8c',
+        customClass: {
+            confirmButton: 'btnAceptar',
+            cancelButton: 'btnCancelar'
+        }
+    });
     
 
     // Obtengo el modo por medio del parámetro que recibe
@@ -72,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
     function eliminarActividad(index) {
-        Swal.fire({
+        swalEstilo.fire({
             title: '¿Estás seguro?',
             text: "Esta acción eliminará la actividad permanentemente.",
             icon: 'warning',
@@ -91,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 localStorage.setItem("actividades", JSON.stringify(actividades));
                 mostrarListadoActividades("eliminar");
 
-                Swal.fire({
+                swalEstilo.fire({
                     title: 'Eliminada',
                     text: 'La actividad ha sido eliminada.',
                     icon:'success',
@@ -242,11 +258,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 ? 'La actividad ha sido actualizada.'
                 : 'La actividad ha sido creada.';
 
-            Swal.fire({
+            swalEstilo.fire({
                 title: '¡Operación Exitosa!',
                 text: textoSwal,            //'La actividad ha sido creada.',
-                imageUrl: '../assets/img/exito.png', 
-                imageHeight: 100,
+                imageUrl: '../assets/img/exito.png',                 
                 imageAlt: 'Éxito',
                 icon: 'success',
                 confirmButtonText: 'Volver',

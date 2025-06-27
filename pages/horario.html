@@ -17,11 +17,62 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
 
     <header class="header">
-        <nav>
-            <a href="../index.html" class="logo">
-                <img src="../assets/img/Logo_Fit_Home.png" alt="Icono FIT Turnos" loading="lazy">                
-            </a>    
+        <nav class="navbar">
+            <!-- Zona izquierda -->
+            <div class="nav-left">
+
+                <!-- Logo -->
+                <a href="../index.html" class="logo">
+                    <img src="../assets/img/Logo_Fit_Home.png" alt="Logo" loading="lazy">
+                </a>
+                  <!-- icono hamburguesa SOLO en mobile -->
+                <a href="#" class="icon" id="btnMenu">
+                    <img src="../assets/img/menu.png" alt="Menú" loading="lazy">
+                </a>
+
+                <!-- menu visible solo en escritorio -->
+                <div class="nav-links desktop-only">
+                    <a href="../pages/turnos.html" id="menuTurnos">Turnos</a>
+                    <a href="../pages/administrar.html" id="menuAdmin">Administrar</a>
+                </div>
+
+            </div>
+
+            <!-- Zona derecha -->
+            <div class="nav-right">
+                <!-- Menú visible solo en escritorio -->
+                <div class="nav-links desktop-only">                    
+                    <a href="#" id="nombreUsuario" style="display: none;"></a>
+                    <a href="../pages/cuenta.html" id="menuIniciarSesion">Iniciar Sesión</a>
+                    <a href="../pages/cuenta.html?form=crear" id="menuCrearCuenta">Crear Cuenta</a>
+                       
+                    <a href="#" id="menuCerrarSesion">Cerrar Sesión</a> 
+                </div>
+
+                <!-- iconos -->
+                <a href="#" class="icon">
+                    <img src="../assets/img/buscar.png" alt="Buscar" loading="lazy">
+                </a>
+                <a href="#" class="icon">
+                    <img src="../assets/img/notif.png" alt="Notificaciones" loading="lazy">
+                </a>
+            </div>
+
         </nav>
+        
+        <!-- Menú desplegable mobile -->
+        <div class="menu-desplegable" id="menuDesplegable">
+
+            <a href="#" id="nombreUsuarioMobile" style="display: none;"></a>
+            
+            <a href="../pages/cuenta.html" id="menuHamburguesaIniciarSesion">Iniciar Sesión</a>
+            <a href="../pages/cuenta.html?form=crear" id="menuHamburguesaCrearCuenta">Crear Cuenta</a>
+        
+            <a href="../pages/administrar.html" id="menuHamburguesaAdmin">Administrar</a>        
+            <a href="../pages/turnos.html" id="menuHamburguesaTurnos">Turnos</a>
+            
+            <a href="#" id="menuHamburguesaCerrarSesion">Cerrar Sesión</a> 
+        </div> 
     </header>
 
     <main class="mainHorario">
@@ -44,15 +95,7 @@
                     <label for="profesor">Profesor *</label>
                     <select id="profesor" class="inputHorario">
                       <option value="" disabled selected>(Todos)</option>
-                    </select>   
-                    
-                    <!-- <select name="profesores" id="profesor" class="inputHorario">
-                        <option value="">(Todos)</option>   
-                        <option value="ana">Ana</option>
-                        <option value="marcos">Marcos</option>
-                        <option value="paola">Paola</option>
-                        <option value="sergio">Sergio</option>
-                    </select>                     -->
+                    </select> 
                 </div>
                 
                 <div>
@@ -125,8 +168,8 @@
             </form>
            
             <div class="contenedorBotones">
-                <button id="cancelar" class="btnCancelar">CANCELAR</button>
                 <button id="agregar" class="btnAceptar">AGREGAR</button>
+                <button id="cancelar" class="btnCancelar">CANCELAR</button>
             </div>
         </section>
 
@@ -149,9 +192,16 @@
 
     <script src="../js/horario.js"></script>
 
-    <footer>
+    <div class="btnsImportarExportar">
         <button id="exportarLocalStorage" onclick="exportarLocalStorage()">Exportar Horarios</button>
         <button id="importarLocalStorage" onclick="importarLocalStorage()">Importar Horarios</button>        
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>FIT Turnos</p>
+            <p>© 2025 FIT Turnos. Todos los derechos reservados.</p>
+        </div>
     </footer>
 
 </body>
