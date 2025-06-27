@@ -8,19 +8,57 @@
 </head>
 <body>
 
-  <!-- agregue sweetalert para usar imágenes e iconos -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
 
   <header class="header">
-    <nav>
-      <a href="../index.html" class="logo">
-        <img src="../assets/img/Logo_Fit_Home.png" alt="Logo FIT Turnos" loading="lazy" />
-        
-      </a>
+    <nav class="navbar">
+      <!-- Zona izquierda -->
+      <div class="nav-left">
+        <a href="#" class="logo">
+          <img src="../assets/img/Logo_Fit_Home.png" alt="Logo" loading="lazy">
+        </a>
+        <!-- icono hamburguesa SOLO en mobile -->
+        <a href="#" class="icon" id="btnMenu">
+          <img src="../assets/img/menu.png" alt="Menú" loading="lazy">
+        </a>
+        <!-- menu visible solo en escritorio -->
+        <div class="nav-links desktop-only">
+          <a href="./turnos.html" id="menuTurnos">Turnos</a>
+          <a href="./administrar.html" id="menuAdmin">Administrar</a>
+        </div>
+      </div>
+
+      <!-- Zona derecha -->
+      <div class="nav-right">
+        <!-- Menú visible solo en escritorio -->
+        <div class="nav-links desktop-only">
+          <a href="./cuenta.html" id="menuIniciarSesion">Iniciar Sesión</a>
+          <a href="./cuenta.html?form=crear" id="menuCrearCuenta">Crear Cuenta</a>
+          <a href="#" id="menuCerrarSesion">Cerrar Sesión</a> 
+        </div>
+
+        <!-- iconos -->
+        <a href="#" class="icon">
+          <img src="../assets/img/buscar.png" alt="Buscar" loading="lazy">
+        </a>
+        <a href="#" class="icon">
+          <img src="../assets/img/notif.png" alt="Notificaciones" loading="lazy">
+        </a>
+      </div>
     </nav>
+
+    <!-- Menú desplegable mobile -->
+    <div class="menu-desplegable" id="menuDesplegable">
+      <a href="./cuenta.html" id="menuHamburguesaIniciarSesion">Iniciar Sesión</a>
+      <a href="./cuenta.html?form=crear" id="menuHamburguesaCrearCuenta">Crear Cuenta</a>
+      <a href="./administrar.html" id="menuHamburguesaAdmin">Administrar</a>        
+      <a href="./turnos.html" id="menuHamburguesaTurnos">Turnos</a>
+      <a href="#" id="menuHamburguesaCerrarSesion">Cerrar Sesión</a> 
+    </div> 
   </header>
 
   <main class="mainCuenta">
+    
     <section class="seccionCuenta">
       <div class="tituloConFlecha">
         <img id="flechaVolver" class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Volver">
@@ -39,7 +77,6 @@
           <p><a href="#" id="linkRecuperar">Olvidé mi contraseña</a></p>
           <p><a href="#" id="linkRegistrarse">No tenés cuenta? Registrarse</a></p>
         </div>   
-
       </form>
 
       <!-- Crear cuenta -->
@@ -85,22 +122,30 @@
         <p id="recuperarError3" class="adventencia"></p>
         <button type="submit" class="btnCuentaLogin">CONFIRMAR</button>
       </form>
-
     </section>
+  
   </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>FIT Turnos</p>
+      <p>© 2025 FIT Turnos. Todos los derechos reservados.</p>
+    </div>
+  </footer>
 
   <script src="../js/navegacion.js"></script>
   <script src="../js/login.js"></script>
   <script src="../js/crearcuenta.js"></script>
   <script src="../js/recuperar.js"></script>
 
-  <!-- EmailJS para recuperación -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script>
     (function() {
       emailjs.init("K_tWHwFkHy42ZpWnU");
     })();
   </script>
-
+ 
+ <!-- Para que maneje la logica del usuario segun tipo y estado-->
+   <script src="../js/index.js"></script>
 </body>
 </html>
