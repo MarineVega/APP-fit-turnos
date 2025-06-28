@@ -477,3 +477,36 @@ main {
   flex: 1;
 }
 
+
+/* ===== Imágenes laterales solo en escritorio (>=1024 px) ===== */
+@media (min-width: 1024px) {
+
+  
+  .mainPrincipal {
+    position: relative;   /* punto de referencia para “absolute” */
+  }
+
+  .contenedor-lateral {
+    position: absolute;
+    top: 50px;            
+    left: 0;
+    width: 100%;
+    height: 0;            /* no suma alto al layout */
+    pointer-events: none; 
+    z-index: 0;
+    display: block !important; /* visible solo en desktop */
+  }
+
+  /* Estilo común a todas las imágenes laterales de esta pantalla */
+  .imagen-lateral-configurar {
+    position: absolute;
+    top: 120px;           /* ajustá visualmente */
+    height: 45vh;
+    max-height: 400px;
+    z-index: 1;
+  }
+
+  /* Desplazamiento lateral */
+  .imagen-lateral-configurar.izquierda { left: 2%; }
+  .imagen-lateral-configurar.derecha   { right: 2%; }
+}
