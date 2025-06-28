@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- configuración de estilos -->
+  <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/administrar.css">
 
   <!-- ícono de la página web -->
@@ -14,124 +15,179 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
   <title>FIT Turnos - Administrar</title>
-
 </head>
 
 <body>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+    
   <header class="header">
-    <nav>
-      <a href="../index.html" class="logo">
-        <img src="../assets/img/Logo_Fit_Home.png" alt="Icono FIT Turnos" loading="lazy">
-      </a>
+    <nav class="navbar">
+
+      <!-- Zona izquierda -->
+      <div class="nav-left">          
+        <!-- Logo -->
+        <a href="../index.html" class="logo">
+            <img src="../assets/img/Logo_Fit_Home.png" alt="Logo" loading="lazy">
+        </a>
+          <!-- icono hamburguesa SOLO en mobile -->
+        <a href="#" class="icon" id="btnMenu">
+            <img src="../assets/img/menu.png" alt="Menú" loading="lazy">
+        </a>
+
+        <!-- menu visible solo en escritorio -->
+        <div class="nav-links desktop-only">
+            <a href="../pages/turnos.html" id="menuTurnos">Turnos</a>
+            <a href="../pages/administrar.html" id="menuAdmin">Administrar</a>
+        </div>
+      </div>
+      
+      <!-- Zona derecha -->
+      <div class="nav-right">
+        <!-- Menú visible solo en escritorio -->
+        <div class="nav-links desktop-only">                    
+          <a href="#" id="nombreUsuario" style="display: none;"></a>
+          <a href="../pages/cuenta.html" id="menuIniciarSesion">Iniciar Sesión</a>
+          <a href="../pages/cuenta.html?form=crear" id="menuCrearCuenta">Crear Cuenta</a>
+              
+          <a href="#" id="menuCerrarSesion">Cerrar Sesión</a> 
+        </div>
+
+        <!-- iconos -->
+        <a href="#" class="icon">
+          <img src="../assets/img/buscar.png" alt="Buscar" loading="lazy">
+        </a>
+        <a href="#" class="icon">
+          <img src="../assets/img/notif.png" alt="Notificaciones" loading="lazy">
+        </a>
+      </div>
+
     </nav>
+    
+    <!-- Menú desplegable mobile -->
+    <div class="menu-desplegable" id="menuDesplegable">
+      <a href="#" id="nombreUsuarioMobile" style="display: none;"></a>
+      
+      <a href="../pages/cuenta.html" id="menuHamburguesaIniciarSesion">Iniciar Sesión</a>
+      <a href="../pages/cuenta.html?form=crear" id="menuHamburguesaCrearCuenta">Crear Cuenta</a>
+  
+      <a href="../pages/administrar.html" id="menuHamburguesaAdmin">Administrar</a>        
+      <a href="../pages/turnos.html" id="menuHamburguesaTurnos">Turnos</a>
+      
+      <a href="#" id="menuHamburguesaCerrarSesion">Cerrar Sesión</a> 
+    </div> 
   </header>
 
-  <div class="tituloConFlecha">
-    <a href="../index.html">
-      <img class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Ir hacia atrás">
-    </a>
-    <p>Administrar</p>
+  <main class="mainPrincipal">
 
-    <a href="../index.html"> 
+    <div class="tituloConFlecha">
+      <a href="index.html">
+        <img class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Ir hacia atrás">
+      </a>
+      <p>Administrar</p>
 
-      <img class="flechaInvisible" src="" alt="">
-    </a>
+      <a href="../index.html"> 
 
-  </div>
+        <img class="flechaInvisible" src="" alt="">
+      </a>
 
-  <section class="card">
+    </div>
 
-  <h2>Datos Empresa</h2>
+  
+    <section class="card">
 
-  <ul id="Datos">
-    <li> <img src="../assets/img/Logo Medusa.jpg" alt="Logo Medusa" id="Medusa"> Nombre de la empresa: Medusa Software S.R.L.</li>
-    <li><i class="bi bi-geo-alt"></i> Dirección: Av. del Deporte 1234, Buenos Aires, Argentina</li>
-    <li><i class="bi bi-telephone"></i> Teléfono: +54 11 3987-4567</li>
-    <li><i class="bi bi-envelope-at"></i> Email de contacto: soporte@fitturnos.com</li>
-    <li><i class="bi bi-browser-chrome"></i> Sitio web: www.fitturnos.com</li>
-    <li><i class="bi bi-instagram"></i> Instagram: @fitturnos</li>
-    <li><i class="bi bi-facebook"></i> Facebook: facebook.com/fitturnos</li>
-  </ul>
+      <h2>Datos Empresa</h2>
 
-  <img src="../assets/img/soga.png" alt="Empresa" id="Empresa">
-</section>
+      <ul id="Datos">
+        <li> <img src="../assets/img/Logo Medusa.jpg" alt="Logo Medusa" id="Medusa"> Nombre de la empresa: Medusa Software S.R.L.</li>
+        <li><i class="bi bi-geo-alt"></i> Dirección: Av. del Deporte 1234, Buenos Aires, Argentina</li>
+        <li><i class="bi bi-telephone"></i> Teléfono: +54 11 3987-4567</li>
+        <li><i class="bi bi-envelope-at"></i> Email de contacto: soporte@fitturnos.com</li>
+        <li><i class="bi bi-browser-chrome"></i> Sitio web: www.fitturnos.com</li>
+        <li><i class="bi bi-instagram"></i> Instagram: @fitturnos</li>
+        <li><i class="bi bi-facebook"></i> Facebook: facebook.com/fitturnos</li>
+      </ul>
+
+      <img src="../assets/img/soga.png" alt="Empresa">
+    </section>
 
 
-  <section class="card">
+    <section class="card">
 
-    <h2>Actividades</h2>
-    <ul>
-      <li> <a href="./actividad.html?modo=agregar">Agregar</a> <a href="./actividad.html?modo=agregar"
-          class="icon">➕</a> </li>
-      <li> <a href="./actividad.html?modo=editar">Modificar</a> <a href="./actividad.html?modo=editar"
-          class="icon">📝</a></li>
-      <li> <a href="./actividad.html?modo=eliminar">Eliminar</a> <a href="./actividad.html?modo=eliminar"
-          class="icon">🗑️</a></li>
-      <li> <a href="./actividad.html?modo=consultar">Consultar</a> <a href="./actividad.html?modo=consultar"
-          class="icon">💬</a></li>
-    </ul>
+      <h2>Actividades</h2>
+      <ul>
+        <li> <a href="./actividad.html?modo=agregar">Agregar</a> <a href="./actividad.html?modo=agregar"
+            class="icon">➕</a> </li>
+        <li> <a href="./actividad.html?modo=editar">Modificar</a> <a href="./actividad.html?modo=editar"
+            class="icon">📝</a></li>
+        <li> <a href="./actividad.html?modo=eliminar">Eliminar</a> <a href="./actividad.html?modo=eliminar"
+            class="icon">🗑️</a></li>
+        <li> <a href="./actividad.html?modo=consultar">Consultar</a> <a href="./actividad.html?modo=consultar"
+            class="icon">💬</a></li>
+      </ul>
 
-    <img src="../assets/img/estocada.png" alt="Actividades">
+      <img src="../assets/img/estocada.png" alt="Actividades">
 
-  </section>
+    </section>
 
-  <section class="card">
+    <section class="card">
 
-    <h2>Horarios</h2>
-    <ul>
-      <li> <a href="./horario.html?modo=agregar"> Agregar </a> <a href="./horario.html?modo=agregar"
-          class="icon">➕</a> </li>
-      <li> <a href="./horario.html?modo=editar"> Modificar </a> <a href="./horario.html?modo=editar"
-          class="icon">📝</a> </li>
-      <li> <a href="./horario.html?modo=eliminar"> Eliminar </a> <a href="./horario.html?modo=eliminar"
-          class="icon">🗑️</a> </li>
-          <li> <a href="./horario.html?modo=consultar">Consultar</a> <a href="./horario.html?modo=consultar"
+      <h2>Horarios</h2>
+      <ul>
+        <li> <a href="./horario.html?modo=agregar"> Agregar </a> <a href="./horario.html?modo=agregar"
+            class="icon">➕</a> </li>
+        <li> <a href="./horario.html?modo=editar"> Modificar </a> <a href="./horario.html?modo=editar"
+            class="icon">📝</a> </li>
+        <li> <a href="./horario.html?modo=eliminar"> Eliminar </a> <a href="./horario.html?modo=eliminar"
+            class="icon">🗑️</a> </li>
+            <li> <a href="./horario.html?modo=consultar">Consultar</a> <a href="./horario.html?modo=consultar"
 
-          class="icon">💬</a></li>
-    </ul>
+            class="icon">💬</a></li>
+      </ul>
 
-    <img src="../assets/img/reloj.png" alt="Horario">
+      <img src="../assets/img/reloj.png" alt="Horario">
 
-  </section>
+    </section>
 
-  <section class="card">
+    <section class="card">
 
-    <h2>Profesores</h2>
-    <ul>
-      <li> <a href="./profesores.html?modo=agregar">Agregar</a> <a href="./profesores.html?modo=agregar"
-          class="icon">➕</a> </li>
-      <li> <a href="./profesores.html?modo=editar">Modificar</a> <a href="./profesores.html?modo=editar"
-          class="icon">📝</a></li>
-      <li> <a href="./profesores.html?modo=eliminar">Eliminar</a> <a href="./profesores.html?modo=eliminar"
-          class="icon">🗑️</a></li>
-      <li> <a href="./profesores.html?modo=consultar">Consultar</a> <a href="./profesores.html?modo=consultar"
-          class="icon">💬</a></li>
-    </ul>
+      <h2>Profesores</h2>
+      <ul>
+        <li> <a href="./profesores.html?modo=agregar">Agregar</a> <a href="./profesores.html?modo=agregar"
+            class="icon">➕</a> </li>
+        <li> <a href="./profesores.html?modo=editar">Modificar</a> <a href="./profesores.html?modo=editar"
+            class="icon">📝</a></li>
+        <li> <a href="./profesores.html?modo=eliminar">Eliminar</a> <a href="./profesores.html?modo=eliminar"
+            class="icon">🗑️</a></li>
+        <li> <a href="./profesores.html?modo=consultar">Consultar</a> <a href="./profesores.html?modo=consultar"
+            class="icon">💬</a></li>
+      </ul>
 
-    <img src="../assets/img/abdominales.png" alt="Profesores">
+      <img src="../assets/img/abdominales.png" alt="Profesores">
 
-  </section>
+    </section>
 
-  <section class="card">
+    <section class="card">
 
-    <h2>Publicidad</h2>
-    <p>Aquí puede promocionar sus productos, servicios o sponsor.</p>
-    <img src="../assets/img/publicidad.png" alt="Publicidad">
+      <h2>Publicidad</h2>
+      <p>Aquí puede promocionar sus productos, servicios o sponsor.</p>
+      <img src="../assets/img/publicidad.png" alt="Publicidad">
 
-  </section>
-
-     <footer class="footer">
-            <div class="footer-content">
-                <a href="../index.html" class="footer-logo">
-                    <img src="../assets/img/Logo_Fit_Home.png" alt="FIT Turnos">
-                </a>
-                <p>FIT Turnos</p>
-                <p>© 2025 FIT Turnos. Todos los derechos reservados.</p>
-            </div>
-        </footer>
-
+    </section>
   </main>
 
-</body>
 
+  <footer class="footer">
+    <div class="footer-content">
+        <p>FIT Turnos</p>
+        <p>© 2025 FIT Turnos. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+  
+  <!-- Para que maneje la logica del usuario segun tipo y estado-->
+  <script src="../js/index.js"></script>
+
+  <!-- <script src="../js/usuarioactivo.js"></script>
+  <script src="../js/menu.js"></script> -->
+
+</body>
 </html>

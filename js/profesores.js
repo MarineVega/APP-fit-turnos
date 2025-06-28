@@ -186,11 +186,14 @@ imagen.addEventListener("change", () => {
 
 let btnAceptar = document.getElementById("agregar");
 
-
 //Agregar / Editar Profesor
 btnAceptar.addEventListener("click", (e) => {
     e.preventDefault();
     resetMesajesError();
+
+    const editIndex = btnAceptar.dataset.editIndex !== undefined
+                    ? Number(btnAceptar.dataset.editIndex)
+                    : null;
 
     let esValido = true;
 
@@ -204,14 +207,41 @@ btnAceptar.addEventListener("click", (e) => {
         esValido = false;
     }
 
-   /* if ((documento.value === "") || (documento.value < 1) || (documento.value > 10)) {
+    function validarDNI(documento) {
+      const regex = /^\d{8}$/;  
+      return regex.test(documento);
+    }
+
+    function existeDNI(documentoNuevo, indiceAExcluir = null) {
+         const profesores = JSON.parse(localStorage.getItem("profesores")) || [];
+
+        return profesores.some((prof, idx) =>
+            prof.documento === documentoNuevo && idx !== indiceAExcluir
+        );
+    }
+
+    if (!validarDNI(documento.value)) {
         mostrarMensajeError("documentoError", "El documento ingresado es incorrecto.");
         esValido = false;
-    }*/
+        // ——— 2. pasamos el índice a excluir ———
+    } else if (existeDNI(documento.value, editIndex)) {
+        mostrarMensajeError("documentoError", "Ya existe un usuario con ese documento.");
+        esValido = false;
+    }
+
+    function validarCUIL(cuil) {
+      const regex = /^\d{11}$/;  
+      console.log(cuil);
+      return regex.test(cuil);
+    }
+
+    if (!validarCUIL(cuil.value))  {
+        mostrarMensajeError("cuilError", "El CUIL/CUIT ingresado es incorrecto.");
+        esValido = false;
+    }
 
     if (esValido) {
         let profesores = JSON.parse(localStorage.getItem("profesores")) || [];
-        
         const archivoImagen = imagen.files[0];
         const nombreImagen = archivoImagen ? archivoImagen.name : null;
         const rutaImagen = nombreImagen ? `../assets/img/${nombreImagen}` : null;
@@ -266,7 +296,6 @@ btnAceptar.addEventListener("click", (e) => {
     });
 });
 
-
 // Muestro el listado de profesores, con opción de editar o eliminar
 function mostrarListadoProfesores(modo= "consultar") {
     const encabezado = document.getElementById("encabezadoProfesores")
@@ -306,19 +335,19 @@ function mostrarListadoProfesores(modo= "consultar") {
             }
 
             fila.innerHTML = `
-    <td>${profesor.nombre}</td>
-    <td>${profesor.apellido}</td>
-    <td>${profesor.documento}</td>
-    <td>${profesor.titulo}</td>
-    <td>${profesor.cuil}</td>
-    <td><img src="${profesor.imagen || '../assets/img/icono_pesas.png'}" style="width: 80px; height: auto;"></td>
-    ${modo !== "consultar" ? `<td>${accion}</td>` : ""}
-`;
+                                <td>${profesor.nombre}</td>
+                                <td>${profesor.apellido}</td>
+                                <td>${profesor.documento}</td>
+                                <td>${profesor.titulo}</td>
+                                <td>${profesor.cuil}</td>
+                                <td><img src="${profesor.imagen || '../assets/img/icono_pesas.png'}" style="width: 80px; height: auto;"></td>
+                                ${modo !== "consultar" ? `<td>${accion}</td>` : ""}
+                            `;
             tabla.appendChild(fila);
         });
     } else {
         const fila = document.createElement("tr");
-        fila.innerHTML = `<td colspan="${modo !== "consultar" ? 5 : 4}">No hay profesores registrados.</td>`;
+        fila.innerHTML = `<td colspan="${modo !== "consultar" ? 5 : 4}">No hay actividades registradas.</td>`;
         tabla.appendChild(fila);
     }
 }

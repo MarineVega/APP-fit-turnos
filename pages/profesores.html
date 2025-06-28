@@ -5,31 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- configuración de estilos -->
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/profesores.css">
     
     <!-- ícono de la página web -->
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     
-    <!-- íconos de google -->
-    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
-
     <title> FIT Turnos - Profesores </title>
-
 </head>
+
 <body>
+    <!-- Imágenes laterales visibles solo en escritorio -->
+    <img src="../assets/img/Frame.png" alt="Entrenamiento" class="imagen-lateral izquierda">
 
-     <!-- Imágenes laterales visibles solo en escritorio -->
-    <img src="../assets/img/lateral_izquierdo.png" alt="Entrenamiento" class="imagen-lateral izquierda">
-
-    <!-- agregue sweetalert para usar imagenes e iconos-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
-
+    
     <header class="header">
-        <nav>
-            <a href="../index.html" class="logo">
-                <img src="../assets/img/Logo_Fit_Home.png" alt="Icono FIT Turnos" loading="lazy">                
-            </a>    
+        <nav class="navbar">
+            <!-- Zona izquierda -->
+            <div class="nav-left">
+
+                <!-- Logo -->
+                <a href="../index.html" class="logo">
+                    <img src="../assets/img/Logo_Fit_Home.png" alt="Logo" loading="lazy">
+                </a>
+                  <!-- icono hamburguesa SOLO en mobile -->
+                <a href="#" class="icon" id="btnMenu">
+                    <img src="../assets/img/menu.png" alt="Menú" loading="lazy">
+                </a>
+
+                <!-- menu visible solo en escritorio -->
+                <div class="nav-links desktop-only">
+                    <a href="../pages/turnos.html" id="menuTurnos">Turnos</a>
+                    <a href="../pages/administrar.html" id="menuAdmin">Administrar</a>
+                </div>
+
+            </div>
+
+            <!-- Zona derecha -->
+            <div class="nav-right">
+                <!-- Menú visible solo en escritorio -->
+                <div class="nav-links desktop-only">                    
+                    <a href="#" id="nombreUsuario" style="display: none;"></a>
+                    <a href="../pages/cuenta.html" id="menuIniciarSesion">Iniciar Sesión</a>
+                    <a href="../pages/cuenta.html?form=crear" id="menuCrearCuenta">Crear Cuenta</a>
+                       
+                    <a href="#" id="menuCerrarSesion">Cerrar Sesión</a> 
+                </div>
+
+                <!-- iconos -->
+                <a href="#" class="icon">
+                    <img src="../assets/img/buscar.png" alt="Buscar" loading="lazy">
+                </a>
+                <a href="#" class="icon">
+                    <img src="../assets/img/notif.png" alt="Notificaciones" loading="lazy">
+                </a>
+            </div>
+
         </nav>
+        
+        <!-- Menú desplegable mobile -->
+        <div class="menu-desplegable" id="menuDesplegable">
+
+            <a href="#" id="nombreUsuarioMobile" style="display: none;"></a>
+            
+            <a href="../pages/cuenta.html" id="menuHamburguesaIniciarSesion">Iniciar Sesión</a>
+            <a href="../pages/cuenta.html?form=crear" id="menuHamburguesaCrearCuenta">Crear Cuenta</a>
+        
+            <a href="../pages/administrar.html" id="menuHamburguesaAdmin">Administrar</a>        
+            <a href="../pages/turnos.html" id="menuHamburguesaTurnos">Turnos</a>
+            
+            <a href="#" id="menuHamburguesaCerrarSesion">Cerrar Sesión</a> 
+        </div> 
     </header>
 
     <main class="mainProfesores">
@@ -66,7 +113,7 @@
 
                 <div>
                     <label for="documento"> Documento *</label>
-                    <input type="number" id="documento" class="inputProfesores" placeholder="10">
+                    <input type="number" id="documento" class="inputProfesores" placeholder="8" maxlength="8" pattern="\d{8}">
                     <div id="documentoError" class="mensaje-error"></div>    
                 </div>
 
@@ -78,7 +125,7 @@
 
                  <div>
                     <label for="cuil"> CUIT/CUIL *</label>
-                    <input type="number" id="cuil" class="inputProfesores" placeholder="10">
+                    <input type="number" id="cuil" class="inputProfesores" placeholder="11" maxlength="11" pattern="\d{11}">
                     <div id="cuilError" class="mensaje-error"></div>    
                 </div>
 
@@ -91,8 +138,12 @@
 
                 <label class="advertencia">* Campos obligatorios</label>
             </form>
+            <div class="contenedorBotones">
+                <button id="agregar" class="btnAceptar">AGREGAR</button>
+                <button class="btnCancelar" onclick="window.location.href='../pages/administrar.html'">CANCELAR</button>
+            </div>
             
-            <button id="agregar" class="btnAceptar">AGREGAR</button>
+            
         </section>
         
         <section id="listadoProfesores">            
@@ -103,25 +154,32 @@
                 <tbody id="profesoresLista">
                     <!-- Filas generadas dinámicamente -->
                 </tbody>
-            </table>            
+            </table> 
+            <div class="contenedorBotones">
+                <button class="btnAceptar" onclick="window.location.href='../pages/administrar.html'">VOLVER</button>
+            </div>           
         </section>
 
-        <footer class="footer">
-            <div class="footer-content">
-                <a href="../index.html" class="footer-logo">
-                    <img src="../assets/img/Logo_Fit_Home.png" alt="FIT Turnos">
-                </a>
-                <p>FIT Turnos</p>
-                <p>© 2025 FIT Turnos. Todos los derechos reservados.</p>
-            </div>
-        </footer>
+      <footer class="footer">
+        <div class="footer-content">
+            <p>FIT Turnos</p>
+            <p>© 2025 FIT Turnos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
       
     </main>
 
     <!-- Imagen lateral derecha -->
-    <img src="../assets/img/lateral_derecho.png" alt="Ejercicio" class="imagen-lateral derecha">
-    
+    <img src="../assets/img/chica_ok.png" alt="Ejercicio" class="imagen-lateral derecha">
+ 
     <script src="../js/profesores.js"></script>
+    
+    <!-- Para que maneje la logica del usuario segun tipo y estado-->
+    <script src="../js/index.js"></script>
+
+    <!-- <script src="../js/usuarioactivo.js"></script>
+    <script src="../js/menu.js"></script> -->
 
 </body>
+
 </html>
