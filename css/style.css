@@ -39,7 +39,6 @@
   box-sizing: border-box;
 }
 
-
 /* configuración de variables*/
 :root {
   --color-fondo: #bababa;
@@ -926,6 +925,10 @@ h2#fc-dom-1 {
   .mainTurno .tituloConFlecha {
     font-size: 1.1rem;
     padding: 2% 5%;
+  }
+
+  .mainPrincipal .logoMedusa {      
+    width: 40%;
   }
 
 }

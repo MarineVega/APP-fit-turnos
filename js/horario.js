@@ -151,6 +151,27 @@ document.addEventListener("DOMContentLoaded", () => {
             fila.innerHTML = `<td colspan="${modo !== "consultar" ? 5 : 6}">No hay horarios registrados.</td>`;
             tabla.appendChild(fila);
         }
+
+
+        // agrego botón "Seguir agregando" si vengo del alta
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("desde") === "alta") {
+            const contenedor = document.createElement("div");
+            contenedor.style.display = "flex";
+            contenedor.style.justifyContent = "center";
+            contenedor.style.marginTop = "20px";
+
+            const btnSeguir = document.createElement("button");
+            btnSeguir.textContent = "Agregar";
+            btnSeguir.className = "btnAceptar";
+            btnSeguir.addEventListener("click", () => {
+                window.location.href = "./horario.html?modo=agregar";
+            });
+
+            contenedor.appendChild(btnSeguir);
+            listado.appendChild(contenedor);
+        }
+
     }
 
     function mostrarMensajeError(elementId, mensaje) {
@@ -382,7 +403,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (modo === "editar") {
                         window.location.href = './horario.html?modo=editar';
                     } else {
-                        window.location.href = './horario.html?modo=consultar';
+                        //window.location.href = './horario.html?modo=consultar';
+                        window.location.href = './horario.html?modo=consultar&desde=alta';
                     }
                 }
             });
