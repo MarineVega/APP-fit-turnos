@@ -9,7 +9,7 @@
 <body>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
-
+    
   <header class="header">
     <nav class="navbar">
       <!-- Zona izquierda -->
@@ -59,6 +59,10 @@
 
   <main class="mainCuenta">
     
+     <div class="contenedor-lateral desktop-only">
+         <img src="../assets/img/cuenta2.png" alt="imagen 1" class="imagen-lateral-actividad izquierda">
+         <img src="../assets/img/cuenta1.png" alt="imagen 2" class="imagen-lateral-actividad derecha">
+     </div>
     <section class="seccionCuenta">
       <div class="tituloConFlecha">
         <img id="flechaVolver" class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Volver">
@@ -74,7 +78,12 @@
         <div>
           <input type="password" class="inputCuenta" id="loginPassword" placeholder="Contraseña" />
         </div>
-        <label style="padding-left: 5%; font-size: 0.9rem;"><input type="checkbox" id="recordarme" /> Recordarme</label>
+        <div>
+         <label for="recordarme" class="labelCheckbox">
+           <input type="checkbox" id="recordarme" /> Recordarme
+         </label>
+       </div>
+
         <p id="loginError" class="adventencia"></p>
         <button type="submit" class="btnCuentaLogin">CONFIRMAR</button>
         <div style="text-align: center;">
@@ -97,9 +106,11 @@
         <div>
           <input type="password" class="inputCuenta" id="confirmarPassword" placeholder="Confirmar Contraseña*" />
         </div>
-        <label style="padding-left: 5%; font-size: 0.9rem;">
-          <input type="checkbox" id="esAdmin" /> Crear como administrador
-        </label>
+        <div>
+          <label for="esAdmin" class="labelCheckbox">
+            <input type="checkbox" id="esAdmin" /> Crear como administrador
+          </label>
+        </div>
         <p id="crearError" class="adventencia"></p>
         <button type="submit" class="btnCuentaLogin">REGISTRARSE</button>
         <div style="text-align: center;">

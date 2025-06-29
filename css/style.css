@@ -549,6 +549,8 @@ a.btnAceptar:hover {
 
 .formCuenta > div {
   width: 100%;
+  max-width: 700px;
+  margin:0 auto;
   display: flex;
   flex-direction: column;
   padding: 1%;
@@ -617,6 +619,22 @@ a.btnAceptar:hover {
   padding-left: 4%;
   font-size: 0.9rem;
   color: red;
+}
+/* Estilo mejorado para el checkbox "Crear como administrador" */
+#formCrear label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 600;           /* Negrita */
+  font-size: 1rem;
+  padding-left: 0;
+  text-align: left;
+}
+
+#formCrear input[type="checkbox"] {
+  transform: scale(1.4);      /* Agranda el checkbox */
+  margin-right: 10px;
+  accent-color: var(--color-terciario); /* Color del tilde (mejor compatibilidad moderna) */
+  cursor: pointer;
 }
 /*__________TERMINA CSS CUENTA___________*/
 
