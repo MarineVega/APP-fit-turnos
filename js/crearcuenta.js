@@ -63,25 +63,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     usuariosGuardados.push(nuevoUsuario);
     localStorage.setItem("usuarios", JSON.stringify(usuariosGuardados));
-
-    Swal.fire({
+    
+    swalEstilo.fire({
       title: '¡Operación Exitosa!',
       text: 'Bienvenid@, ya está todo listo, alcanza tus objetivos con nosotros.',
       imageUrl: '../assets/img/exito.png',
-
       imageHeight: 100,
       imageAlt: 'Éxito',
       icon: 'success',
-      confirmButtonText: 'Inicio',
-      customClass: {
-        confirmButton: 'btnAceptar'
-      },
-      buttonsStyling: false
+      confirmButtonText: 'Inicio'
     }).then((result) => {
-      if (result.isConfirmed) {
-        window.location.href = '../pages/cuenta.html?form=login' 
-      }
-    });
+   if (result.isConfirmed) {
+       window.location.href = '../pages/cuenta.html?form=login';
+   }
+   });
+
 
     form.reset();
   });

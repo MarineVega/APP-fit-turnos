@@ -615,10 +615,19 @@ a.btnAceptar:hover {
   visibility: hidden;
 }
 
+.contenedorError {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1% 5%;
+}
+
 .adventencia {
-  padding-left: 4%;
   font-size: 0.9rem;
   color: red;
+  text-align:left;
+  padding-left: 0;
+  margin: top 15px;;
 }
 /* Estilo mejorado para el checkbox "Crear como administrador" */
 #formCrear label {
@@ -1150,5 +1159,6 @@ main {
   /* Desplazamiento lateral */
   .imagen-lateral-actividad.izquierda { left: 2%; }
   .imagen-lateral-actividad.derecha   { right: 2%; }
-}
 
+
+}
