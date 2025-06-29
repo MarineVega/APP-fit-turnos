@@ -178,7 +178,7 @@ header {
 
 /* Estilo de las tarjetas*/
 .card {
-  background:#007a5e;
+  background:linear-gradient(to right, #a9cdbb, #c1d8e4);
   border-radius: 15px;
   padding: 1em;
   margin: 1em;
@@ -197,7 +197,7 @@ header {
   width: 100%;
   margin-bottom: 0.5em;
   font-size: 1em;
-  color: rgb(250, 246, 246);
+  color: rgb(56, 55, 55);
 }
 
 
