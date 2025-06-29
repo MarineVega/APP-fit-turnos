@@ -502,7 +502,11 @@ main {
     font-size: 1.6em;    /* 60 % mayor                                              */
     margin-bottom: 0.8em;
   }
-
+.card li {
+  justify-content: flex-end; /* alineados al inicio */
+  gap: 12px;                   /* espacio natural entre texto y botón */
+  margin: 0.4em 0;
+}
   /* Texto/Lista dentro de la tarjeta */
   .card p,
   .card ul{
