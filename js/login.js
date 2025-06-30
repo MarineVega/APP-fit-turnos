@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       confirmButtonText: "Cerrar"
      }).then((result) => {
        if (result.isConfirmed) {
-          window.location.href = "./index.html";
+          window.location.href = "../index.html";
        }
     });
       form.reset();

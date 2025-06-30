@@ -1136,6 +1136,17 @@ main {
   flex: 1;
 }
 /* ===== Imágenes laterales solo en escritorio (>=1024 px) ===== */
+/* Por defecto, oculto en todos los tamaños */
+.desktop-only {
+  display: none;
+}
+
+/* Mostrar solo en pantallas de escritorio (por ejemplo, a partir de 992px) */
+@media screen and (min-width: 992px) {
+  .desktop-only {
+    display: block; /* o flex, grid, según lo que uses */
+  }
+}
 @media (min-width: 1024px) {
 
   

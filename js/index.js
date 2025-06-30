@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }).then(function (result) {
         if (result.isConfirmed === true) {
           localStorage.removeItem("usuarioActivo");
-          window.location.href = "./index.html";
+          window.location.href = "../index.html";
         }
       });
     });
@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }).then(function (result) {
         if (result.isConfirmed === true) {
           localStorage.removeItem("usuarioActivo");
-          window.location.href = "./index.html";
+          window.location.href = "../index.html";
         }
       });
     });
