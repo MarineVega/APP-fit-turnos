@@ -958,6 +958,10 @@ h2#fc-dom-1 {
     width: 40%;
   }
 
+  .imagen-lateral-actividad {
+    display: none;
+  }
+
 }
 
 /* Media Queries para pantallas de escritorio */
@@ -1110,6 +1114,11 @@ h2#fc-dom-1 {
   .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
     width: 100%;
   }
+
+  .imagen-lateral-actividad {
+    display: block;
+  }
+
 }
 
 .mainPrincipal, .mainActividad, .mainHorario, .mainTurno, .mainCuenta {
@@ -1142,7 +1151,8 @@ main {
     height: 0;            /* no suma alto al layout */
     pointer-events: none; 
     z-index: 0;
-    display: block !important; /* visible solo en desktop */
+    /*display: block !important; *//* visible solo en desktop */
+    display: block ; /* visible solo en desktop */
   }
 
   /* Estilo común a todas las imágenes laterales de esta pantalla */

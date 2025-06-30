@@ -21,11 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const titulo = document.getElementById("titulo");
     const imagen = document.getElementById("imagen");
     const btnAgregar = document.getElementById("agregar");
+    const imagenesLaterales = document.getElementById("contenedorImagenesLaterales");
     const btnExportar = document.getElementById("exportarLocalStorage");
     const btnImportar = document.getElementById("importarLocalStorage");
 
     formulario.style.display = "none";
     listado.style.display = "block";
+    imagenesLaterales.style.display = "none";
     btnExportar.style.visibility = "hidden";
     btnImportar.style.visibility = "hidden";
     
@@ -42,11 +44,12 @@ document.addEventListener("DOMContentLoaded", () => {
             formulario.style.display = "block";
             listado.style.display = "none";
             titulo.textContent = "Agregar Actividad";
+            imagenesLaterales.style.display = "block";
             limpiarFormulario();
             break
         
         case "editar":
-            titulo.textContent = "Modificar Actividad";
+            titulo.textContent = "Modificar Actividad";            
             mostrarListadoActividades("editar");
             break
         
@@ -60,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
             break    
     }
     
-
     function eliminarActividad(index) {
         swalEstilo.fire({
             title: '¿Estás seguro?',
@@ -98,6 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function editarActividad(index) {
         const actividades = JSON.parse(localStorage.getItem("actividades")) || [];
         const actividad = actividades[index];
+        imagenesLaterales.style.display = "block";
 
         // Muestro el formulario y lo lleno
         document.getElementById("formularioActividad").style.display = "block";
@@ -286,7 +289,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     });
    
-          
+    
+    function tieneReservasFuturas(nombreActividad) {
+        const reservas = JSON.parse(localStorage.getItem("reservasTurnos")) || {};
+        const hoy = new Date();
+
+        return Object.values(reservas).some(r =>
+            r.actividad === nombreActividad &&
+            new Date(`${r.fecha}T${r.hora}`) >= hoy
+        );
+    }
+
     // Muestro el listado de actividades, con opción de editar o eliminar
     function mostrarListadoActividades(modo = "consultar") {
         const encabezado = document.getElementById("encabezadoActividades");
@@ -328,12 +341,39 @@ document.addEventListener("DOMContentLoaded", () => {
                     const boton = document.createElement("button");
                     boton.className = "btnTabla";
 
+                    const tieneTurnos = tieneReservasFuturas(actividad.nombre);
+
                     if (modo === "editar") {
                         boton.innerHTML = `<img src="../assets/img/icono_editar.png" alt="Editar" class="iconoTabla">`; 
-                        boton.addEventListener("click", () => editarActividad(index));
+                        //boton.addEventListener("click", () => editarActividad(index));
+                         boton.addEventListener("click", () => {
+                            if (tieneTurnos) {
+                                swalEstilo.fire({
+                                    icon: 'warning',
+                                    title: 'No se puede modificar',
+                                    text: 'Esta actividad tiene turnos futuros reservados.',
+                                    confirmButtonText: 'Cerrar'
+                                });
+                                return;
+                            }
+                            editarActividad(index);
+                        });                
+
                     } else if (modo === "eliminar") {
                         boton.innerHTML = `<img src="../assets/img/icono_eliminar.png" alt="Eliminar" class="iconoTabla">`;
-                        boton.addEventListener("click", () => eliminarActividad(index));
+                        //boton.addEventListener("click", () => eliminarActividad(index));
+                        boton.addEventListener("click", () => {
+                            if (tieneTurnos) {
+                                swalEstilo.fire({
+                                    icon: 'warning',
+                                    title: 'No se puede eliminar',
+                                    text: 'Esta actividad tiene turnos futuros reservados.',
+                                    confirmButtonText: 'Cerrar'
+                                });
+                                return;
+                            }
+                            eliminarActividad(index);
+                        });
                     }
 
                     celdaAccion.appendChild(boton);
