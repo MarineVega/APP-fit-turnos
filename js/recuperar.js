@@ -31,7 +31,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const destino = recuperarEmail.value;
     const codigo = generarCodigo();
-
+    
+    // configuro estilos para sweetalert
+    const swalEstilo = Swal.mixin({
+        imageWidth: 200,       // ancho en píxeles
+        imageHeight: 200,      // alto en píxeles 
+        background: '#bababa',
+        confirmButtonColor: '#6edc8c',
+        customClass: {
+            confirmButton: 'btnAceptar',
+            cancelButton: 'btnCancelar'
+        }
+    });
+    
     localStorage.setItem("codigoRecuperacion", codigo);
     // coloco el service de emailjs y el template creado
     emailjs.send("service_vq2s3hg", "template_tth5c7f", {
@@ -40,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     .then(() => {
-      Swal.fire({
+      swalEstilo.fire({
         title: 'Código enviado',
         text: 'Revisá tu correo para continuar con la recuperación.',
         icon: 'success',
@@ -70,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (codigoSeguridad.value === localStorage.getItem("codigoRecuperacion")) {
       mostrar("formRecuperar3");
     } else {
-      Swal.fire({
+      swalEstilo.fire({
         title: '¡Upps!',
         text:'Código incorrecto. Revisá tu correo.',
         imageUrl: '../assets/img/error.png',
@@ -100,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
       codigo: codigo
     })
     .then(() => {
-      Swal.fire({
+      swalEstilo.fire({
         title: 'Código reenviado',
         text: 'Revisá tu correo nuevamente.',
         icon: 'info',
@@ -136,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    Swal.fire({
+    swalEstilo.fire({
       title: '¡Operación exitosa!',
       text:'Se ha actualizado la contraseña',
       imageUrl: '../assets/img/exito.png',

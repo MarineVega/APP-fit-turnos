@@ -15,8 +15,8 @@
 </head>
 
 <body>
-    <!-- Imágenes laterales visibles solo en escritorio -->
-    <img src="../assets/img/Frame.png" alt="Entrenamiento" class="imagen-lateral izquierda">
+    <!-- Imágenes laterales visibles solo en escritorio 
+    <img src="../assets/img/Frame.png" alt="Entrenamiento" class="imagen-lateral izquierda">-->
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
     
@@ -80,12 +80,17 @@
     </header>
 
     <main class="mainProfesores">
+         <div class="contenedor-lateral-imagenes desktop-only">
+                <img src="../assets/img/profesor1.png" alt="Profesor 1" class="imagen-lateral-profesor izquierda">
+                <img src="../assets/img/profesor2.png" alt="Profesor 2" class="imagen-lateral-profesor derecha">
+            </div>
 
         <div class="tituloConFlecha">
             <a href="../pages/administrar.html">
                 <img class="flecha" src="../assets/img/icono_flecha_atras.png" alt="Ir hacia atrás">
             </a>
             <p id="tituloPagina">Agregar Profesores</p>
+           
              
             <a href="../pages/administrar.html">
                 <!-- sin flecha -->
@@ -159,18 +164,20 @@
                 <button class="btnAceptar" onclick="window.location.href='../pages/administrar.html'">VOLVER</button>
             </div>           
         </section>
+  
+  
+    </main>
+    
 
-      <footer class="footer">
+    <footer class="footer">
         <div class="footer-content">
             <p>FIT Turnos</p>
             <p>© 2025 FIT Turnos. Todos los derechos reservados.</p>
         </div>
     </footer>
       
-    </main>
-
-    <!-- Imagen lateral derecha -->
-    <img src="../assets/img/chica_ok.png" alt="Ejercicio" class="imagen-lateral derecha">
+    <!-- Imagen lateral derecha 
+    <img src="../assets/img/chica_ok.png" alt="Ejercicio" class="imagen-lateral derecha">-->
  
     <script src="../js/profesores.js"></script>
     

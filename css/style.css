@@ -549,6 +549,8 @@ a.btnAceptar:hover {
 
 .formCuenta > div {
   width: 100%;
+  max-width: 700px;
+  margin:0 auto;
   display: flex;
   flex-direction: column;
   padding: 1%;
@@ -613,10 +615,35 @@ a.btnAceptar:hover {
   visibility: hidden;
 }
 
+.contenedorError {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1% 5%;
+}
+
 .adventencia {
-  padding-left: 4%;
   font-size: 0.9rem;
   color: red;
+  text-align:left;
+  padding-left: 0;
+  margin: top 15px;;
+}
+/* Estilo mejorado para el checkbox "Crear como administrador" */
+#formCrear label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 600;           /* Negrita */
+  font-size: 1rem;
+  padding-left: 0;
+  text-align: left;
+}
+
+#formCrear input[type="checkbox"] {
+  transform: scale(1.4);      /* Agranda el checkbox */
+  margin-right: 10px;
+  accent-color: var(--color-terciario); /* Color del tilde (mejor compatibilidad moderna) */
+  cursor: pointer;
 }
 /*__________TERMINA CSS CUENTA___________*/
 
@@ -1099,4 +1126,39 @@ html, body {
 main {
   flex: 1;
 }
+/* ===== Imágenes laterales solo en escritorio (>=1024 px) ===== */
+@media (min-width: 1024px) {
 
+  
+  .mainPrincipal {
+    position: relative;   /* punto de referencia para “absolute” */
+  }
+
+  .contenedor-lateral {
+    position: absolute;
+    top: 50px;            
+    left: 0;
+    width: 100%;
+    height: 0;            /* no suma alto al layout */
+    pointer-events: none; 
+    z-index: 0;
+    display: block !important; /* visible solo en desktop */
+  }
+
+  /* Estilo común a todas las imágenes laterales de esta pantalla */
+  .imagen-lateral-actividad {
+    position: absolute;
+    top: 220px;           /* ajustá visualmente */
+    width: 30vw;  
+    height: 60vh;
+    max-height: 200px;
+    max-width: 230px;
+    z-index: 1;
+  }
+
+  /* Desplazamiento lateral */
+  .imagen-lateral-actividad.izquierda { left: 2%; }
+  .imagen-lateral-actividad.derecha   { right: 2%; }
+
+
+}

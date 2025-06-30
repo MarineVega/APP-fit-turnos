@@ -3,6 +3,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const email = document.getElementById("loginEmail");
   const password = document.getElementById("loginPassword");
   const error = document.getElementById("loginError");
+  
+   // configuro estilos para sweetalert
+    const swalEstilo = Swal.mixin({
+        imageWidth: 200,       // ancho en píxeles
+        imageHeight: 200,      // alto en píxeles 
+        background: '#bababa',
+        confirmButtonColor: '#6edc8c',
+        customClass: {
+            confirmButton: 'btnAceptar',
+            cancelButton: 'btnCancelar'
+        }
+    });
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -12,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       error.textContent = "Completá todos los campos.";
       return;
     }
-
+    
     // Obtener lista de usuarios guardados
     const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
@@ -29,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ? "Bienvenido administrador"
         : "¡Bienvenido!";
 
-     Swal.fire({
+     swalEstilo.fire({
       title: mensaje,
       imageUrl: "../assets/img/exito.png",
       imageWidth: 100,
