@@ -36,10 +36,10 @@ function eliminarProfesor(index) {
 function editarProfesor(index) {
     const profesores = JSON.parse(localStorage.getItem("profesores")) || [];
     const profesor = profesores[index];
-
+    
     document.getElementById("formularioProfesores").style.display = "block";
-    document.getElementById("listadoProfesores").style.display = "none";
-
+    document.getElementById("listadoProfesores").style.display = "none";    
+        
     document.getElementById("nombre").value = profesor.nombre;
     document.getElementById("apellido").value = profesor.apellido;
     document.getElementById("documento").value = profesor.documento;
@@ -67,7 +67,10 @@ function editarProfesor(index) {
 
     const formulario = document.getElementById("formularioProfesores");
     const listado = document.getElementById("listadoProfesores");
+    const imagenesLaterales = document.getElementById("contenedorImagenesLaterales");
     const btnAgregar = document.getElementById("agregar");
+    
+    imagenesLaterales.style.display = "none";
 
     // Muestro u oculto secciones según el modo
     switch (modo) {
@@ -81,7 +84,8 @@ function editarProfesor(index) {
         case "agregar":
             formulario.style.display = "block";
             listado.style.display = "none";
-            document.getElementById("tituloPagina").textContent = "Agregar Profesor";
+            document.getElementById("tituloPagina").textContent = "Agregar Profesor";            
+            imagenesLaterales.style.display = "block";    
             limpiarFormulario();
             break;
 
@@ -109,7 +113,8 @@ function editarProfesor(index) {
     // Editar profesor
     function editarProfesor(index) {
         const profesores = JSON.parse(localStorage.getItem("profesores")) || [];
-        const profesor = profesores[index];
+        const profesor = profesores[index];            
+        imagenesLaterales.style.display = "block";
 
         // Muestro el formulario y lo lleno
         document.getElementById("formularioProfesores").style.display = "block";

@@ -78,9 +78,9 @@
 
     <main class="mainActividad">
         
-        <div class="contenedor-lateral desktop-only">
-                <img src="../assets/img/actividad1.png" alt="actividad 1" class="imagen-lateral-actividad izquierda">
-                <img src="../assets/img/actividad2.png" alt="actividad 2" class="imagen-lateral-actividad derecha">
+        <div class="contenedor-lateral desktop-only" id="contenedorImagenesLaterales">
+            <img src="../assets/img/actividad1.png" alt="actividad 1" class="imagen-lateral-actividad izquierda">
+            <img src="../assets/img/actividad2.png" alt="actividad 2" class="imagen-lateral-actividad derecha">
          </div>
 
         <div class="tituloConFlecha">
@@ -119,11 +119,10 @@
                 </div>
 
                 <div>
-                   <!-- <div id="urlImagen">         se agregó esta clase, para poder ocultar el input en el modificar, ya que, aun no pude resolver el mostrar ruta de la imagen, para poder modificar-->
-                        <label for="imagen">URL de Imagen</label>
-                        <input type="file" id="imagen" class="inputActividad" accept="image/*">                 
-                        <label class="advertencia">Coloque la imagen en la carpeta <b>assets/img</b> antes de seleccionarla.</label>
-                  <!--  </div>  -->
+                    <label for="imagen">URL de Imagen</label>
+                    <input type="file" id="imagen" class="inputActividad" accept="image/*">                 
+                    <label class="advertencia">Coloque la imagen en la carpeta <b>assets/img</b> antes de seleccionarla.</label>
+                   
                     <img id="vistaPrevia" style="width: 100px; display: none; margin-top: 10px;">
                 </div>
 

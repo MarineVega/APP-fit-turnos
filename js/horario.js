@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const formulario = document.getElementById("formularioHorario");
     const listado = document.getElementById("listadoHorarios");
     const titulo = document.getElementById("titulo");
+    const imagenesLaterales = document.getElementById("contenedorImagenesLaterales");
 
     const actividad = document.getElementById("actividad");
     const profesor = document.getElementById("profesor");
@@ -53,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     formulario.style.display = "none";
     listado.style.display = "block";
+    imagenesLaterales.style.display = "none";
     btnExportar.style.visibility = "hidden";
     btnImportar.style.visibility = "hidden";
 
@@ -68,7 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
         case "agregar":
             formulario.style.display = "block";
             listado.style.display = "none";
-            titulo.textContent = "Agregar Horario";              
+            titulo.textContent = "Agregar Horario";
+            imagenesLaterales.style.display = "block";              
             limpiarFormulario();
             break
         
@@ -87,6 +90,25 @@ document.addEventListener("DOMContentLoaded", () => {
             break    
     }
     
+    // determino si un horario dado, tiene turnos futuros reservados. 
+    // si hay al menos una reserva a futuro asociada a ese horario, devuelvo true; si no, devuelvo false.
+    function tieneReservasFuturas(horario) {
+        // obtengo todas las reservas desde localStorage
+        const reservas = JSON.parse(localStorage.getItem("reservasTurnos")) || {};        
+        const hoy = new Date();
+
+        // recorro todas las reservas usando Object.entries, que convierte el objeto en un array de pares [id, reserva]
+        // some corta en el primer caso verdadero
+        return Object.entries(reservas).some(([id, reserva]) => {
+            const fechaReserva = new Date(`${reserva.fecha}T${reserva.hora}`);
+            return reserva.actividad === horario.actividad &&
+                (!horario.profesor || id.includes(horario.profesor)) &&
+                id.includes(horario.horario) &&
+                fechaReserva >= hoy;
+        });
+    }
+
+
     // Muestro el listado de horarios, con opción de editar o eliminar
     function mostrarListadoHorarios(modo = "consultar") {
         const encabezado = document.getElementById("encabezadoHorarios");
@@ -132,12 +154,40 @@ document.addEventListener("DOMContentLoaded", () => {
                     const boton = document.createElement("button");
                     boton.className = "btnTabla";
 
+                    const tieneTurnos = tieneReservasFuturas(horario);
+
                     if (modo === "editar") {
                         boton.innerHTML = `<img src="../assets/img/icono_editar.png" alt="Editar" class="iconoTabla">`; 
-                        boton.addEventListener("click", () => editarHorario(index));
+                        //boton.addEventListener("click", () => editarHorario(index));
+                        // si tiene turnos futuros asociados, no permito modificar, al menos por ahora, en una versión 2 podría modificar en cascada
+                        boton.addEventListener("click", () => {
+                            if (tieneTurnos) {
+                                swalEstilo.fire({
+                                    icon: 'warning',
+                                    title: 'No se puede modificar',
+                                    text: 'Este horario tiene turnos futuros reservados.',
+                                    confirmButtonText: 'Cerrar'
+                                });
+                                return;
+                            }
+                            editarHorario(index);
+                        });                
                     } else if (modo === "eliminar") {
                         boton.innerHTML = `<img src="../assets/img/icono_eliminar.png" alt="Eliminar" class="iconoTabla">`;
-                        boton.addEventListener("click", () => eliminarHorario(index));
+                        //boton.addEventListener("click", () => eliminarHorario(index));
+                        boton.addEventListener("click", () => {
+                            if (tieneTurnos) {
+                                swalEstilo.fire({
+                                    icon: 'warning',
+                                    title: 'No se puede eliminar',
+                                    text: 'Este horario tiene turnos futuros reservados.',
+                                    confirmButtonText: 'Cerrar'
+                                });
+                                return;
+                            }
+                            eliminarHorario(index);
+                        });                
+
                     }
 
                     celdaAccion.appendChild(boton);
@@ -187,7 +237,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Editar horario
     function editarHorario(index) {
         const horarios = JSON.parse(localStorage.getItem("horarios")) || [];
-        const horario = horarios[index];
+        const horario = horarios[index];        
+        imagenesLaterales.style.display = "block";
         
         // Muestro el formulario y lo lleno
         document.getElementById("formularioHorario").style.display = "block";
