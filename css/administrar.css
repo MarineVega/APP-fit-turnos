@@ -178,7 +178,7 @@ header {
 
 /* Estilo de las tarjetas*/
 .card {
-  background: linear-gradient(to right, #a9cdbb, #c1d8e4);
+  background:#007a5e;
   border-radius: 15px;
   padding: 1em;
   margin: 1em;
@@ -197,7 +197,7 @@ header {
   width: 100%;
   margin-bottom: 0.5em;
   font-size: 1em;
-  color: rgb(66, 65, 65);
+  color: rgb(224, 222, 222);
 }
 
 
@@ -476,4 +476,52 @@ html, body {
 main {
   flex: 1;
 }
+/* -------------  ESCRITORIO  ≥1024 px  ------------- */
+@media (min-width: 1024px) {
 
+  /* TARJETAS más anchas y aireadas */
+  .card{
+    width: 90%;          /* pasa del 70 % a 90 % del ancho del viewport            */
+    max-width: 900px;    /* freno para monitores muy grandes                        */
+    padding: 2.5em;      /* más padding interior                                    */
+    margin: 2em auto;    /* centrada y con espacio entre tarjetas                   */
+    flex-direction: row; /* texto e imagen uno al lado del otro (si cabe)           */
+    gap: 30px;           /* aire entre texto e imagen                               */
+  }
+
+  /* Imagen dentro de la tarjeta – un poco más grande en escritorio */
+  .card img{
+    width: 26%;
+    max-width: 240px;
+    margin: 0;           /* quitamos márgenes raros                                */
+    align-self: flex-start;
+  }
+
+  /* Título de la tarjeta */
+  .card h2{
+    font-size: 1.6em;    /* 60 % mayor                                              */
+    margin-bottom: 0.8em;
+  }
+.card li {
+  justify-content: flex-end; /* alineados al inicio */
+  gap: 12px;                   /* espacio natural entre texto y botón */
+  margin: 0.4em 0;
+}
+  /* Texto/Lista dentro de la tarjeta */
+  .card p,
+  .card ul{
+    font-size: 1.05em;   /* sube un poco la fuente                                  */
+    width: 62%;          /* para que no llegue tan al borde                         */
+  }
+
+  /* Ítems de la lista con icono y texto */
+  #Datos .dato{
+    font-size: 1.05em;   /* texto ligeramente mayor                                 */
+    gap: 14px;
+  }
+
+  #Datos .dato i{
+    font-size: 1.4em;    /* icono un poco mayor                                     */
+    width: 28px;
+  }
+}
