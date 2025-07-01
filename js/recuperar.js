@@ -19,6 +19,18 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(formId).style.display = "flex";
   };
 
+  // configuro estilos para sweetalert
+  const swalEstilo = Swal.mixin({
+    imageWidth: 200,       // ancho en píxeles
+    imageHeight: 200,      // alto en píxeles 
+    background: '#bababa',
+    confirmButtonColor: '#6edc8c',
+    customClass: {
+        confirmButton: 'btnAceptar',
+        cancelButton: 'btnCancelar'
+    }
+  });
+
   // Paso 1: Enviar código por correo
   formRecuperar1.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -31,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const destino = recuperarEmail.value;
     const codigo = generarCodigo();
-    
+    /*
     // configuro estilos para sweetalert
     const swalEstilo = Swal.mixin({
         imageWidth: 200,       // ancho en píxeles
@@ -43,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cancelButton: 'btnCancelar'
         }
     });
-    
+    */
     localStorage.setItem("codigoRecuperacion", codigo);
     // coloco el service de emailjs y el template creado
     emailjs.send("service_vq2s3hg", "template_tth5c7f", {
