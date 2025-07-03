@@ -216,9 +216,12 @@ document.addEventListener("DOMContentLoaded", function () {
         buttonsStyling: false
       }).then(function (result) {
         if (result.isConfirmed === true) {
-          localStorage.removeItem("usuarioActivo");
-          window.location.href = "../index.html";
-        }
+         localStorage.removeItem("usuarioActivo");
+         //detecta en que pagina esta para poder cerrar sesion
+         // y redirigir al index
+         const enSubcarpeta = window.location.pathname.includes("/pages/");
+         window.location.href = enSubcarpeta ? "../index.html" : "./index.html";
+       }
       });
     });
   }
@@ -242,9 +245,12 @@ document.addEventListener("DOMContentLoaded", function () {
         buttonsStyling: false
       }).then(function (result) {
         if (result.isConfirmed === true) {
-          localStorage.removeItem("usuarioActivo");
-          window.location.href = "../index.html";
-        }
+         localStorage.removeItem("usuarioActivo");
+         //detecta en que pagina esta para poder cerrar sesion
+         // y redirigir al index
+         const enSubcarpeta = window.location.pathname.includes("/pages/");
+         window.location.href = enSubcarpeta ? "../index.html" : "./index.html";
+       }
       });
     });
   }
